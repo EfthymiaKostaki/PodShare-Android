@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">My Application1</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email address</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="speak_your_">
+Speak your mind!
+</string>
+    <!-- strings.xml -->
+    <string name="podshare">
+        PodShare
+    </string>
+    <string name="login">
+        Login
+    </string>
+
+    <string name="don_t_have_"><u>
+        Don't have an account? Register Now!</u>
+    </string>
+    <string name="forgot"><u>
+        Forgot password?</u>
+    </string>
+
+</resources>
