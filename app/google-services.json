@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "851513110410",
+    "firebase_url": "https://lekakosproject.firebaseio.com",
+    "project_id": "lekakosproject",
+    "storage_bucket": "lekakosproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851513110410:android:f9ce332cc9cee07f2da273",
+        "android_client_info": {
+          "package_name": "com.aueb.podshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851513110410-o6q1fhif59qso70341n7qh7sss6lakvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvKDdD0pTNC-dpRx-wLwI0qMYtbV7E9GY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851513110410-o6q1fhif59qso70341n7qh7sss6lakvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
