@@ -1,4 +1,4 @@
-package com.chnt.gr.preOrder.view;
+package com.aueb.podshare.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
-import com.chnt.gr.preOrder.R;
+import com.aueb.podshare.R;
 
 /**
  * Created by Christina Chaniotaki (christinachaniotaki96@gmail.com) on 08,April,2019

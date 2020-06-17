@@ -1,4 +1,4 @@
-package com.chnt.gr.preOrder;
+package com.aueb.podshare;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.chnt.gr.preOrder.view.InputLayoutWithEditTextView;
+import com.aueb.podshare.view.InputLayoutWithEditTextView;
 
 /**
  * Created by Christina Chaniotaki (christinachaniotaki96@gmail.com) on 08,April,2019

@@ -1,4 +1,4 @@
-package com.chnt.gr.preOrder.classes;
+package com.aueb.podshare.classes;
 
 public class User {
 
