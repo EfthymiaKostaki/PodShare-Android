@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     private InputLayoutWithEditTextView firstName;
     private InputLayoutWithEditTextView lastName;
     private ProgressDialog progressDialog;
+    private Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordInput);
         firstName = findViewById(R.id.firstnameInput);
         lastName = findViewById(R.id.lastnameInput);
-
+        loginBtn = findViewById(R.id.loginBtn);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +67,17 @@ public class RegisterActivity extends AppCompatActivity {
                 registerUser(email.getEditTextValue(), password.getEditTextValue(), firstName.getEditTextValue(), lastName.getEditTextValue());
             }
         });
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLoginActivity();
+            }
+        });
+    }
+
+    private void goToLoginActivity() {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     private void registerUser(final String email, String password, final String fName, final String lName) {
