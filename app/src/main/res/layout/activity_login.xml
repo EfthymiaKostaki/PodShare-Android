@@ -24,7 +24,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/textExtraHuge" />
 
-    <com.chnt.gr.preOrder.view.InputLayoutWithEditTextView
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/emailInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:imeOptions="actionNext"
         app:itemEditTextHint="@string/email"/>
 
-    <com.chnt.gr.preOrder.view.InputLayoutWithEditTextView
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/passwordInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,6 +73,7 @@
             android:padding="@dimen/spacingSmall"
             android:text="@string/register_sign_up"
             android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/black"/>
 
 

@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <com.chnt.gr.preOrder.view.InputLayoutWithEditTextView
+            <com.aueb.podshare.view.InputLayoutWithEditTextView
                 android:id="@+id/emailInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:imeOptions="actionNext"
                 app:itemEditTextHint="@string/email"/>
 
-            <com.chnt.gr.preOrder.view.InputLayoutWithEditTextView
+            <com.aueb.podshare.view.InputLayoutWithEditTextView
                     android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                     android:imeOptions="actionNext"
                     app:itemEditTextHint="@string/password"/>
 
-            <com.chnt.gr.preOrder.view.InputLayoutWithEditTextView
+            <com.aueb.podshare.view.InputLayoutWithEditTextView
                     android:id="@+id/firstnameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     android:imeOptions="actionNext"
                     app:itemEditTextHint="@string/firstName"/>
 
-            <com.chnt.gr.preOrder.view.InputLayoutWithEditTextView
+            <com.aueb.podshare.view.InputLayoutWithEditTextView
                     android:id="@+id/lastnameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
