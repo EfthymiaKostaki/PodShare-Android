@@ -1,98 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/spacingHuge"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/spacingSmall"
-        android:background="@color/white">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/spacingHuge"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/spacingSmall"
+    android:background="@drawable/microphone1">
 
     <TextView
-            android:id="@+id/signInText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/spacingMedium"
-            android:padding="@dimen/spacingMedium"
-            android:text="@string/register_sign_up"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textExtraHuge"/>
+        android:id="@+id/registerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/spacingMedium"
+        android:padding="@dimen/spacingMedium"
+        android:text="@string/register_moto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textExtraHuge" />
 
-    <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/emailInput"
+        android:layout_width="276dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:visibility="visible"
+        app:itemEditTextHint="@string/email" />
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/usernameInput"
+        android:layout_width="276dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:visibility="visible"
+        app:itemEditTextHint="@string/username"/>
+    <!--for line:45 temporary solution, should create method for input textUsername -->
 
-            <com.aueb.podshare.view.InputLayoutWithEditTextView
-                android:id="@+id/emailInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:inputType="textEmailAddress"
-                android:imeOptions="actionNext"
-                app:itemEditTextHint="@string/email"/>
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/passwordInput"
+        android:layout_width="276dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        app:itemEditTextHint="@string/password" />
 
-            <com.aueb.podshare.view.InputLayoutWithEditTextView
-                    android:id="@+id/passwordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacingLarge"
-                    android:inputType="textPassword"
-                    android:imeOptions="actionNext"
-                    app:itemEditTextHint="@string/password"/>
-
-            <com.aueb.podshare.view.InputLayoutWithEditTextView
-                    android:id="@+id/firstnameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:imeOptions="actionNext"
-                    app:itemEditTextHint="@string/firstName"/>
-
-            <com.aueb.podshare.view.InputLayoutWithEditTextView
-                    android:id="@+id/lastnameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:imeOptions="actionNext"
-                    app:itemEditTextHint="@string/lastName"/>
-
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/confirmPasswordInput"
+        android:layout_width="276dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        app:itemEditTextHint="@string/confirmPassword" />
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacingTiny"
-            android:layout_marginEnd="@dimen/spacingTiny"
-            android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="406dp"
+        android:layout_marginStart="@dimen/spacingTiny"
+        android:layout_marginEnd="@dimen/spacingTiny"
+        android:layout_weight="1">
 
         <Button
-                android:id="@+id/submitButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@color/pink"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="@string/login_continue"
-                tools:targetApi="m"/>
+            android:id="@+id/submitButton"
+            android:layout_width="276dp"
+            android:layout_height="52.89dp"
+            android:layout_centerInParent="true"
+            android:background="#6942FD"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/register_submit"
+            android:textColor="@color/white"
+            tools:targetApi="m" />
+
+        <Button
+            android:id="@+id/hasAccountBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/submitButton"
+            android:layout_gravity="center_horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/spacingSmall"
+            android:text="@string/has_account"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

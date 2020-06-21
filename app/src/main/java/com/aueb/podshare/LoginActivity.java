@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initUIComponents() {
-        loginButton = findViewById(R.id.submitButton);
-        signUpBtn = findViewById(R.id.signUpBtn);
+        loginButton = findViewById(R.id.logInButton);
+        signUpBtn = findViewById(R.id.noAccountBtn);
         email = findViewById(R.id.emailInput);
         password = findViewById(R.id.passwordInput);
         loginButton.setOnClickListener(new View.OnClickListener() {

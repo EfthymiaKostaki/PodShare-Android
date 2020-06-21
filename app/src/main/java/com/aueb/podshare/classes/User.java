@@ -2,18 +2,16 @@ package com.aueb.podshare.classes;
 
 public class User {
 
-    public String firstname;
-    public String lastname;
+    public String username;
     public String email;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String email, String fName, String lName) {
+    public User(String email, String username) {
 
         this.email = email;
-        this.firstname = fName;
-        this.lastname = lName;
+        this.username = username;
     }
 }

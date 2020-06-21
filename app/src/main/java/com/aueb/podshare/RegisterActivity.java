@@ -38,8 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private InputLayoutWithEditTextView email;
     private InputLayoutWithEditTextView password;
-    private InputLayoutWithEditTextView firstName;
-    private InputLayoutWithEditTextView lastName;
+    private InputLayoutWithEditTextView username;
     private ProgressDialog progressDialog;
     private Button loginBtn;
 
@@ -57,14 +56,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         email = findViewById(R.id.emailInput);
         password = findViewById(R.id.passwordInput);
-        firstName = findViewById(R.id.firstnameInput);
-        lastName = findViewById(R.id.lastnameInput);
-        loginBtn = findViewById(R.id.loginBtn);
+        username = findViewById(R.id.usernameInput);
+        loginBtn = findViewById(R.id.hasAccountBtn);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showLoading();
-                registerUser(email.getEditTextValue(), password.getEditTextValue(), firstName.getEditTextValue(), lastName.getEditTextValue());
+                registerUser(email.getEditTextValue(), password.getEditTextValue(), username.getEditTextValue());
             }
         });
 
@@ -80,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    private void registerUser(final String email, String password, final String fName, final String lName) {
+    private void registerUser(final String email, String password, final String username) {
         //https://firebase.google.com/docs/auth/android/start/
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -88,8 +86,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            writeNewUser(email, fName, lName); //Realtime Database
-                            writeUserToFirestore(email, fName, lName); // Firestore
+                            writeNewUser(email, username); //Realtime Database
+                            writeUserToFirestore(email, username); // Firestore
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
                             updateUI();
@@ -103,21 +101,20 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    private void writeNewUser(String email, String fName, String lName) {
+    private void writeNewUser(String email, String username) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         assert firebaseUser != null;
         String userId = firebaseUser.getUid();
         DatabaseReference mRef = database.getReference().child("Users").child(userId);
-        mRef.child("name").setValue(fName);
-        mRef.child("lastname").setValue(lName);
+        mRef.child("username").setValue(username);
         mRef.child("email").setValue(email);
     }
 
-    private void writeUserToFirestore(String email, String fName, String lName) {
+    private void writeUserToFirestore(String email, String username) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        User user = new User(email, fName, lName);
+        User user = new User(email, username);
         // Add a new document with a generated ID
         db.collection("users")
                 .add(user)
