@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Firebase Example </string>
     <string name="to_do">TO DO</string>
+    <string name="logo">PodShare</string>
     <string name="please_wait">Please wait…</string>
 
     <string name="log_out">Log out</string>
@@ -10,6 +11,7 @@
     <string name="login_submit">Login</string>
     <string name="no_account"> <u>Don\'t have an account? Register now!</u></string>
     <string name="login_moto">Speak your mind!</string>
+    <string name="forgot_password"><b>Forgot password?</b></string>
 
     <!-- REGISTER -->
     <string name="register_moto">Create an account!</string>
@@ -22,4 +24,7 @@
 
     <!-- NAVIGATION BAR -->
 
+    <!-- FORGOT PASSWORD-->
+    <string name="forgot_password_info">Enter your e-mail and we will send you a new password!</string>
+    <string name="forgot_password_send">Send</string>
 </resources>

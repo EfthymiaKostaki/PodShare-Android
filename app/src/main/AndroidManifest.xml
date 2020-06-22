@@ -29,6 +29,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="unspecified" />
 
+        <activity android:name=".ForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="unspecified" />
+
         <activity android:name=".MainActivity"
             android:screenOrientation="unspecified" />
 

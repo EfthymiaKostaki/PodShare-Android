@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private String TAG = "TAG_Login";
     private Button loginButton;
     private Button signUpBtn;
+    private Button forgotPass;
     private InputLayoutWithEditTextView email;
     private InputLayoutWithEditTextView password;
     private FirebaseAuth mAuth;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initUIComponents() {
         loginButton = findViewById(R.id.logInButton);
         signUpBtn = findViewById(R.id.noAccountBtn);
+        forgotPass = findViewById(R.id.forgotPass);
         email = findViewById(R.id.emailInput);
         password = findViewById(R.id.passwordInput);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -56,13 +58,22 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToForgotPasswordActivity();
+            }
+        });
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToRegisterActivity();
             }
         });
+    }
+
+    private void goToForgotPasswordActivity() {
+        startActivity(new Intent(this, ForgotPasswordActivity.class));
     }
 
     private void loginUser(String email, String password) {
