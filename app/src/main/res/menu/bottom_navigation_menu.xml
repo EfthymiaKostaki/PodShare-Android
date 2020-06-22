@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <item
+            android:id="@+id/navhome"
+            android:enabled="true"
+            android:icon="@drawable/navhome"
+            android:title="@string/to_do" />
+    <item
+            android:id="@+id/navsearch"
+            android:enabled="true"
+            android:icon="@drawable/navsearch"
+            android:title="@string/to_do"/>
+    <item
+        android:id="@+id/navadd"
+        android:enabled="true"
+        android:icon="@drawable/navadd"
+        android:title="@string/to_do"/>
+    <item
+        android:id="@+id/navfavorite"
+        android:enabled="true"
+        android:icon="@drawable/navheart"
+        android:title="@string/to_do"/>
+    <item
+        android:id="@+id/navprofile"
+        android:enabled="true"
+        android:icon="@drawable/navprofile"
+        android:title="@string/to_do"/>
+</menu>

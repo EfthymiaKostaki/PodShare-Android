@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_item_logout:
                 mAuth.signOut();
-                Toast.makeText(getApplicationContext(), "Log out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
                 goToLoginActivity();
                 break;
         }
