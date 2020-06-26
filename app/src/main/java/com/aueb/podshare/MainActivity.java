@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
                 goToLoginActivity();
                 break;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
         return true;
     }
