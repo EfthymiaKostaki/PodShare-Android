@@ -8,23 +8,23 @@
     <string name="login_continue">Login</string>
 
     <!--  LOGIN -->
-    <string name="login_submit">Login</string>
-    <string name="no_account"> <u>Don\'t have an account? Register now!</u></string>
     <string name="login_moto">Speak your mind!</string>
     <string name="forgot_password"><b>Forgot password?</b></string>
+    <string name="login_submit">Login</string>
+    <string name="no_account"> <u>Don\'t have an account? Register now!</u></string>
 
     <!-- REGISTER -->
     <string name="register_moto">Create an account!</string>
-    <string name="register_submit">Submit</string>
-    <string name="has_account"> <u>Already a PodSharer? Login!</u></string>
+    <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm Password</string>
-    <string name="email">Email</string>
-
-    <!-- NAVIGATION BAR -->
+    <string name="accept_terms">I accept Terms and Conditions for using this app.</string>
+    <string name="register_submit">Submit</string>
+    <string name="has_account"> <u>Already a PodSharer? Login!</u></string>
 
     <!-- FORGOT PASSWORD-->
     <string name="forgot_password_info">Enter your e-mail and we will send you a new password!</string>
+    <string name="back_to_login">Go Back to Login</string>
     <string name="forgot_password_send">Send</string>
 </resources>
