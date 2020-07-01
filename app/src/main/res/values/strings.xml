@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Firebase Example </string>
+    <string name="app_name">PodShare </string>
     <string name="to_do">TO DO</string>
     <string name="logo">PodShare</string>
     <string name="please_wait">Please wait…</string>
