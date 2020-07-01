@@ -31,4 +31,9 @@
     <color name="galleryItemOverlay">#cc000000</color>
     <color name="galleryCurrentItemOverlay">@android:color/transparent</color>
 
+    <!-- Media Player -->
+    <color name="background">#09121C</color>
+    <color name="podsharer_media_player">#898F97</color>
+    <color name="like">#3369FF</color>
+    <color name="description">#DADADA</color>
 </resources>

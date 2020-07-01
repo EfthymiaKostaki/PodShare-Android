@@ -24,7 +24,12 @@
 
     <!-- NAVIGATION BAR -->
 
-    <!-- FORGOT PASSWORD-->
+    <!-- FORGOT PASSWORD -->
     <string name="forgot_password_info">Enter your e-mail and we will send you a new password!</string>
     <string name="forgot_password_send">Send</string>
+
+    <!-- MEDIA PLAYER -->
+    <string name="episode_name_default">Episode Name</string>
+    <string name="podsharer_name_default">PodSharer</string>
+
 </resources>
