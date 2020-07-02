@@ -15,10 +15,6 @@ public class Episode {
     private Date pub_date;
     private Duration duration;
 
-    public Episode() {
-
-    }
-
     public Episode(String name, String description) {
         this.name = name;
         this.description = description;
