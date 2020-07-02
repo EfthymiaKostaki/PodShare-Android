@@ -9,6 +9,9 @@ public class Podcast {
     private String description;
     private String imagePath;
     private int subscriptions;
+    private int likes;
+    private int favourites;
+    private int views;
     private User publisher;
     private Date pub_date;
     private ArrayList<Episode> episodes;
@@ -18,6 +21,9 @@ public class Podcast {
         this.description = description;
         episodes = new ArrayList();
         subscriptions = 0;
+        likes = 0;
+        favourites = 0;
+        views = 0;
         this.publisher = publisher;
         this.pub_date = pub_date;
     }
@@ -50,36 +56,40 @@ public class Podcast {
         return episodes.size();
     }
 
-    public int get_likes() {
-        int likes = 0;
-        for (Episode episode : episodes) {
-            likes += episode.get_likes();
-        }
-        return likes;
-    }
-
-    public int get_favourites() {
-        int favourites = 0;
-        for (Episode episode : episodes) {
-            favourites += episode.get_favourites();
-        }
-        return favourites;
-    }
-
-    public int get_totalViews(){
-        int views = 0;
-        for (Episode episode : episodes) {
-            views += episode.get_views();
-        }
-        return views;
-    }
-
     public void add_subscription() {
         subscriptions += 1;
     }
 
+    public void remove_subscription(){
+        subscriptions -= 1;
+    }
+
     public int get_subscriptions() {
         return subscriptions;
+    }
+
+    public void set_likes(int likes) {
+        this.likes = likes;
+    }
+
+    public int get_likes() {
+        return likes;
+    }
+
+    public void set_favourites(int favs) {
+        favourites = favs;
+    }
+
+    public int get_favourites() {
+        return favourites;
+    }
+
+    public void set_views(int views) {
+        this.views = views;
+    }
+
+    public int get_views(){
+        return views;
     }
 
     public User getPublisher() {

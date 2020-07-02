@@ -42,6 +42,7 @@ public class Episode {
 
     public void gain_view() {
         views += 1;
+        podcast.set_views(views);
     }
 
     public int get_views() {
@@ -62,10 +63,12 @@ public class Episode {
 
     public void increase_favourites() {
         favourites += 1;
+        podcast.set_favourites(favourites);
     }
 
     public void decrease_favourites() {
         favourites -= 1;
+        podcast.set_favourites(favourites);
     }
 
     public int get_favourites() {
@@ -74,10 +77,12 @@ public class Episode {
 
     public void increase_likes() {
         likes += 1;
+        podcast.set_likes(likes);
     }
 
     public void decrease_likes() {
         likes -= 1;
+        podcast.set_likes(likes);
     }
 
     public int get_likes() {
