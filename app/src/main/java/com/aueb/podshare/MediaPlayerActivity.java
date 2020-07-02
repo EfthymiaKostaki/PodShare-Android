@@ -1,14 +1,22 @@
 package com.aueb.podshare;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aueb.podshare.mediaPlayer.MediaPlayerService;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import jp.wasabeef.blurry.Blurry;
 
@@ -29,6 +37,22 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 .color(Color.argb(66, 255, 255, 0))
                 .async()
                 .onto(play_image);*/
-        mAuth = FirebaseAuth.getInstance();
+
+        Button mainButton = (Button) findViewById(R.id.main_button);
+        mainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
+            }
+        });
+        MediaPlayerService mediaPlayerService = new MediaPlayerService();
+
+    }
+
+    private void updateUI() {
+        FirebaseUser u = mAuth.getCurrentUser();
+    }
+    private void goToMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +109,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
+        Button playerButton = (Button) findViewById(R.id.player_button);
+        playerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMediaPlayerActivity();
+            }
+        });
+    }
+
+    private void goToMediaPlayerActivity() {
+        startActivity(new Intent(this, MediaPlayerActivity.class));
     }
 
     private void updateUI() {

@@ -38,6 +38,10 @@
         <activity android:name=".MainActivity"
             android:screenOrientation="unspecified" />
 
+        <activity android:name=".MediaPlayerActivity"
+            android:screenOrientation="unspecified" />
+
+        <service android:name=".mediaPlayer.MediaPlayerService" />
     </application>
 
 </manifest>

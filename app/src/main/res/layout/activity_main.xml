@@ -51,6 +51,20 @@
             android:textColor="@color/black"
             android:textSize="@dimen/textExtra" />
 
+        <Button
+            android:id="@+id/player_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/spacingSmall"
+            android:text="Go to player"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"

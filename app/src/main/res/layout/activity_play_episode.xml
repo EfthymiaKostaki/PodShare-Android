@@ -76,7 +76,6 @@
             android:id="@+id/play_image"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            android:background="@drawable/play_image"
             android:baselineAligned="false"
             android:gravity="center"
             android:orientation="vertical"
@@ -215,5 +214,20 @@
             android:text="Cooking sessions with Sally. In today’s episode we will be making Spagetti Bolognese using a true italian  recipe."
             android:textColor="@color/description"
             android:textSize="@dimen/textSubtitle" />
+
+        <Button
+            android:id="@+id/main_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/spacingSmall"
+            android:text="Go to main"
+            android:textAlignment="center"
+            android:textColor="@color/podshare_purple" />
     </LinearLayout>
+
 </LinearLayout>
