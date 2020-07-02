@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToMediaPlayerActivity() {
         startActivity(new Intent(this, MediaPlayerActivity.class));
+        finish();
     }
 
     private void updateUI() {

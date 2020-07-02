@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToForgotPasswordActivity() {
         startActivity(new Intent(this, ForgotPasswordActivity.class));
+        finish();
     }
 
     private void loginUser(String email, String password) {

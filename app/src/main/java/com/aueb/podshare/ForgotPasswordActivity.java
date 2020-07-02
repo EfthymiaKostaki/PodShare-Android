@@ -90,5 +90,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void goToLoginActivity() {
         startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }
