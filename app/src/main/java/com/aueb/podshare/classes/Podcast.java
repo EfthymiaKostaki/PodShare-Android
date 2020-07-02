@@ -16,10 +16,6 @@ public class Podcast {
     private Date pub_date;
     private ArrayList<Episode> episodes;
 
-    public Podcast() {
-
-    }
-
     public Podcast(String name, String description, User publisher, Date pub_date) {
         this.name = name;
         this.description = description;
