@@ -4,7 +4,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -22,45 +22,43 @@
             android:layout_height="wrap_content"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextAppearance="@style/ActivityTitle"
-            app:titleTextColor="@color/black" />
-
+            app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/spacingHuge"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/spacingSmall">
 
-        <ImageView
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_account" />
+        <TextView
+            android:id="@+id/TrendingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/spacingMedium"
+            android:text="@string/trending"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textExtraHuge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="276dp"
+            android:background="@drawable/microphone_mini"
+            android:src="@drawable/trending" />
 
         <TextView
-            android:id="@+id/userInfoDisplay"
-            android:layout_width="wrap_content"
+            android:id="@+id/YourSubscriptionsTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/spacingMedium"
-            android:text="No User"
-            android:textColor="@color/black"
-            android:textSize="@dimen/textExtra" />
+            android:text="@string/your_subscriptions"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textExtraHuge"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:itemBackground="@color/navbackground"
             app:itemIconTint="@color/navicon"
             app:itemTextColor="@color/navbackground"

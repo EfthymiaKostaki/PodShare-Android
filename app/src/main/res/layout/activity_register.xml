@@ -16,8 +16,7 @@
         android:layout_height="101.5dp"
         android:layout_gravity="center"
         android:src="@drawable/logo_full"
-        android:background="@color/transparent"
-        android:contentDescription="@string/logo" />
+        android:background="@color/transparent"/>
 
     <TextView
         android:id="@+id/registerText"

@@ -106,12 +106,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
     }
 
     private void updateUI() {
         FirebaseUser u = mAuth.getCurrentUser();
-        if (u != null) userInfoDisplay.setText(u.getEmail());
     }
 
     private void goToLoginActivity() {

@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-   <item
-            android:id="@+id/navhome"
-            android:enabled="true"
-            android:icon="@drawable/navhome"
-            android:title="@string/to_do" />
-    <item
-            android:id="@+id/navsearch"
-            android:enabled="true"
-            android:icon="@drawable/navsearch"
-            android:title="@string/to_do"/>
-    <item
-        android:id="@+id/navadd"
+    <item android:id="@+id/nb_home"
+        android:title="@string/nb_home"
         android:enabled="true"
-        android:icon="@drawable/navadd"
-        android:title="@string/to_do"/>
-    <item
-        android:id="@+id/navfavorite"
+        android:icon="@drawable/navhome" />
+    <item android:id="@+id/nb_search"
+        android:title="@string/nb_search"
         android:enabled="true"
-        android:icon="@drawable/navheart"
-        android:title="@string/to_do"/>
-    <item
-        android:id="@+id/navprofile"
+        android:icon="@drawable/navsearch" />
+    <item android:id="@+id/nb_upload"
+        android:title="@string/nb_upload"
         android:enabled="true"
-        android:icon="@drawable/navprofile"
-        android:title="@string/to_do"/>
+        android:icon="@drawable/navadd" />
+    <item android:id="@+id/nb_favourites"
+        android:title="@string/nb_favourites"
+        android:enabled="true"
+        android:icon="@drawable/navheart" />
+    <item android:id="@+id/nb_profile"
+        android:title="@string/nb_profile"
+        android:enabled="true"
+        android:icon="@drawable/navprofile" />
 </menu>

@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">PodShare </string>
-    <string name="to_do">TO DO</string>
-    <string name="logo">PodShare</string>
+    <string name="app_name">PodShare</string>
     <string name="please_wait">Please wait…</string>
 
     <string name="log_out">Log out</string>
@@ -23,8 +21,29 @@
     <string name="register_submit">Submit</string>
     <string name="has_account"> <u>Already a PodSharer? Login!</u></string>
 
-    <!-- FORGOT PASSWORD-->
+    <!-- FORGOT PASSWORD -->
     <string name="forgot_password_info">Enter your e-mail and we will send you a new password!</string>
     <string name="back_to_login">Go Back to Login</string>
     <string name="forgot_password_send">Send</string>
+
+    <!-- BOTTOM NAVIGATION BAR -->
+    <string name="nb_home">HOME</string>
+    <string name="nb_search">SEARCH</string>
+    <string name="nb_upload">UPLOAD</string>
+    <string name="nb_favourites">FAVOURITES</string>
+    <string name="nb_profile">PROFILE</string>
+
+    <!-- SIDE MENU -->
+    <string name="sm_following">FOLLOWING</string>
+    <string name="sm_subscribed">SUBSCRIBED</string>
+    <string name="sm_favourites">FAVOURITES</string>
+    <string name="sm_settings">ACCOUNT SETTINGS</string>
+    <string name="sm_faq">FAQ</string>
+    <string name="sm_logout">LOGOUT</string>
+
+    <!-- HOMEPAGE-->
+    <string name="trending">Trending</string>
+    <string name="your_subscriptions">Your Subscriptions</string>
+
+
 </resources>
