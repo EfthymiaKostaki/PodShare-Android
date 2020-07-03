@@ -27,4 +27,16 @@
     <!-- FORGOT PASSWORD-->
     <string name="forgot_password_info">Enter your e-mail and we will send you a new password!</string>
     <string name="forgot_password_send">Send</string>
+
+    <!-- UPLOAD EPISODE -->
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="episode_name">Episode name:</string>
+    <string name="episode_name_example">Business Planning</string>
+    <string name="episode_description">Description:</string>
+    <string name="episode_description_example">A business plan is a valuable tool for business planning..</string>
+    <string name="episode_add_episode_to">Add episode to podcast:</string>
+    <string name="new_podcast">&#160;&#160;New Podcast</string>
+    <string name="existing_podcast">&#160;&#160;Existing Podcast</string>
+    <string name="step_1">"Step 1 "</string>
 </resources>

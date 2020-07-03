@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -105,8 +107,20 @@ public class MainActivity extends AppCompatActivity {
     private void initUIComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
+        Button upload = (Button) findViewById(R.id.upload);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUploadActivity();
+            }
+        });
 
         userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
+    }
+
+    private void goToUploadActivity() {
+        startActivity(new Intent(this, UploadEpisodeActivity.class));
     }
 
     private void updateUI() {
