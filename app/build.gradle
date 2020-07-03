@@ -17,6 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            java {
+                srcDir 'src'
+                exclude '**/com/aueb/podshare/ChoosePodcastToPlayActivity.java'
+                exclude '**/com/aueb/podshare/MainActivityKoko.java'
+                exclude '**/com/aueb/podshare/MainActivityKokus.java'
+            }
+        }
+    }
 }
 
 dependencies {
