@@ -7,6 +7,7 @@ public class Podcast {
 
     private String name;
     private String description;
+    public String url;
     private String imagePath;
     private int subscriptions;
     private int likes;

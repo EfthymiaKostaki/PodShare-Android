@@ -23,7 +23,7 @@ android {
                 srcDir 'src'
                 exclude '**/com/aueb/podshare/ChoosePodcastToPlayActivity.java'
                 exclude '**/com/aueb/podshare/MainActivityKoko.java'
-                exclude '**/com/aueb/podshare/MainActivityKokus.java'
+                exclude '**/com/aueb/podshare/UploadEpisodeActivity.java'
             }
         }
     }

@@ -7,6 +7,7 @@ import java.util.*;
 public class Episode {
     private String name;
     private String description;
+    private String episodeLink;
     private Podcast podcast;
     private boolean privacy;
     private int favourites;
@@ -16,6 +17,9 @@ public class Episode {
     private Duration duration;
 
     public Episode(String name, String description) {
+        if (name.trim().equals("")) {
+            this.name = "No name";
+        }
         this.name = name;
         this.description = description;
         favourites = 0;
@@ -95,6 +99,10 @@ public class Episode {
 
     public Duration get_duration() {
         return duration;
+    }
+
+    public void setEpisodeLink(String link) {
+        episodeLink = link;
     }
 
 }
