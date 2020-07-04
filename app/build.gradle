@@ -24,6 +24,10 @@ android {
                 exclude '**/com/aueb/podshare/ChoosePodcastToPlayActivity.java'
                 exclude '**/com/aueb/podshare/MainActivityKoko.java'
                 exclude '**/com/aueb/podshare/UploadEpisodeActivity.java'
+                exclude '**/com/aueb/podshare/mediaPlayer/EpisodePlayerActivity.java'
+                exclude '**/com/aueb/podshare/Adapter/EpisodesAdapter.java'
+                exclude '**/com/aueb/podshare/UploadNewEpisodeActivity.java'
+                exclude '**/com/aueb/podshare/UploadPodcastActivity.java'
             }
         }
     }
