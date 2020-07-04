@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.navigation.NavController;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -103,9 +105,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUIComponents() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nb_home:
+                        Toast.makeText(MainActivity.this, "Recents", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nb_search:
+                        Toast.makeText(MainActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nb_upload:
+                        Toast.makeText(MainActivity.this, "Nearby", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nb_favourites:
+                        Toast.makeText(MainActivity.this, "Nearby", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nb_profile:
+                        Toast.makeText(MainActivity.this, "Nearby", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     private void updateUI() {

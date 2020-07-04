@@ -1,68 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:background="@color/colorPrimary">
 
-    <com.google.android.material.appbar.AppBarLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/appBarLayout"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Light">
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation_menu"
+        android:background="@color/navbackground"
+        app:itemIconTint="@color/navicon" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextAppearance="@style/ActivityTitle"
-            app:titleTextColor="@color/white" />
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/spacingSmall">
-
-        <TextView
-            android:id="@+id/TrendingTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/spacingMedium"
-            android:text="@string/trending"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textExtraHuge" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="276dp"
-            android:background="@drawable/microphone_mini"
-            android:src="@drawable/trending" />
-
-        <TextView
-            android:id="@+id/YourSubscriptionsTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/your_subscriptions"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textExtraHuge"/>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemBackground="@color/navbackground"
-            app:itemIconTint="@color/navicon"
-            app:itemTextColor="@color/navbackground"
-            app:menu="@menu/bottom_navigation_menu" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

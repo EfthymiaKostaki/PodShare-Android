@@ -2,22 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/nb_home"
         android:title="@string/nb_home"
-        android:enabled="true"
         android:icon="@drawable/navhome" />
     <item android:id="@+id/nb_search"
         android:title="@string/nb_search"
-        android:enabled="true"
         android:icon="@drawable/navsearch" />
     <item android:id="@+id/nb_upload"
         android:title="@string/nb_upload"
-        android:enabled="true"
         android:icon="@drawable/navadd" />
     <item android:id="@+id/nb_favourites"
         android:title="@string/nb_favourites"
-        android:enabled="true"
         android:icon="@drawable/navheart" />
     <item android:id="@+id/nb_profile"
         android:title="@string/nb_profile"
-        android:enabled="true"
         android:icon="@drawable/navprofile" />
 </menu>
