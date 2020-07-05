@@ -3,9 +3,11 @@
     package="com.aueb.podshare"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <permission android:name="android.permission.INTERNET"/>
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <permission android:name="android.permission.READ_PHONE_STATE" />
+    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         tools:replace="android:appComponentFactory"
@@ -15,7 +17,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true">
 
         <activity android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -37,9 +40,15 @@
 
         <activity android:name=".MainActivity"
             android:screenOrientation="unspecified" />
+
         <activity android:name=".UploadEpisodeActivity"
             android:screenOrientation="unspecified" />
 
+        <activity android:name=".UploadEpisodeExistingPodcastActivity"
+            android:screenOrientation="unspecified" />
+
+        <activity android:name=".UploadEpisodeNewPodcastActivity"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>

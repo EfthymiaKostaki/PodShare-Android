@@ -16,13 +16,13 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextAppearance="@style/ActivityTitle"
-        app:titleTextColor="@color/black" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextAppearance="@style/ActivityTitle"
+            app:titleTextColor="@color/black" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -34,23 +34,38 @@
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/spacingSmall">
 
-        <TextView
-            android:id="@+id/step_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingHuge"
-            android:layout_marginLeft="@dimen/spacingHuge"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:padding="@dimen/spacingTiny"
-            android:text="@string/step_1"
-            android:textColor="@color/upload_purple"
-            android:textSize="@dimen/textTitle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/back_button"
+                android:lineSpacingExtra="8sp" />
+
+            <TextView
+                android:id="@+id/step_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingSmall"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:padding="@dimen/spacingTiny"
+                android:text="@string/step_2"
+                android:textColor="@color/upload_purple"
+                android:textSize="@dimen/textTitle" />
+        </LinearLayout>
+
 
         <com.kofigyan.stateprogressbar.StateProgressBar
             android:id="@+id/step_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:spb_currentStateNumber="one"
+            app:spb_currentStateNumber="two"
             app:spb_maxStateNumber="three"
             app:spb_stateBackgroundColor="@color/step_color"
             app:spb_stateForegroundColor="@color/step_color"
@@ -66,29 +81,27 @@
             android:background="@color/white" />
 
         <TextView
-            android:id="@+id/episode_name_text"
+            android:id="@+id/podcast_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacingHuge"
             android:layout_marginLeft="@dimen/spacingHuge"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:padding="@dimen/spacingTiny"
-            android:text="@string/episode_name"
+            android:text="@string/podcast_name"
             android:textColor="@color/white"
             android:textSize="@dimen/textTitle" />
 
-
         <com.aueb.podshare.view.InputLayoutWithEditTextView
-            android:id="@+id/episode_name"
+            android:id="@+id/podcast_name"
             android:layout_width="276dp"
             android:layout_height="58dp"
             android:layout_gravity="center"
             android:imeOptions="actionDone"
-            android:inputType="text"
-            app:itemEditTextHint="@string/episode_name_example" />
+            android:inputType="text" />
 
         <TextView
-            android:id="@+id/episode_description_text"
+            android:id="@+id/podcast_description_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacingHuge"
@@ -100,57 +113,49 @@
             android:textSize="@dimen/textTitle" />
 
         <com.aueb.podshare.view.InputLayoutWithEditTextView
-            android:id="@+id/episode_description"
+            android:id="@+id/podcast_description"
             android:layout_width="276dp"
             android:layout_height="58dp"
             android:layout_gravity="center"
             android:imeOptions="actionDone"
-            android:inputType="text"
-            app:itemEditTextHint="@string/episode_description_example" />
+            android:inputType="text" />
 
         <TextView
-            android:id="@+id/episode_belongs_to_new_or_old"
+            android:id="@+id/upload_image_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacingHuge"
             android:layout_marginLeft="@dimen/spacingHuge"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:padding="@dimen/spacingTiny"
-            android:text="@string/episode_add_episode_to"
+            android:text="@string/upload_image"
             android:textColor="@color/white"
             android:textSize="@dimen/textTitle" />
 
-        <RadioGroup
-            android:id="@+id/accuracy_choice"
-            android:layout_width="wrap_content"
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+            android:id="@+id/add_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/add"
+            android:gravity="center_horizontal|center_vertical"
+            android:lineSpacingExtra="8sp" />
+
+            <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingExtraHuge"
-            android:layout_marginLeft="@dimen/spacingHuge"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/new_podcast_choice_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/radiobuttonstyle"
-                android:onClick="onRadioButtonClicked"
-                android:layout_marginTop="@dimen/spacingSmall"
-                android:layout_marginBottom="@dimen/spacingSmall"
-                android:text="@string/new_podcast"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/existing_podcast_choice_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacingSmall"
-                android:layout_marginBottom="@dimen/spacingSmall"
-                android:button="@drawable/radiobuttonstyle"
-                android:checked="true"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/existing_podcast"
-                android:textColor="@color/white" />
-        </RadioGroup>
+            android:layout_weight="1" />
+        </LinearLayout>
 
         <!-- Next -->
         <Button
@@ -180,7 +185,5 @@
             android:lineSpacingExtra="8sp"
             android:text="@string/cancel"
             android:textAppearance="@style/next" />
-
-
     </LinearLayout>
 </LinearLayout>

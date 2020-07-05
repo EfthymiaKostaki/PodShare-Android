@@ -39,4 +39,7 @@
     <string name="new_podcast">&#160;&#160;New Podcast</string>
     <string name="existing_podcast">&#160;&#160;Existing Podcast</string>
     <string name="step_1">"Step 1 "</string>
+    <string name="step_2">Step 2</string>
+    <string name="podcast_name">Podcast name:</string>
+    <string name="upload_image">Upload Image</string>
 </resources>

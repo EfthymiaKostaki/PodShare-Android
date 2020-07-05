@@ -35,4 +35,5 @@
     <color name="upload_purple">#BB6BD9</color>
     <color name="background_upload">#09121C</color>
     <color name="step_color">#C220D0</color>
+    <color name="add_color">#DADADA</color>
 </resources>
