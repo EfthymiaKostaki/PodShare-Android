@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimary">#09121C</color>
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#fb4c69</color>
 
@@ -26,6 +26,10 @@
     <color name="popupmenu">#C220D0</color>
     <color name="navbackground">#2A0034</color>
     <color name="navicon">#01E0FA</color>
+
+    <!-- SEARCH -->
+    <color name="unselected">#19232F</color>
+    <color name="selected">#444f5a</color>
 
     <!-- Colors with opacity -->
     <color name="galleryItemOverlay">#cc000000</color>

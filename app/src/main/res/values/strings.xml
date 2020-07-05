@@ -27,4 +27,15 @@
     <!-- FORGOT PASSWORD-->
     <string name="forgot_password_info">Enter your e-mail and we will send you a new password!</string>
     <string name="forgot_password_send">Send</string>
+
+    <!-- SEARCH-->
+    <string name="search_title">Search</string>
+    <string name="search_question">What are you looking for?</string>
+    <string name="search_option_1">Podcasts</string>
+    <string name="search_option_2">Podsharers</string>
+    <string name="search_recent">Recent Searches</string>
+    <string name="search_recent_default">You haven’t made any searches yet. Use the search button above!</string>
+
+
+
 </resources>
