@@ -154,45 +154,4 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         cursor.close();
         return path;
     }
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-            assert selectedImage != null;
-            Cursor cursor = getApplicationContext().getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            assert cursor != null;
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            if(cursor.getCount() > 0) {
-                cursor.moveToFirst();
-                if (Build.VERSION.SDK_INT >= 29) {
-                    // You can replace '0' by 'cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)'
-                    // Note that now, you read the column '_ID' and not the column 'DATA'
-                    Uri imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cursor.getInt(column_index));
-                    // now that you have the media URI, you can decode it to a bitmap
-                    try (ParcelFileDescriptor pfd = this.getContentResolver().openFileDescriptor(imageUri, "r")) {
-                        if (pfd != null) {
-                            Bitmap image = BitmapFactory.decodeFileDescriptor(pfd.getFileDescriptor());
-                            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-                            imageView.setImageBitmap(image);
-                        }
-                    } catch (IOException ex) {
-                        Log.println(Log.ERROR, "URI", String.valueOf(imageUri));
-                        ex.printStackTrace();
-                    }
-                } else {
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    ImageView imageView = (ImageView) findViewById(R.id.imgView);
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                }
-            }
-            cursor.close();
-        }
-    }
-    
- */
 }
