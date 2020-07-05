@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -87,7 +88,12 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             dismissLoading();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String username = firebaseUser.getDisplayName();
+                            String email = firebaseUser.getEmail();
+                            User user = new User(email, username);
+                            SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+                            sessionManagement.saveSession(user);
                             goToMainActivity();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -104,6 +110,21 @@ public class LoginActivity extends AppCompatActivity {
     private void goToMainActivity() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        checkSession();
+    }
+
+    private void checkSession() {
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        String username = sessionManagement.getSession();
+        if (username != null) {
+            goToMainActivity();
+        }
     }
 
     private void goToRegisterActivity() {
