@@ -42,4 +42,5 @@
     <string name="step_2">Step 2</string>
     <string name="podcast_name">Podcast name:</string>
     <string name="upload_image">Upload Image</string>
+    <string name="select_podcast">Select Podcast</string>
 </resources>

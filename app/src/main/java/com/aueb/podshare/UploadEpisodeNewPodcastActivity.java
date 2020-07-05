@@ -2,40 +2,31 @@ package com.aueb.podshare;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.BreakIterator;
-
 public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private Button backButton;
     private Button addImage;
+    private Button next;
+    private Button cancel;
     private InputLayoutWithEditTextView podcastName;
     private InputLayoutWithEditTextView podcastDescription;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -65,6 +56,31 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+        next = findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUploadEpisodeFileActivity();
+            }
+        });
+        cancel = findViewById(R.id.cancel_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertUser();
+            }
+        });
+    }
+
+    private void alertUser() {
+        // TO DO ADD ALERT FOR USER TO CONFIRM
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    private void goToUploadEpisodeFileActivity() {
+        startActivity(new Intent(this, UploadEpisodeFileActivity.class));
+        finish();
     }
 
     private void goToUploadEpisodeActivity() {
