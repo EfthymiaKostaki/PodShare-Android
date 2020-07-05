@@ -43,4 +43,10 @@
     <string name="podcast_name">Podcast name:</string>
     <string name="upload_image">Upload Image</string>
     <string name="select_podcast">Select Podcast</string>
+    <string name="step_3">Step 3</string>
+    <string name="upload_audio">Upload Audio File</string>
+    <string name="privacy">Privacy:</string>
+    <string name="privacy_private">&#160;&#160; Private</string>
+    <string name="privacy_public">&#160;&#160; Public</string>
+    <string name="submit_episode">Submit Episode</string>
 </resources>

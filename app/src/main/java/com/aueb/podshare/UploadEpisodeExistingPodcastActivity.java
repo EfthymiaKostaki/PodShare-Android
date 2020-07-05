@@ -49,7 +49,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     }
 
     private void goToUploadEpisodeFileActivity() {
-        startActivity(new Intent(this, UploadEpisodeFileActivity.class));
+        startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 101);
         finish();
     }
 

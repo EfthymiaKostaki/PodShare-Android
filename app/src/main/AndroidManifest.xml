@@ -49,6 +49,9 @@
 
         <activity android:name=".UploadEpisodeNewPodcastActivity"
             android:screenOrientation="unspecified" />
+
+        <activity android:name=".UploadEpisodeFileActivity"
+            android:screenOrientation="unspecified" />
     </application>
 
 </manifest>
