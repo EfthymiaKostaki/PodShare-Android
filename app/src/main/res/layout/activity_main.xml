@@ -24,22 +24,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" >
-        <TextView
-            android:id="@+id/userInfoDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/spacingMedium"
-            android:text="No User"
-            android:textColor="@color/red"
-            android:textSize="@dimen/textExtra" />
-    </LinearLayout>
-
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navbar"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"
@@ -48,6 +37,8 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation_menu"
         android:background="@color/navbackground"
+        app:itemBackground="?selectableItemBackgroundBorderless"
+        app:itemHorizontalTranslationEnabled="true"
         app:itemIconTint="@color/navicon" />
 
 </RelativeLayout>
