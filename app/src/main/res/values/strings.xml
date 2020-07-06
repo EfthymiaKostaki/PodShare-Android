@@ -44,6 +44,8 @@
     <!-- HOMEPAGE-->
     <string name="trending">Trending</string>
     <string name="your_subscriptions">Your Subscriptions</string>
+    <string name="hp_podsharers">PodSharers</string>
+    <string name="hp_podcasts">Podcasts</string>
 
     <!-- SEARCH-->
     <string name="search_title">Search</string>

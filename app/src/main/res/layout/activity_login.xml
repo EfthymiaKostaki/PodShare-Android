@@ -74,11 +74,10 @@ android:background="@drawable/microphone">
         android:layout_width="276dp"
         android:layout_height="51dp"
         android:layout_centerInParent="true"
-        android:background="#3369FF"
+        android:background="@color/blue"
         android:padding="10dp"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/login_continue"
         android:textColor="@color/white" />
 

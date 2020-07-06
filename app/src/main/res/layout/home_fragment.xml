@@ -21,7 +21,6 @@
             android:text="@string/trending"
             android:textColor="@color/white"
             android:textSize="@dimen/textExtraHuge" />
-
         <HorizontalScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
@@ -43,12 +42,12 @@
                     android:contentDescription="@string/trending" />
             </LinearLayout>
         </HorizontalScrollView>
-
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/your_subscriptions"
             android:layout_width="wrap_content"
@@ -58,6 +57,35 @@
             android:padding="@dimen/spacingMedium"
             android:textColor="@color/white"
             android:textSize="@dimen/textExtraHuge"/>
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/layout_padding"
+            android:layout_marginLeft="@dimen/layout_padding" >
+
+            <Button
+                android:id="@+id/hp_podsharers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/hp_podsharers"
+                android:textColor="@color/gray" />
+            <Button
+                android:id="@+id/hp_podcasts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/hp_podcasts"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/transparent"
+                android:textColor="@color/gray"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
