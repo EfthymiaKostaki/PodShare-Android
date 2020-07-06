@@ -18,9 +18,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
             app:titleTextAppearance="@style/ActivityTitle"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/podshare_purple" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,6 +28,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height"
         android:layout_above="@+id/navbar"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

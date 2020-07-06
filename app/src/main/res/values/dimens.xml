@@ -27,7 +27,7 @@
     <dimen name="textHint">12sp</dimen>
     <dimen name="textExtraSmall">10sp</dimen>
 
-    <dimen name="layout_padding">8dp</dimen>
+    <dimen name="layout_padding">16dp</dimen>
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="avatar_size">104dp</dimen>
     <dimen name="avatar_size_large">156dp</dimen>
