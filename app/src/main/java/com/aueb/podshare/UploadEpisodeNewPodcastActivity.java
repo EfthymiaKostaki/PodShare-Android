@@ -27,6 +27,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private Button addImage;
     private Button next;
     private Button cancel;
+    private Bitmap image;
     private InputLayoutWithEditTextView podcastName;
     private InputLayoutWithEditTextView podcastDescription;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -105,12 +106,12 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
 
                 // Showing the toast message
                 Toast.makeText(UploadEpisodeNewPodcastActivity.this,
-                        "Camera Permission Granted",
+                        "Storage Permission Granted",
                         Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(UploadEpisodeNewPodcastActivity.this,
-                        "Camera Permission Denied",
+                        "Storage Permission Denied",
                         Toast.LENGTH_SHORT)
                         .show();
             }
@@ -150,12 +151,11 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 String file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
                 if (file_extn.equals("img") || file_extn.equals("jpg") || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
                     //FINE
-                    Bitmap image = BitmapFactory.decodeFile(filePath);
+                    image = BitmapFactory.decodeFile(filePath);
                     ImageView imageView = (ImageView) findViewById(R.id.imgView);
                     imageView.setImageBitmap(image);
-                } else {
-                    //NOT IN REQUIRED FORMAT
-                }
+                }  //NOT IN REQUIRED FORMAT
+
             }
     }
 
