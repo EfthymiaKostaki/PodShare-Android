@@ -10,6 +10,9 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.SessionManagement;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
 
 public class UploadEpisodeActivity extends AppCompatActivity {
@@ -28,6 +31,10 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         episodeName = findViewById(R.id.episode_name);
         episodeDescription = findViewById(R.id.episode_description);
         cancel = findViewById(R.id.cancel_button);
+        EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeActivity.this);
+        EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
+        episodeNameSharedPreference.saveSession(episodeName.toString());
+        episodeDescriptionSharedPreference.saveSession(episodeDescription.toString());
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

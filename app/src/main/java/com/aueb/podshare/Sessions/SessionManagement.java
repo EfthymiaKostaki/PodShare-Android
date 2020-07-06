@@ -16,9 +16,8 @@ public class SessionManagement {
         editor = sharedPreferences.edit();
     }
 
-    public void saveSession(User user) {
-        String username = user.getUsername();
-        editor.putString(SESSION_KEY, username).commit();
+    public void saveSession(String email) {
+        editor.putString(SESSION_KEY, email).commit();
     }
 
     public String getSession() {
