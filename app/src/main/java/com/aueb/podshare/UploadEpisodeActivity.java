@@ -60,12 +60,25 @@ public class UploadEpisodeActivity extends AppCompatActivity {
     }
 
     private void goToPodcastActivity() {
-        if (existingPodcastChecked) {
-            startActivity(new Intent(this, UploadEpisodeExistingPodcastActivity.class));
+        if (episodeName.getEditTextValue().equals("") || episodeDescription.getEditTextValue().equals("")) {
+            alertEmptyFields();
         } else {
-            startActivity(new Intent(this, UploadEpisodeNewPodcastActivity.class));
+            if (existingPodcastChecked) {
+                startActivity(new Intent(this, UploadEpisodeExistingPodcastActivity.class));
+            } else {
+                startActivity(new Intent(this, UploadEpisodeNewPodcastActivity.class));
+            }
+            finish();
         }
-        finish();
+    }
+
+    private void alertEmptyFields() {
+        new AlertDialog.Builder(UploadEpisodeActivity.this)
+                .setTitle("Empty fields")
+                .setMessage("Please add values to all the fields")
+                .setNegativeButton(android.R.string.yes, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     public void onRadioButtonClicked(View view) {

@@ -94,8 +94,21 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     }
 
     private void goToUploadEpisodeFileActivity() {
-        startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 100);
-        finish();
+        if (podcastName.getEditTextValue().equals("") || podcastDescription.getEditTextValue().equals("") || image == null) {
+            alertEmptyFields();
+        } else {
+            startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 100);
+            finish();
+        }
+    }
+
+    private void alertEmptyFields() {
+        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
+                .setTitle("Empty fields")
+                .setMessage("Please add values to all the fields")
+                .setNegativeButton(android.R.string.yes, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void goToUploadEpisodeActivity() {

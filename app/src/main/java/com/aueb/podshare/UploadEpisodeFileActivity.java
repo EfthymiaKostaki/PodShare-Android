@@ -173,7 +173,21 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
     }
 
     private void saveToFirebase() {
-        // save to firebase at the correct folder and redirect to main activity.
+        if (audio == null) {
+            alertEmptyFields();
+        } else {
+            // save to firebase at the correct folder and redirect to main activity.
+        }
+    }
+
+
+    private void alertEmptyFields() {
+        new AlertDialog.Builder(UploadEpisodeFileActivity.this)
+                .setTitle("Empty fields")
+                .setMessage("Please add values to all the fields")
+                .setNegativeButton(android.R.string.yes, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void alertUser() {
