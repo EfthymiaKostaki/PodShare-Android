@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +25,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
+import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private Button backButton;
@@ -73,9 +84,18 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 alertUser();
             }
         });
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        podcastNameSharedPreference.saveSession(podcastName.getEditTextValue());
+        podcastDescriptionSharedPreference.saveSession(podcastDescription.getEditTextValue());
     }
 
     private void alertUser() {
+        EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
         new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
@@ -83,6 +103,9 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         // DROP ALL SESSION OBJECTS UNTIL NOW FOR THE UPLOAD
+                        podcastNameSharedPreference.terminateSession();
+                        podcastDescriptionSharedPreference.terminateSession();
+                        imageSharedPreference.terminateSession();
                         startActivity(new Intent(UploadEpisodeNewPodcastActivity.this, MainActivity.class));
                         finish();
                     }
@@ -173,6 +196,14 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         if (requestCode == 1)
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImage = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    String image = encodeToBase64(bitmap);
+                    ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
+                    imageSharedPreference.saveSession(image);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 String filePath = getPath(selectedImage);
                 String file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
@@ -196,5 +227,22 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         String path = cursor.getString(column_index);
         cursor.close();
         return path;
+    }
+
+    public static String encodeToBase64(Bitmap image) {
+        Bitmap bitmap = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory
+                .decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

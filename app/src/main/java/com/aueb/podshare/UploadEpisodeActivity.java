@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
+import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.Sessions.SessionManagement;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
 
@@ -33,8 +36,11 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         cancel = findViewById(R.id.cancel_button);
         EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeActivity.this);
         EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
-        episodeNameSharedPreference.saveSession(episodeName.toString());
-        episodeDescriptionSharedPreference.saveSession(episodeDescription.toString());
+        if (episodeNameSharedPreference.getSession() != null) {
+            episodeName.setEditTextValue(episodeNameSharedPreference.getSession());
+        }
+        episodeNameSharedPreference.saveSession(episodeName.getEditTextValue());
+        episodeDescriptionSharedPreference.saveSession(episodeDescription.getEditTextValue());
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,12 +56,19 @@ public class UploadEpisodeActivity extends AppCompatActivity {
     }
 
     private void alertUser() {
+        EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeActivity.this);
+        EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeActivity.this);
+        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeActivity.this);
         new AlertDialog.Builder(UploadEpisodeActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?")
+                .setMessage("Are you sure you want to disregard your additions?"+episodeNameSharedPreference.getSession())
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
+                        episodeNameSharedPreference.terminateSession();
+                        episodeDescriptionSharedPreference.terminateSession();
                         startActivity(new Intent(UploadEpisodeActivity.this, MainActivity.class));
                         finish();
                     }
