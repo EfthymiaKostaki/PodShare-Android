@@ -44,8 +44,9 @@
     <!-- HOMEPAGE-->
     <string name="trending">Trending</string>
     <string name="your_subscriptions">Your Subscriptions</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- FAVORITES & PROFILE-->
+    <string name="not_available">This feature is not available yet. More coming soon!</string>
 
 
 </resources>
