@@ -11,6 +11,12 @@ import android.widget.RadioGroup;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
+import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+
 public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     private Button backButton;
     private Button next;
@@ -45,6 +51,11 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     }
 
     private void alertUser() {
+        EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
@@ -52,6 +63,9 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         // DROP ALL SESSION OBJECTS UNTIL NOW FOR THE UPLOAD
+                        podcastNameSharedPreference.terminateSession();
+                        podcastDescriptionSharedPreference.terminateSession();
+                        imageSharedPreference.terminateSession();
                         startActivity(new Intent(UploadEpisodeExistingPodcastActivity.this, MainActivity.class));
                         finish();
                     }
