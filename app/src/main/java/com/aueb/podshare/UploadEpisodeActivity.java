@@ -43,31 +43,20 @@ public class UploadEpisodeActivity extends AppCompatActivity {
     }
 
     private void alertUser() {
-        /* Alert dialog is on the making
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(getApplicationContext());
-        builder1.setMessage("Are you sure you want to disregard your changes?");
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+        new AlertDialog.Builder(UploadEpisodeActivity.this)
+                .setTitle("Disregard additions")
+                .setMessage("Are you sure you want to disregard your additions?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        startActivity(new Intent(UploadEpisodeActivity.this, MainActivity.class));
+                        finish();
                     }
-                });
-
-        builder1.setNegativeButton(
-                "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();*/
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void goToPodcastActivity() {

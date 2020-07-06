@@ -2,6 +2,7 @@ package com.aueb.podshare;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -74,9 +76,21 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     }
 
     private void alertUser() {
-        // TO DO ADD ALERT FOR USER TO CONFIRM
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
+                .setTitle("Disregard additions")
+                .setMessage("Are you sure you want to disregard your additions?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        // DROP ALL SESSION OBJECTS UNTIL NOW FOR THE UPLOAD
+                        startActivity(new Intent(UploadEpisodeNewPodcastActivity.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void goToUploadEpisodeFileActivity() {
