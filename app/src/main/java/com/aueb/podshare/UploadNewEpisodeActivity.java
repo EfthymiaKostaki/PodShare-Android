@@ -63,7 +63,7 @@ public class UploadNewEpisodeActivity extends AppCompatActivity {
 
         metadataRetriever = new MediaMetadataRetriever();
         referenceEpisodes = FirebaseDatabase.getInstance().getReference().child("episodes");
-        pStorageRef = FirebaseStorage.getInstance().getReference().child("episodes");
+        eStorageRef = FirebaseStorage.getInstance().getReference().child("episodes");
 
     }
 
@@ -87,13 +87,11 @@ public class UploadNewEpisodeActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(cover, 0, cover.length);
             podcastCover.setImageBitmap(bitmap);
             title.setText(metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
-            description.setText(metadataRetriever.extractMetadata(MediaMetadataRetriever.M));
             podcast.setText(metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
             publisher.setText(metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
             duration.setText(metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
 
             str_title = metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-            str_description = metadataRetriever.extractMetadata(MediaMetadataRetriever.M);
             str_podcast = metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
             str_publisher = metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
             str_duration = metadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
@@ -130,7 +128,7 @@ public class UploadNewEpisodeActivity extends AppCompatActivity {
         if (textViewImage.equals("No file selected")) {
             Toast.makeText(this,"please select an image", Toast.LENGTH_SHORT).show();
         } else {
-            if (pUploadTask != null && pUploadTask.isInProgress()) {
+            if (eUploadTask != null && eUploadTask.isInProgress()) {
                 Toast.makeText(this, "episode upload in progress", Toast.LENGTH_SHORT).show();
             } else {
                 uploadFiles();
@@ -141,8 +139,8 @@ public class UploadNewEpisodeActivity extends AppCompatActivity {
     private void uploadFiles() {
         if (audioUri != null) {
             Toast.makeText(this, "uploading, please wait", Toast.LENGTH_SHORT).show();
-            final StorageReference storageReference = pStorageRef.child(System.currentTimeMillis()+'.'+getFileExtension(audioUri));
-            pUploadTask = storageReference.putFile(audioUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final StorageReference storageReference = eStorageRef.child(System.currentTimeMillis()+'.'+getFileExtension(audioUri));
+            eUploadTask = storageReference.putFile(audioUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
