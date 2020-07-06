@@ -1,24 +1,21 @@
-package com.aueb.podshare;
+package com.aueb.podshare.Sessions;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.aueb.podshare.classes.User;
-
-public class SessionManagement {
+public class PodcastNameSharedPreference {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String SHARED_PREF_NAME= "session";
-    String SESSION_KEY = "session_user";
+    String SESSION_KEY = "episode_name";
 
-    public SessionManagement(Context context) {
+    public PodcastNameSharedPreference(Context context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
-    public void saveSession(User user) {
-        String username = user.getUsername();
-        editor.putString(SESSION_KEY, username).commit();
+    public void saveSession(String podcast_name) {
+        editor.putString(SESSION_KEY, podcast_name).commit();
     }
 
     public String getSession() {
