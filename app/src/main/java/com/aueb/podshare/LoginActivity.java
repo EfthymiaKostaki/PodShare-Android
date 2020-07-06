@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void loginUser(String email, String password) {
+    private void loginUser(final String email, String password) {
         //https://firebase.google.com/docs/auth/android/start/
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                             dismissLoading();
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String username = firebaseUser.getDisplayName();
-                            String email = firebaseUser.getEmail();
                             User user = new User(email, username);
                             SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                             sessionManagement.saveSession(user);
