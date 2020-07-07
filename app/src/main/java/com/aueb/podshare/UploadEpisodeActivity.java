@@ -39,6 +39,7 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
         if (episodeNameSharedPreference.getSession() != null) {
             episodeName.setEditTextValue(episodeNameSharedPreference.getSession());
+            episodeDescription.setEditTextValue(episodeDescriptionSharedPreference.getSession());
         }
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,9 @@ public class UploadEpisodeActivity extends AppCompatActivity {
                         // Continue with delete operation
                         episodeNameSharedPreference.terminateSession();
                         episodeDescriptionSharedPreference.terminateSession();
+                        podcastNameSharedPreference.terminateSession();
+                        podcastDescriptionSharedPreference.terminateSession();
+                        imageSharedPreference.terminateSession();
                         startActivity(new Intent(UploadEpisodeActivity.this, MainActivity.class));
                         finish();
                     }
