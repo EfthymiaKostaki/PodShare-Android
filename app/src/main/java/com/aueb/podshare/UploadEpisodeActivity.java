@@ -56,8 +56,8 @@ public class UploadEpisodeActivity extends AppCompatActivity {
     }
 
     private void alertUser() {
-        EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeActivity.this);
-        EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
+        final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeActivity.this);
+        final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
         PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeActivity.this);
         PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeActivity.this);
         ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeActivity.this);

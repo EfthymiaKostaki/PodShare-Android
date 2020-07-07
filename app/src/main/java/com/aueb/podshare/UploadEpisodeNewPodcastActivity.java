@@ -93,9 +93,9 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private void alertUser() {
         EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
         EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
         new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
