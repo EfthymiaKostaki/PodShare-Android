@@ -58,7 +58,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?"+episodeNameSharedPreference.getSession())
+                .setMessage("Are you sure you want to disregard your additions?"+podcastNameSharedPreference.getSession())
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
