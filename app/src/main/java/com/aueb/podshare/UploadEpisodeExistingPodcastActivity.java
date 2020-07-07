@@ -63,9 +63,13 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         // DROP ALL SESSION OBJECTS UNTIL NOW FOR THE UPLOAD
+                        episodeNameSharedPreference.terminateSession();
+                        episodeDescriptionSharedPreference.terminateSession();
                         podcastNameSharedPreference.terminateSession();
-                        podcastDescriptionSharedPreference.terminateSession();
-                        imageSharedPreference.terminateSession();
+                        if (podcastDescriptionSharedPreference != null) {
+                            podcastDescriptionSharedPreference.terminateSession();
+                            imageSharedPreference.terminateSession();
+                        }
                         startActivity(new Intent(UploadEpisodeExistingPodcastActivity.this, MainActivity.class));
                         finish();
                     }
@@ -96,5 +100,11 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         // find the radiobutton by returned id
         RadioButton radioButton = (RadioButton) findViewById(selectedId);
         podcast_name_chosen = radioButton.getText().toString();
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        if (podcastDescriptionSharedPreference != null) {
+            podcastDescriptionSharedPreference.terminateSession();
+        }
+        podcastNameSharedPreference.saveSession(podcast_name_chosen);
     }
 }

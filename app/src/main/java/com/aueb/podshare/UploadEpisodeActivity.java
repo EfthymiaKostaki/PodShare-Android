@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,8 +40,6 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         if (episodeNameSharedPreference.getSession() != null) {
             episodeName.setEditTextValue(episodeNameSharedPreference.getSession());
         }
-        episodeNameSharedPreference.saveSession(episodeName.getEditTextValue());
-        episodeDescriptionSharedPreference.saveSession(episodeDescription.getEditTextValue());
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +82,10 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         if (episodeName.getEditTextValue().equals("") || episodeDescription.getEditTextValue().equals("")) {
             alertEmptyFields();
         } else {
+            EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeActivity.this);
+            EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeActivity.this);
+            episodeNameSharedPreference.saveSession(episodeName.getEditTextValue());
+            episodeDescriptionSharedPreference.saveSession(episodeDescription.getEditTextValue());
             if (existingPodcastChecked) {
                 startActivity(new Intent(this, UploadEpisodeExistingPodcastActivity.class));
             } else {

@@ -84,10 +84,6 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 alertUser();
             }
         });
-        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        podcastNameSharedPreference.saveSession(podcastName.getEditTextValue());
-        podcastDescriptionSharedPreference.saveSession(podcastDescription.getEditTextValue());
     }
 
     private void alertUser() {
@@ -103,9 +99,13 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         // DROP ALL SESSION OBJECTS UNTIL NOW FOR THE UPLOAD
+                        episodeNameSharedPreference.terminateSession();
+                        episodeDescriptionSharedPreference.terminateSession();
                         podcastNameSharedPreference.terminateSession();
-                        podcastDescriptionSharedPreference.terminateSession();
-                        imageSharedPreference.terminateSession();
+                        if (podcastDescriptionSharedPreference != null) {
+                            podcastDescriptionSharedPreference.terminateSession();
+                            imageSharedPreference.terminateSession();
+                        }
                         startActivity(new Intent(UploadEpisodeNewPodcastActivity.this, MainActivity.class));
                         finish();
                     }
@@ -120,6 +120,10 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         if (podcastName.getEditTextValue().equals("") || podcastDescription.getEditTextValue().equals("") || image == null) {
             alertEmptyFields();
         } else {
+            PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
+            PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+            podcastNameSharedPreference.saveSession(podcastName.getEditTextValue());
+            podcastDescriptionSharedPreference.saveSession(podcastDescription.getEditTextValue());
             startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 100);
             finish();
         }
