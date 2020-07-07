@@ -30,6 +30,7 @@ import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.utils.BitmapUtil;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
 
 import java.io.ByteArrayOutputStream;
@@ -41,6 +42,8 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private Button next;
     private Button cancel;
     private Bitmap image;
+    private String str_image;
+    private ImageView imageView;
     private InputLayoutWithEditTextView podcastName;
     private InputLayoutWithEditTextView podcastDescription;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -59,7 +62,19 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         });
         podcastName = findViewById(R.id.podcast_name);
         podcastDescription = findViewById(R.id.podcast_description);
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        if (podcastNameSharedPreference.getSession() != null) {
+            podcastName.setEditTextValue(podcastNameSharedPreference.getSession());
+            podcastDescription.setEditTextValue(podcastDescriptionSharedPreference.getSession());
+        }
         addImage = findViewById(R.id.add_image);
+        imageView = findViewById(R.id.imgView);
+        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        if (imageSharedPreference.getSession() != null) {
+            image = BitmapUtil.decodeBase64(imageSharedPreference.getSession());
+            imageView.setImageBitmap(image);
+        }
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -122,8 +137,10 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         } else {
             PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
             PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+            ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
             podcastNameSharedPreference.saveSession(podcastName.getEditTextValue());
             podcastDescriptionSharedPreference.saveSession(podcastDescription.getEditTextValue());
+            imageSharedPreference.saveSession(str_image);
             startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 100);
             finish();
         }
@@ -202,9 +219,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 Uri selectedImage = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                    String image = encodeToBase64(bitmap);
-                    ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
-                    imageSharedPreference.saveSession(image);
+                    str_image = encodeToBase64(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
