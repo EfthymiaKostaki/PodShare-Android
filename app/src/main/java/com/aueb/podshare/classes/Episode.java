@@ -9,6 +9,7 @@ public class Episode {
     private String description;
     private String episodeLink;
     private Podcast podcast;
+    /* When privacy is true it means that episode is private */
     private boolean privacy;
     private int favourites;
     private int likes;
@@ -53,12 +54,8 @@ public class Episode {
         return views;
     }
 
-    public void set_privacy(String privacy) {
-        if (privacy.equals("private")){
-            this.privacy = false;
-        } else {
-            this.privacy = true;
-        }
+    public void set_privacy(boolean privacy) {
+        this.privacy = privacy;
     }
 
     public boolean get_privacy() {

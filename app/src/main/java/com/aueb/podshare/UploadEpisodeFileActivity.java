@@ -14,7 +14,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -31,16 +30,24 @@ import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
-import com.aueb.podshare.utils.DateUtil;
+import com.aueb.podshare.utils.BitmapUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-public class UploadEpisodeFileActivity extends  AppCompatActivity {
+import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
+
+public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActivity {
     private static final String TAG = "UPLOAD_FILE" ;
     private Button submit;
     private Button cancel;
@@ -213,15 +220,41 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     try {
-                                        FirebaseFirestore userPodcasts = document.getReference().collection("podcasts").getFirestore();
                                         if (getCallingActivity() != null) {
                                             String shortClassName = getCallingActivity().getClassName();
-                                            final Episode episode = new Episode("find yourself", "be yourself");
+                                            final Episode episode = new Episode(episodeNameSharedPreference.getSession(), episodeDescriptionSharedPreference.getSession());
+                                            episode.set_privacy(privacy_private);
+                                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                            assert firebaseUser != null;
+                                            String userId = firebaseUser.getUid();
+                                            com.google.firebase.storage.StorageReference usersRef = storage.getReference();
                                             if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
-                                                Podcast podcast = new Podcast("something", "something", DateUtil.parseDate("2014-02-14"));
+                                                Podcast podcast = new Podcast(podcastNameSharedPreference.getSession(), podcastDescriptionSharedPreference.getSession(), Calendar.getInstance().getTime());
                                                 document.getReference().collection("podcasts").add(podcast);
+                                                Bitmap image = BitmapUtil.decodeBase64(imageSharedPreference.getSession());
+                                                String file_extn = imageSharedPreference.getSession().substring(imageSharedPreference.getSession().lastIndexOf(".") + 1);
+
+                                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                                image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                                                byte[] data = baos.toByteArray();
+                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/"+userId+ "/podcasts/"+podcastNameSharedPreference.getSession()+"/"+podcastNameSharedPreference.getSession()+"."+file_extn);
+                                                UploadTask uploadTask = podcastRef.putBytes(data);
+                                                uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception exception) {
+                                                        Log.w(TAG, "Error uploading to storage default user image.");
+                                                    }
+                                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                                        Log.w(TAG, "Successfully uploaded to storage default user image.");
+                                                    }
+                                                });
                                             }
-                                            document.getReference().collection("podcasts").whereEqualTo("name", "something").get()
+                                            document.getReference().collection("podcasts").whereEqualTo("name", podcastNameSharedPreference.getSession())
+                                                    .get()
                                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -232,6 +265,12 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                                                             }
                                                         }
                                                     });
+                                            episodeNameSharedPreference.terminateSession();
+                                            episodeDescriptionSharedPreference.terminateSession();
+                                            podcastNameSharedPreference.terminateSession();
+                                            podcastDescriptionSharedPreference.terminateSession();
+                                            imageSharedPreference.terminateSession();
+                                            goToMainActivity();
                                         } else {
                                             Log.e("class was not found", "calling activity does not exist");
                                         }
@@ -245,12 +284,13 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                             }
                         }
                     });
-            episodeNameSharedPreference.terminateSession();
-            episodeDescriptionSharedPreference.terminateSession();
-            podcastNameSharedPreference.terminateSession();
-            podcastDescriptionSharedPreference.terminateSession();
-            imageSharedPreference.terminateSession();
+
         }
+    }
+
+    private void goToMainActivity() {
+        startActivity(new Intent(UploadEpisodeFileActivity.this, MainActivity.class));
+        finish();
     }
 
 
@@ -281,8 +321,7 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                         podcastNameSharedPreference.terminateSession();
                         podcastDescriptionSharedPreference.terminateSession();
                         imageSharedPreference.terminateSession();
-                        startActivity(new Intent(UploadEpisodeFileActivity.this, MainActivity.class));
-                        finish();
+                        goToMainActivity();
                     }
                 })
                 // A null listener allows the button to dismiss the dialog and take no further action.
@@ -299,11 +338,11 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
         switch(view.getId()) {
             case R.id.privacy_private:
                 if (checked)
-                    privacy_private = false;
+                    privacy_private = true;
                 break;
             case R.id.privacy_public:
                 if (checked)
-                    privacy_private = true;
+                    privacy_private = false;
                 break;
         }
     }
