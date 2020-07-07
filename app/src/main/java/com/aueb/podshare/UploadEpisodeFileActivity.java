@@ -24,6 +24,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
+import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+
 public class UploadEpisodeFileActivity extends  AppCompatActivity {
     private Button submit;
     private Button cancel;
@@ -176,6 +182,16 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
         if (audio == null) {
             alertEmptyFields();
         } else {
+            final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
+            final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+            final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
+            final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+            final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
+            episodeNameSharedPreference.terminateSession();
+            episodeDescriptionSharedPreference.terminateSession();
+            podcastNameSharedPreference.terminateSession();
+            podcastDescriptionSharedPreference.terminateSession();
+            imageSharedPreference.terminateSession();
             // save to firebase at the correct folder and redirect to main activity.
         }
     }
@@ -191,6 +207,11 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
     }
 
     private void alertUser() {
+        EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
+        EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
         new AlertDialog.Builder(UploadEpisodeFileActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
@@ -198,6 +219,11 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         // DROP ALL SESSION OBJECTS UNTIL NOW FOR THE UPLOAD
+                        episodeNameSharedPreference.terminateSession();
+                        episodeDescriptionSharedPreference.terminateSession();
+                        podcastNameSharedPreference.terminateSession();
+                        podcastDescriptionSharedPreference.terminateSession();
+                        imageSharedPreference.terminateSession();
                         startActivity(new Intent(UploadEpisodeFileActivity.this, MainActivity.class));
                         finish();
                     }
