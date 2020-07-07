@@ -29,6 +29,8 @@ import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.classes.Podcast;
+import com.aueb.podshare.utils.DateUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +50,7 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int STORAGE_PERMISSION_CODE = 101;
     private static int RESULT_LOAD_AUDIO = 1;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,11 +198,7 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
             final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
             final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
             final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
-            episodeNameSharedPreference.terminateSession();
-            episodeDescriptionSharedPreference.terminateSession();
-            podcastNameSharedPreference.terminateSession();
-            podcastDescriptionSharedPreference.terminateSession();
-            imageSharedPreference.terminateSession();
+
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser firebaseuser = mAuth.getCurrentUser();
             // save to firebase at the correct folder and redirect to main activity.
@@ -214,7 +212,8 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     try {
-                                        document.getReference().collection("podcasts");
+                                        Podcast podcast = new Podcast("something", "something", DateUtil.parseDate("2014-02-14"));
+                                        document.getReference().collection("podcasts").add(podcast);
                                         Log.d(TAG, "podcasts collection exists in users");
                                     } catch (Exception e) {
                                         Log.d(TAG, e.toString());
@@ -225,7 +224,11 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                             }
                         }
                     });
-
+            episodeNameSharedPreference.terminateSession();
+            episodeDescriptionSharedPreference.terminateSession();
+            podcastNameSharedPreference.terminateSession();
+            podcastDescriptionSharedPreference.terminateSession();
+            imageSharedPreference.terminateSession();
         }
     }
 

@@ -13,11 +13,10 @@ public class Podcast {
     private int likes;
     private int favourites;
     private int views;
-    private User publisher;
     private Date pub_date;
     private ArrayList<Episode> episodes;
 
-    public Podcast(String name, String description, User publisher, Date pub_date) {
+    public Podcast(String name, String description, Date pub_date) {
         this.name = name;
         this.description = description;
         episodes = new ArrayList();
@@ -25,7 +24,6 @@ public class Podcast {
         likes = 0;
         favourites = 0;
         views = 0;
-        this.publisher = publisher;
         this.pub_date = pub_date;
     }
 
@@ -91,10 +89,6 @@ public class Podcast {
 
     public int get_views(){
         return views;
-    }
-
-    public User getPublisher() {
-        return publisher;
     }
 
     public Date getPub_date() {
