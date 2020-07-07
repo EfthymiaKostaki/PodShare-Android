@@ -81,6 +81,12 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     }
 
     private void goToUploadEpisodeFileActivity() {
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        if (podcastDescriptionSharedPreference != null) {
+            podcastDescriptionSharedPreference.terminateSession();
+        }
+        podcastNameSharedPreference.saveSession(podcast_name_chosen);
         startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 101);
         finish();
     }
@@ -100,11 +106,5 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         // find the radiobutton by returned id
         RadioButton radioButton = (RadioButton) findViewById(selectedId);
         podcast_name_chosen = radioButton.getText().toString();
-        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
-        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeExistingPodcastActivity.this);
-        if (podcastDescriptionSharedPreference != null) {
-            podcastDescriptionSharedPreference.terminateSession();
-        }
-        podcastNameSharedPreference.saveSession(podcast_name_chosen);
     }
 }
