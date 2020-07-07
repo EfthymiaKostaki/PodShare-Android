@@ -3,11 +3,15 @@ package com.aueb.podshare;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,12 +20,26 @@ import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.classes.Episode;
+import com.aueb.podshare.classes.Podcast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     private Button backButton;
     private Button next;
     private String podcast_name_chosen = "";
     private Button cancel;
+    private FirebaseAuth mAuth;
+    private static ArrayList<Podcast> mArrayList = new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +66,12 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                 alertUser();
             }
         });
+        ViewGroup verButtonLayout = (ViewGroup) findViewById(R.id.podcast_choice);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseuser = mAuth.getCurrentUser();
+        // save to firebase at the correct folder and redirect to main activity.
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     }
 
     private void alertUser() {
@@ -107,4 +131,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         RadioButton radioButton = (RadioButton) findViewById(selectedId);
         podcast_name_chosen = radioButton.getText().toString();
     }
+
+
+
 }
