@@ -29,6 +29,7 @@ import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.utils.DateUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -212,15 +213,35 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     try {
-                                        Podcast podcast = new Podcast("something", "something", DateUtil.parseDate("2014-02-14"));
-                                        document.getReference().collection("podcasts").add(podcast);
-                                        Log.d(TAG, "podcasts collection exists in users");
+                                        FirebaseFirestore userPodcasts = document.getReference().collection("podcasts").getFirestore();
+                                        if (getCallingActivity() != null) {
+                                            String shortClassName = getCallingActivity().getClassName();
+                                            final Episode episode = new Episode("find yourself", "be yourself");
+                                            if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
+                                                Podcast podcast = new Podcast("something", "something", DateUtil.parseDate("2014-02-14"));
+                                                document.getReference().collection("podcasts").add(podcast);
+                                            }
+                                            document.getReference().collection("podcasts").whereEqualTo("name", "something").get()
+                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                            if (task.isSuccessful()) {
+                                                                for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
+                                                                    podcastDocument.getReference().collection("episodes").add(episode);
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                        } else {
+                                            Log.e("class was not found", "calling activity does not exist");
+                                        }
                                     } catch (Exception e) {
                                         Log.d(TAG, e.toString());
                                     }
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
+                                Toast.makeText(UploadEpisodeFileActivity.this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
