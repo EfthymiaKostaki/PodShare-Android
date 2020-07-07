@@ -188,7 +188,7 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
     }
 
     private void saveToFirebase() {
-        if (audio == null) {
+        if (false) {//audio == null) {
             alertEmptyFields();
         } else {
             final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
@@ -201,6 +201,7 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
             podcastNameSharedPreference.terminateSession();
             podcastDescriptionSharedPreference.terminateSession();
             imageSharedPreference.terminateSession();
+            mAuth = FirebaseAuth.getInstance();
             FirebaseUser firebaseuser = mAuth.getCurrentUser();
             // save to firebase at the correct folder and redirect to main activity.
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -212,7 +213,12 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.d(TAG, document.getId() + " => " + document.getData());
+                                    try {
+                                        document.getReference().collection("podcasts");
+                                        Log.d(TAG, "podcasts collection exists in users");
+                                    } catch (Exception e) {
+                                        Log.d(TAG, e.toString());
+                                    }
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
