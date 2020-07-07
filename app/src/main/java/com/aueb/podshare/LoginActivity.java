@@ -19,6 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 
 /**
  * Created by Christina Chaniotaki (christinachaniotaki96@gmail.com) on 08,April,2019
@@ -89,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             dismissLoading();
                             FirebaseUser firebaseuser = mAuth.getCurrentUser();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("users");
                             User user = new User(email, firebaseuser.getDisplayName());
                             SessionManagement sm = new SessionManagement(LoginActivity.this);
                             sm.saveSession(email);
