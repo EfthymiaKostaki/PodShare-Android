@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class ImageSharedPreference {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String SHARED_PREF_NAME= "session";
+    String SHARED_PREF_NAME= "image";
     String SESSION_KEY = "image";
 
     public ImageSharedPreference(Context context) {

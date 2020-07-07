@@ -271,7 +271,7 @@ public class UploadEpisodeFileActivity extends  AppCompatActivity {
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
         new AlertDialog.Builder(UploadEpisodeFileActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?")
+                .setMessage("Are you sure you want to disregard your additions?"+episodeNameSharedPreference.getSession())
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
