@@ -67,7 +67,7 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeActivity.this);
         new AlertDialog.Builder(UploadEpisodeActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?"+podcastNameSharedPreference.getSession())
+                .setMessage("Are you sure you want to disregard your additions?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
