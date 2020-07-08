@@ -11,11 +11,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aueb.podshare.Sessions.AudioSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.Sessions.PrivacySharedPreference;
 import com.aueb.podshare.Sessions.SessionManagement;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
 
@@ -61,6 +63,8 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeActivity.this);
         final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeActivity.this);
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeActivity.this);
+        final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeActivity.this);
+        final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeActivity.this);
         new AlertDialog.Builder(UploadEpisodeActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?"+podcastNameSharedPreference.getSession())
@@ -72,6 +76,8 @@ public class UploadEpisodeActivity extends AppCompatActivity {
                         podcastNameSharedPreference.terminateSession();
                         podcastDescriptionSharedPreference.terminateSession();
                         imageSharedPreference.terminateSession();
+                        audioSharedPreference.terminateSession();
+                        privacySharedPreference.terminateSession();
                         startActivity(new Intent(UploadEpisodeActivity.this, MainActivity.class));
                         finish();
                     }

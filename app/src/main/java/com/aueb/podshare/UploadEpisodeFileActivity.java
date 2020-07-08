@@ -313,6 +313,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                                             podcastNameSharedPreference.terminateSession();
                                             podcastDescriptionSharedPreference.terminateSession();
                                             imageSharedPreference.terminateSession();
+                                            audioSharedPreference.terminateSession();
+                                            privacySharedPreference.terminateSession();
                                             goToMainActivity();
                                         } else {
                                             Log.e("class was not found", "calling activity does not exist");
@@ -369,6 +371,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
         final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
         final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
+        final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
+        final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
         new AlertDialog.Builder(UploadEpisodeFileActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?"+episodeNameSharedPreference.getSession())
@@ -381,6 +385,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                         podcastNameSharedPreference.terminateSession();
                         podcastDescriptionSharedPreference.terminateSession();
                         imageSharedPreference.terminateSession();
+                        audioSharedPreference.terminateSession();
+                        privacySharedPreference.terminateSession();
                         goToMainActivity();
                     }
                 })
