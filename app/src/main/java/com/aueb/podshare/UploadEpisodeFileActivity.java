@@ -45,6 +45,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Calendar;
 
 public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActivity {
@@ -58,6 +62,12 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
     private FirebaseAuth mAuth;
     private static final int STORAGE_PERMISSION_CODE = 101;
     private static int RESULT_LOAD_AUDIO = 1;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private com.google.firebase.storage.StorageReference usersRef = storage.getReference();
+    private InputStream stream;
+    private String filePath;
+    private String file_extn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,16 +134,21 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
         if (requestCode == 1)
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImage = data.getData();
-                String filePath = getPath(selectedImage);
-                String file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
+                filePath = getPath(selectedImage);
+                file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
                 if (file_extn.equals("3gp") || file_extn.equals("mp4") || file_extn.equals("m4a") || file_extn.equals("mp3") || file_extn.equals("ogg")) {
                     //FINE
-                    audio = BitmapFactory.decodeFile(filePath);
-                    Toast
-                            .makeText(UploadEpisodeFileActivity.this,
-                                    "Episode was successfully added.",
-                                    Toast.LENGTH_SHORT)
-                            .show();
+                    try {
+                        stream = new FileInputStream(new File(filePath));
+                        Toast
+                                .makeText(UploadEpisodeFileActivity.this,
+                                        "Audio was successfully uploaded.",
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("audio log",filePath);
                 }  //NOT IN REQUIRED FORMAT
 
             }
@@ -198,7 +213,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
     }
 
     private void saveToFirebase() {
-        if (false) {//audio == null) {
+        if (filePath.equals("")) {
             alertEmptyFields();
         } else {
             final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
@@ -224,11 +239,9 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                                             String shortClassName = getCallingActivity().getClassName();
                                             final Episode episode = new Episode(episodeNameSharedPreference.getSession(), episodeDescriptionSharedPreference.getSession());
                                             episode.set_privacy(privacy_private);
-                                            FirebaseStorage storage = FirebaseStorage.getInstance();
                                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                             assert firebaseUser != null;
                                             String userId = firebaseUser.getUid();
-                                            com.google.firebase.storage.StorageReference usersRef = storage.getReference();
                                             if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
                                                 Podcast podcast = new Podcast(podcastNameSharedPreference.getSession(), podcastDescriptionSharedPreference.getSession(), Calendar.getInstance().getTime());
                                                 document.getReference().collection("podcasts").add(podcast);
@@ -263,6 +276,29 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                                                             }
                                                         }
                                                     });
+                                            UploadTask uploadTask = usersRef.child("users/"+ userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/episodes/"+ episodeNameSharedPreference.getSession() + "/" + episodeNameSharedPreference.getSession() + "." +file_extn).putStream(stream);
+                                            uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception exception) {
+                                                    // Handle unsuccessful uploads
+                                                    Toast
+                                                            .makeText(UploadEpisodeFileActivity.this,
+                                                                    "Something went wrong. Please try again later.",
+                                                                    Toast.LENGTH_SHORT)
+                                                            .show();
+                                                }
+                                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                                    Toast
+                                                            .makeText(UploadEpisodeFileActivity.this,
+                                                                    "Episode was successfully added.",
+                                                                    Toast.LENGTH_SHORT)
+                                                            .show();}
+                                            });
+
+                                            Log.d("audio log",filePath);
                                             episodeNameSharedPreference.terminateSession();
                                             episodeDescriptionSharedPreference.terminateSession();
                                             podcastNameSharedPreference.terminateSession();
