@@ -138,8 +138,6 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                 Uri selectedImage = data.getData();
                 filePath = getPath(selectedImage);
                 file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
-                AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
-                audioSharedPreference.saveSession(filePath, file_extn);
                 if (file_extn.equals("3gp") || file_extn.equals("mp4") || file_extn.equals("m4a") || file_extn.equals("mp3") || file_extn.equals("ogg")) {
                     //FINE
                     try {
@@ -201,6 +199,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
 
     private void goToUploadPreviousActivity() {
         if (getCallingActivity() != null) {
+            AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
+            audioSharedPreference.saveSession(filePath, file_extn);
             String shortClassName = getCallingActivity().getClassName();
             if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
                 startActivity(new Intent(this, UploadEpisodeNewPodcastActivity.class));
