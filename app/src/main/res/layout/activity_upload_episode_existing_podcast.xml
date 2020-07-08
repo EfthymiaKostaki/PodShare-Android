@@ -93,31 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacingExtraHuge"
-        android:layout_marginLeft="@dimen/spacingHuge"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/podcast1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginBottom="@dimen/spacingSmall"
-            android:button="@drawable/radiobuttonstyle"
-            android:checked="true"
-            android:onClick="onRadioButtonClicked"
-            android:text="&#160;&#160; My favorite car!"
-            android:textColor="@color/white" />
-
-        <RadioButton
-            android:id="@+id/podcast2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginBottom="@dimen/spacingSmall"
-            android:button="@drawable/radiobuttonstyle"
-            android:onClick="onRadioButtonClicked"
-            android:text="&#160;&#160; Fun in Athens!"
-            android:textColor="@color/white" />
+        android:layout_marginLeft="@dimen/spacingHuge">
     </RadioGroup>
 
 

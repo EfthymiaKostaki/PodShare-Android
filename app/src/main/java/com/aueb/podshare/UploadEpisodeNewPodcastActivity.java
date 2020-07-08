@@ -44,6 +44,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private Bitmap image;
     private String str_image;
     private ImageView imageView;
+    private String img_extension;
     private InputLayoutWithEditTextView podcastName;
     private InputLayoutWithEditTextView podcastDescription;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -140,7 +141,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
             ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
             podcastNameSharedPreference.saveSession(podcastName.getEditTextValue());
             podcastDescriptionSharedPreference.saveSession(podcastDescription.getEditTextValue());
-            imageSharedPreference.saveSession(str_image);
+            imageSharedPreference.saveSession(str_image, img_extension);
             startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 100);
             finish();
         }
@@ -228,6 +229,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 String file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
                 if (file_extn.equals("img") || file_extn.equals("jpg") || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
                     //FINE
+                    img_extension = file_extn;
                     image = BitmapFactory.decodeFile(filePath);
                     ImageView imageView = (ImageView) findViewById(R.id.imgView);
                     imageView.setImageBitmap(image);
