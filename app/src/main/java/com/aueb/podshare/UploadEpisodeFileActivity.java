@@ -249,7 +249,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                                 image.compress(Bitmap.CompressFormat.PNG, 100, baos);
                                                 byte[] data = baos.toByteArray();
-                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/" + userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/"+ podcastNameSharedPreference.getSession()+imageSharedPreference.getImgExtension());
+                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/" + userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/"+ podcastNameSharedPreference.getSession()+ "." +imageSharedPreference.getImgExtension());
                                                 UploadTask uploadTask = podcastRef.putBytes(data);
                                                 uploadTask.addOnFailureListener(new OnFailureListener() {
                                                     @Override
