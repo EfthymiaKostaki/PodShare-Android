@@ -34,6 +34,7 @@
     <string name="nb_profile">PROFILE</string>
 
     <!-- SIDE MENU -->
+    <string name="sm">SIDE MENU</string>
     <string name="sm_following">FOLLOWING</string>
     <string name="sm_subscribed">SUBSCRIBED</string>
     <string name="sm_favourites">FAVOURITES</string>
@@ -46,6 +47,8 @@
     <string name="your_subscriptions">Your Subscriptions</string>
     <string name="hp_podsharers">PodSharers</string>
     <string name="hp_podcasts">Podcasts</string>
+    <string name="sub_podsharers">Podcast Episodes from PodSharers you follow will appear here</string>
+    <string name="sub_podcasts">Episodes from Podcasts you have subscribed to will appear here</string>
 
     <!-- SEARCH-->
     <string name="search_title">Search</string>
