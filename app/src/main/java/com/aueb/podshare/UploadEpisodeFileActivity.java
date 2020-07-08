@@ -399,6 +399,10 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
+        PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
+        if (((RadioButton) view).getText().toString().equals(privacySharedPreference.getSession())) {
+            ((RadioButton) view).setChecked(true);
+        }
 
         // Check which radio button was clicked
         switch(view.getId()) {
