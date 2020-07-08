@@ -233,12 +233,10 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                                                 Podcast podcast = new Podcast(podcastNameSharedPreference.getSession(), podcastDescriptionSharedPreference.getSession(), Calendar.getInstance().getTime());
                                                 document.getReference().collection("podcasts").add(podcast);
                                                 Bitmap image = BitmapUtil.decodeBase64(imageSharedPreference.getSession());
-                                                String file_extn = imageSharedPreference.getSession().substring(imageSharedPreference.getSession().lastIndexOf(".") + 1);
-
                                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                                 image.compress(Bitmap.CompressFormat.PNG, 100, baos);
                                                 byte[] data = baos.toByteArray();
-                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/"+userId+ "/podcasts/"+podcastNameSharedPreference.getSession()+"/"+podcastNameSharedPreference.getSession()+"."+file_extn);
+                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/" + userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/"+ podcastNameSharedPreference.getSession()+".png");
                                                 UploadTask uploadTask = podcastRef.putBytes(data);
                                                 uploadTask.addOnFailureListener(new OnFailureListener() {
                                                     @Override
