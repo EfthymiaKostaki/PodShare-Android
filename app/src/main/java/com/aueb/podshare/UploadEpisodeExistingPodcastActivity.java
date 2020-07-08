@@ -3,6 +3,7 @@ package com.aueb.podshare;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -82,14 +84,18 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         rgb = findViewById(R.id.podcast_choice);
         getPodcasts();
         for (String podcast : podcasts){
-            RadioButton rb = new RadioButton(this);
-            rb.setId(podcasts.indexOf(podcast));
-            rb.setText(podcast);
-            rb.setChecked(false);
-
-            rgb.addView(rb);
+                RadioButton rb = new RadioButton(this);
+                rb.setId(podcasts.indexOf(podcast));
+                rb.setText(podcast);
+                rb.setTextColor(Color.WHITE);
+                rb.setButtonDrawable(R.drawable.radiobuttonstyle);
+                rb.setChecked(false);
+                ScrollView.LayoutParams layoutParams = new ScrollView.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.bottomMargin = 6;
+                layoutParams.topMargin = 6;
+                rb.setLayoutParams(layoutParams);
+                rgb.addView(rb);
         }
-
     }
 
     private void alertUser() {
