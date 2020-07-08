@@ -2,6 +2,7 @@ package com.aueb.podshare;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,15 +23,23 @@ import com.aueb.podshare.Sessions.PodcastDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
+import com.aueb.podshare.utils.BitmapUtil;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
@@ -39,7 +48,9 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     private String podcast_name_chosen = "";
     private Button cancel;
     private FirebaseAuth mAuth;
-    private static ArrayList<Podcast> mArrayList = new ArrayList<>();
+    RadioGroup rgb;
+    private static final String TAG = "GET_PODCASTS" ;
+    private static ArrayList<String> podcasts = new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +77,16 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                 alertUser();
             }
         });
-        ViewGroup verButtonLayout = (ViewGroup) findViewById(R.id.podcast_choice);
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseuser = mAuth.getCurrentUser();
-        // save to firebase at the correct folder and redirect to main activity.
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        rgb = findViewById(R.id.podcast_choice);
+        getPodcasts();
+        for (String podcast : podcasts){
+            RadioButton rb = new RadioButton(this);
+            rb.setId(podcasts.indexOf(podcast));
+            rb.setText(podcast);
+            rb.setChecked(false);
+
+            rgb.addView(rb);
+        }
 
     }
 
@@ -82,7 +98,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?"+podcastNameSharedPreference.getSession())
+                .setMessage("Are you sure you want to disregard your additions?"+podcasts.get(0))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
@@ -132,6 +148,43 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         podcast_name_chosen = radioButton.getText().toString();
     }
 
+    public void getPodcasts(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseuser = mAuth.getCurrentUser();
+        // save to firebase at the correct folder and redirect to main activity.
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users")
+                .whereEqualTo("email", firebaseuser.getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                document.getReference().collection("podcasts")
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
+                                                        String name = (String) podcastDocument.get("name");
+                                                        podcasts.add(name);
+                                                    }
+                                                } else {
+                                                    Log.d(TAG, "Error getting podcasts: ", task.getException());
+                                                    Toast.makeText(UploadEpisodeExistingPodcastActivity.this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast.makeText(UploadEpisodeExistingPodcastActivity.this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
 
 }
