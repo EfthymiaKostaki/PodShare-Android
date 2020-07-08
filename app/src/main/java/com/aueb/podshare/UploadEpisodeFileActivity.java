@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.aueb.podshare.Sessions.AudioSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
@@ -137,6 +138,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                 Uri selectedImage = data.getData();
                 filePath = getPath(selectedImage);
                 file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
+                AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
+                audioSharedPreference.saveSession(filePath, file_extn);
                 if (file_extn.equals("3gp") || file_extn.equals("mp4") || file_extn.equals("m4a") || file_extn.equals("mp3") || file_extn.equals("ogg")) {
                     //FINE
                     try {
@@ -222,7 +225,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
             final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
             final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
             final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
-
+            final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
+            final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser firebaseuser = mAuth.getCurrentUser();
             // save to firebase at the correct folder and redirect to main activity.
@@ -277,6 +281,10 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                                                             }
                                                         }
                                                     });
+                                            if (stream == null) {
+                                                produceDynamicStream();
+                                                file_extn = audioSharedPreference.getAudioExtension();
+                                            }
                                             UploadTask uploadTask = usersRef.child("users/"+ userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/episodes/"+ episodeNameSharedPreference.getSession() + "/" + episodeNameSharedPreference.getSession() + "." +file_extn).putStream(stream);
                                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                                 @Override
@@ -336,6 +344,23 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                 .setNegativeButton(android.R.string.yes, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    private void produceDynamicStream() {
+        AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
+        String audio_extn = audioSharedPreference.getSession();
+        if (audio_extn.equals("3gp") || audio_extn.equals("mp4") || audio_extn.equals("m4a") || audio_extn.equals("mp3") || audio_extn.equals("ogg")) {
+            //FINE
+            try {
+                stream = new FileInputStream(new File(filePath));
+                Toast.makeText(UploadEpisodeFileActivity.this,
+                        "Audio was successfully uploaded.",
+                        Toast.LENGTH_SHORT).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            Log.d("audio log",filePath);
+        }  //NOT IN REQUIRED FORMAT
     }
 
     private void alertUser() {
