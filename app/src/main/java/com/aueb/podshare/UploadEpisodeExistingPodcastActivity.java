@@ -54,7 +54,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     RadioGroup rgb;
     private static final String TAG = "GET_PODCASTS" ;
-    private static ArrayList<String> podcasts = new ArrayList<>();
+    private static ArrayList<String> podcasts =  new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,20 +81,26 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                 alertUser();
             }
         });
+        createExistingPodcasts();
+    }
+
+   private void createExistingPodcasts() {
         rgb = findViewById(R.id.podcast_choice);
         getPodcasts();
         for (String podcast : podcasts){
-                RadioButton rb = new RadioButton(this);
-                rb.setId(podcasts.indexOf(podcast));
-                rb.setText(podcast);
-                rb.setTextColor(Color.WHITE);
-                rb.setButtonDrawable(R.drawable.radiobuttonstyle);
-                rb.setChecked(false);
-                ScrollView.LayoutParams layoutParams = new ScrollView.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.bottomMargin = 6;
-                layoutParams.topMargin = 6;
-                rb.setLayoutParams(layoutParams);
-                rgb.addView(rb);
+            RadioButton rb = new RadioButton(this);
+            rb.setId(podcasts.indexOf(podcast));
+            rb.setChecked(false);
+            rb.setFocusable(false);
+            rb.setText(podcast);
+            rb.setTextColor(Color.WHITE);
+            rb.setButtonDrawable(R.drawable.radiobuttonstyle);
+            rb.setChecked(false);
+            ScrollView.LayoutParams layoutParams = new ScrollView.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.bottomMargin = 6;
+            layoutParams.topMargin = 6;
+            rb.setLayoutParams(layoutParams);
+            rgb.addView(rb);
         }
     }
 
@@ -182,6 +188,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                                                     for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
                                                         String name = (String) podcastDocument.get("name");
                                                         podcasts.add(name);
+                                                        Log.d("podcast name", name);
                                                     }
                                                 } else {
                                                     Log.d(TAG, "Error getting podcasts: ", task.getException());
