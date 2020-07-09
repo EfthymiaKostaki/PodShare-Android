@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".HomeFragment">
@@ -23,88 +24,28 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/layout_padding"
         android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
         android:text="@string/search_question"
         android:gravity="top"
         android:textColor="@color/white"
         android:textSize="@dimen/textExtraHuge"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/layout_padding"
-        android:paddingEnd="@dimen/layout_padding">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageButton
-                android:id="@+id/search_option_1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/search_podcasts"
-                android:textColor="@color/unselected"
-                android:contentDescription="@string/search_option_1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacingMedium"
-                android:text="@string/search_option_1"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSmall" />
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageButton
-                android:id="@+id/search_option_2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:clickable="true"
-                android:src="@drawable/search_podsharers"
-                android:focusable="true"
-                android:textColor="@color/unselected"
-                android:contentDescription="@string/search_option_2"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacingMedium"
-                android:text="@string/search_option_2"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSmall" />
-        </LinearLayout>
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/search_recent"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/searchtabLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/search_recent"
-        android:gravity="top"
-        android:padding="@dimen/spacingMedium"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textExtraHuge"/>
-    <ScrollView
+        android:background="@color/transparent"
+        app:tabTextColor="@color/gray_dark_x2"
+        app:tabSelectedTextColor="@color/gray"
+        app:tabMode="fixed"
+        app:tabGravity="fill" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/searchviewPager"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/search_recent_default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_recent_default"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/spacingSmall"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:padding="@dimen/spacingMedium"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textLarge"
-            android:layout_marginLeft="@dimen/layout_padding"
-            android:layout_marginRight="@dimen/layout_padding"/>
-    </ScrollView>
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
