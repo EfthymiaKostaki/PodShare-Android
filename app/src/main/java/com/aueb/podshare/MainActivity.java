@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new ProfileFragment());
                 return true;
             case R.id.sm_favourites:
-                loadFragment(new FavoriteFragment());
+                loadFragment(new FavoritesFragment());
                 return true;
             case R.id.sm_settings:
                 loadFragment(new ProfileFragment());
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new UploadFragment());
                     return true;
                 case R.id.nb_favourites:
-                    loadFragment(new FavoriteFragment());
+                    loadFragment(new FavoritesFragment());
                     return true;
                 case R.id.nb_profile:
                     loadFragment(new ProfileFragment());

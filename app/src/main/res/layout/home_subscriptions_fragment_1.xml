@@ -13,8 +13,8 @@
     android:textColor="@color/white"
     android:textSize="@dimen/textSmall"
     android:gravity="center"
-    android:layout_marginLeft="@dimen/layout_padding"
-    android:layout_marginRight="@dimen/layout_padding"/>
+    android:layout_marginLeft="@dimen/toolbar_height"
+    android:layout_marginRight="@dimen/toolbar_height"/>
 
 
 </LinearLayout>
