@@ -40,8 +40,8 @@
             android:orientation="vertical">
             <ImageButton
                 android:id="@+id/search_option_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
                 android:focusable="true"
@@ -62,8 +62,8 @@
             android:orientation="vertical">
             <ImageButton
                 android:id="@+id/search_option_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
                 android:src="@drawable/search_podsharers"
@@ -102,7 +102,7 @@
             android:layout_marginTop="@dimen/spacingSmall"
             android:padding="@dimen/spacingMedium"
             android:textColor="@color/gray"
-            android:textSize="@dimen/textHuge"
+            android:textSize="@dimen/textLarge"
             android:layout_marginLeft="@dimen/layout_padding"
             android:layout_marginRight="@dimen/layout_padding"/>
     </ScrollView>
