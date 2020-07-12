@@ -54,7 +54,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     RadioGroup rgb;
     private static final String TAG = "GET_PODCASTS" ;
-    private static ArrayList<String> podcasts =  new ArrayList<>();
+    private ArrayList<String> podcasts = new ArrayList<String>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +81,12 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                 alertUser();
             }
         });
-        createExistingPodcasts();
-    }
-
-   private void createExistingPodcasts() {
         rgb = findViewById(R.id.podcast_choice);
         getPodcasts();
+        //podcasts is null why?
+        Log.d("is podcats null", podcasts.toString());
         for (String podcast : podcasts){
+            Log.d("PODCAST BUTTON", podcast);
             RadioButton rb = new RadioButton(this);
             rb.setId(podcasts.indexOf(podcast));
             rb.setChecked(false);
@@ -150,6 +149,12 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     }
 
     private void goToUploadEpisodeActivity() {
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+        if (podcastDescriptionSharedPreference != null) {
+            podcastDescriptionSharedPreference.terminateSession();
+        }
+        podcastNameSharedPreference.saveSession(podcast_name_chosen);
         startActivity(new Intent(this, UploadEpisodeActivity.class));
         finish();
     }
@@ -186,9 +191,8 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
                                                     for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
-                                                        String name = (String) podcastDocument.get("name");
+                                                        String name = podcastDocument.getString("name");
                                                         podcasts.add(name);
-                                                        Log.d("podcast name", name);
                                                     }
                                                 } else {
                                                     Log.d(TAG, "Error getting podcasts: ", task.getException());
@@ -203,6 +207,8 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                         }
                     }
                 });
+        //podcasts is null here why
+        Log.d("in get podcasts", podcasts.toString());
 
     }
 
