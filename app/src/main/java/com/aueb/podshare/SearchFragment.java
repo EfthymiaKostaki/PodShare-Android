@@ -1,6 +1,5 @@
 package com.aueb.podshare;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.google.android.material.tabs.TabLayout;
 public class SearchFragment extends Fragment {
 
     private TabLayout tabs;
-    private int[] tabIcons = { R.drawable.search_podcasts, R.drawable.search_podsharers };
 
     public SearchFragment() {
         // Required empty public constructor
@@ -45,8 +43,8 @@ public class SearchFragment extends Fragment {
     }
 
     private void setupTabIcons() {
-        tabs.getTabAt(0).setIcon(tabIcons[0]);
-        tabs.getTabAt(1).setIcon(tabIcons[1]);
+        tabs.getTabAt(0).setIcon(R.drawable.search_podcasts);
+        tabs.getTabAt(1).setIcon(R.drawable.search_podsharers);
     }
 
 }

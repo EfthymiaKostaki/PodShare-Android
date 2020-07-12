@@ -21,7 +21,8 @@
 
         <activity android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="unspecified" >
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,13 +32,16 @@
 
         <activity android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="unspecified" />
 
         <activity android:name=".ForgotPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="unspecified" />
 
         <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="unspecified" />
 
     </application>

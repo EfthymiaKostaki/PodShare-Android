@@ -19,7 +19,7 @@
     <color name="violet">#9a32f0</color>
     <color name="pink">#fb4c69</color>
     <color name="yellow">#f4e139</color>
-    <color name="podshare_purple">#6942FD</color>
+    <color name="purple">#6942FD</color>
     <color name="galleryBg">#212121</color>
 
     <!-- NAVIGATION BAR -->
@@ -30,6 +30,7 @@
     <!-- SEARCH -->
     <color name="unselected">#19232F</color>
     <color name="selected">#444f5a</color>
+    <color name="search_bar">#010304</color>
 
     <!-- Colors with opacity -->
     <color name="galleryItemOverlay">#cc000000</color>

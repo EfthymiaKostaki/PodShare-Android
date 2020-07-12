@@ -9,13 +9,16 @@ import androidx.fragment.app.Fragment;
 
 public class SearchPodsharersFragment extends Fragment {
 
+    View view;
+
     public SearchPodsharersFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.search_podsharers_fragment, container, false);
+        view = inflater.inflate(R.layout.search_podsharers_fragment, container, false);
+        return view;
     }
 
 }

@@ -80,7 +80,7 @@
             android:layout_width="276dp"
             android:layout_height="52.89dp"
             android:layout_centerInParent="true"
-            android:background="#6942FD"
+            android:background="@drawable/register_btn"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/register_submit"

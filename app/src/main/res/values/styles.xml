@@ -1,7 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/gray_dark</item>
+        <item name="colorAccent">@color/popupmenu</item>
+        <item name="android:textColorHint">@color/gray</item>
+
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -10,7 +17,7 @@
     </style>
 
     <style name="ActivityTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textColor">@color/podshare_purple</item>
+        <item name="android:textColor">@color/purple</item>
         <item name="android:textSize">@dimen/textTitle</item>
     </style>
 
