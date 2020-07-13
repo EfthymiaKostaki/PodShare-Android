@@ -5,6 +5,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
-    private TextView userInfoDisplay;
     private Toolbar toolbar;
 
     @Override
@@ -93,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                     updateUI();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                    userInfoDisplay.setText("No user");
                 }
             }
         };
@@ -116,7 +118,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        userInfoDisplay = (TextView) findViewById(R.id.userInfoDisplay);
+        BottomNavigationView navigation = findViewById(R.id.navbar);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        loadFragment(new HomeFragment());
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nb_home:
+                    loadFragment(new HomeFragment());
+                    return true;
+                case R.id.nb_search:
+                    loadFragment(new SearchFragment());
+                    return true;
+                case R.id.nb_upload:
+                    loadFragment(new UploadFragment());
+                    return true;
+                case R.id.nb_favourites:
+                    loadFragment(new FavoriteFragment());
+                    return true;
+                case R.id.nb_profile:
+                    loadFragment(new ProfileFragment());
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void goToUploadActivity() {
@@ -125,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI() {
         FirebaseUser u = mAuth.getCurrentUser();
-        if (u != null) userInfoDisplay.setText(u.getEmail());
     }
 
     private void goToLoginActivity() {
@@ -134,8 +172,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-
-

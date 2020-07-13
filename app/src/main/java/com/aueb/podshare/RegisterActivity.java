@@ -2,8 +2,13 @@ package com.aueb.podshare;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 /**
  * Created by Christina Chaniotaki (christinachaniotaki96@gmail.com) on 08,April,2019
@@ -88,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             writeNewUser(email, username); //Realtime Database
                             writeUserToFirestore(email, username); // Firestore
+                            createUserStorage(email, username);
                             Log.d(TAG, "createUserWithEmail:success");
                             dismissLoading();
                             updateUI();
@@ -100,6 +112,35 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void createUserStorage(String email, String username) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        assert firebaseUser != null;
+        String userId = firebaseUser.getUid();
+        StorageReference storageRef = storage.getReference();
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.user);
+        StorageReference riversRef = storageRef.child("users/"+userId+"/user.png");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask = riversRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.w(TAG, "Error uploading to storage default user image.");
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                Log.w(TAG, "Successfully uploaded to storage default user image.");
+            }
+        });
+    }
+
+    // Register observers to listen for when the download is done or if it fails
+
 
     private void writeNewUser(String email, String username) {
 

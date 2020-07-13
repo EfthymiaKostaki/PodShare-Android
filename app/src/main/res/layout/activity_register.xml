@@ -9,18 +9,15 @@
     android:orientation="vertical"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/spacingHuge"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/spacingSmall"
-    android:background="@drawable/microphone1">
+    android:background="@drawable/microphone">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacingSuperHuge"
-        android:src="@drawable/podsharelogo"
-        android:background="@color/black"
-        android:contentDescription="@string/logo" />
+        android:layout_width="288dp"
+        android:layout_height="101.5dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_full"
+        android:background="@color/transparent"/>
+
     <TextView
         android:id="@+id/registerText"
         android:layout_width="match_parent"
@@ -35,7 +32,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/emailInput"
         android:layout_width="276dp"
-        android:layout_height="58dp"
+        android:layout_height="68dp"
         android:layout_gravity="center"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
@@ -45,7 +42,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/usernameInput"
         android:layout_width="276dp"
-        android:layout_height="58dp"
+        android:layout_height="68dp"
         android:layout_gravity="center"
         android:imeOptions="actionNext"
         android:inputType="textPersonName"
@@ -56,7 +53,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/passwordInput"
         android:layout_width="276dp"
-        android:layout_height="58dp"
+        android:layout_height="68dp"
         android:layout_gravity="center"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
@@ -65,7 +62,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/confirmPasswordInput"
         android:layout_width="276dp"
-        android:layout_height="58dp"
+        android:layout_height="68dp"
         android:layout_gravity="center"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
