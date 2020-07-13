@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
     <item
         android:icon="@drawable/side_menu"
-        android:title="@string/sm"
+        android:title="@string/"
         app:showAsAction="always">
 
         <menu

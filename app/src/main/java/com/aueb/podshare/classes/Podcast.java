@@ -1,6 +1,5 @@
 package com.aueb.podshare.classes;
 
-<<<<<<< HEAD
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -60,7 +59,7 @@ public class Podcast {
         subscriptions += 1;
     }
 
-    public void remove_subscription(){
+    public void remove_subscription() {
         subscriptions -= 1;
     }
 
@@ -88,7 +87,7 @@ public class Podcast {
         this.views = views;
     }
 
-    public int get_views(){
+    public int get_views() {
         return views;
     }
 
@@ -96,20 +95,4 @@ public class Podcast {
         return pub_date;
     }
 
-=======
-public class Podcast {
-
-    public String title;
-    public String noOfEpisodes;
-
-    public Podcast() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
-
-    public Podcast(String title, String noOfEpisodes) {
-
-        this.title = title;
-        this.noOfEpisodes = noOfEpisodes;
-    }
->>>>>>> search
 }
