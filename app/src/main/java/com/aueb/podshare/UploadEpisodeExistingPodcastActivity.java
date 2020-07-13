@@ -1,5 +1,6 @@
 package com.aueb.podshare;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -44,6 +45,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
@@ -55,9 +57,11 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
     RadioGroup rgb;
     private static final String TAG = "GET_PODCASTS" ;
     private ArrayList<String> podcasts = new ArrayList<String>();
-    
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        showLoading();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_episode_existing_podcast);
         backButton = findViewById(R.id.back_button);
@@ -82,26 +86,52 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
             }
         });
         rgb = findViewById(R.id.podcast_choice);
+        rgb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Check which radio button was clicked
+                RadioGroup radioGroup = findViewById(R.id.podcast_choice);
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                podcast_name_chosen = radioButton.getText().toString();
+                Log.d("BUTTON_TEXT", podcast_name_chosen);
+                Log.v("On clicked working", "clicado");
+            }
+        });
         getPodcasts();
-        //podcasts is null why?
-        Log.d("is podcats null", podcasts.toString());
-        for (String podcast : podcasts){
-            Log.d("PODCAST BUTTON", podcast);
-            RadioButton rb = new RadioButton(this);
-            rb.setId(podcasts.indexOf(podcast));
-            rb.setChecked(false);
-            rb.setFocusable(false);
-            rb.setText(podcast);
-            rb.setTextColor(Color.WHITE);
-            rb.setButtonDrawable(R.drawable.radiobuttonstyle);
-            rb.setChecked(false);
-            ScrollView.LayoutParams layoutParams = new ScrollView.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.bottomMargin = 6;
-            layoutParams.topMargin = 6;
-            rb.setLayoutParams(layoutParams);
-            rgb.addView(rb);
+    }
+
+    private void loadPodcasts() {
+        if (podcasts.isEmpty()) {
+            Toast.makeText(UploadEpisodeExistingPodcastActivity.this, "No podcasts found. Create a new one instead",
+                    Toast.LENGTH_SHORT).show();
+            goToUploadEpisodeActivity();
+            finish();
+        } else {
+            for (String podcast : podcasts) {
+                Log.d("PODCAST BUTTON", podcast);
+                RadioButton rb = new RadioButton(this);
+                rb.setId(podcasts.indexOf(podcast));
+                rb.setChecked(false);
+                rb.setFocusable(false);
+                rb.setText(podcast);
+                rb.setTextColor(Color.WHITE);
+                rb.setTextSize(getResources().getDimension(R.dimen.textSmall));
+                rb.setButtonDrawable(R.drawable.radiobuttonstyle);
+                ScrollView.LayoutParams layoutParams = new ScrollView.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.bottomMargin = 6;
+                layoutParams.topMargin = 6;
+                rb.setLayoutParams(layoutParams);
+                rgb.addView(rb);
+            }
+            final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
+            podcastNameSharedPreference.saveSession(podcast_name_chosen);
+            Log.d("session podcast name", podcastNameSharedPreference.getSession());
         }
     }
+
 
     private void alertUser() {
         final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeExistingPodcastActivity.this);
@@ -113,7 +143,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeExistingPodcastActivity.this);
         new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?"+podcasts.get(0))
+                .setMessage("Are you sure you want to disregard your additions?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
@@ -159,18 +189,6 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        RadioGroup radioGroup = findViewById(R.id.podcast_choice);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        // find the radiobutton by returned id
-        RadioButton radioButton = (RadioButton) findViewById(selectedId);
-        podcast_name_chosen = radioButton.getText().toString();
-    }
-
     public void getPodcasts(){
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseuser = mAuth.getCurrentUser();
@@ -190,11 +208,20 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
-                                                        String name = podcastDocument.getString("name");
-                                                        podcasts.add(name);
-                                                    }
+                                                        int i = 0;
+                                                        for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
+                                                            String name = podcastDocument.getString("name");
+                                                            podcasts.add(name);
+                                                            Log.d(TAG, name);
+                                                            if(i++ == task.getResult().size() - 1){
+                                                                Log.d(TAG, "disconnecting inside iterator");
+                                                                dismissLoading();
+                                                                loadPodcasts();
+                                                            }
+                                                        }
                                                 } else {
+                                                    Log.d(TAG, "disconnecting when task is not successful");
+                                                    dismissLoading();
                                                     Log.d(TAG, "Error getting podcasts: ", task.getException());
                                                     Toast.makeText(UploadEpisodeExistingPodcastActivity.this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
                                                 }
@@ -210,6 +237,20 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         //podcasts is null here why
         Log.d("in get podcasts", podcasts.toString());
 
+    }
+
+    private void showLoading() {
+        if (progressDialog == null)
+            progressDialog = new ProgressDialog(this);
+
+        progressDialog.setMessage(getString(R.string.fetching_podcats));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    private void dismissLoading() {
+        if (progressDialog != null)
+            progressDialog.dismiss();
     }
 
 }

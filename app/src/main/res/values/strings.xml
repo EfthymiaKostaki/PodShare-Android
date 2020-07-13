@@ -49,4 +49,6 @@
     <string name="privacy_private">&#160;&#160; Private</string>
     <string name="privacy_public">&#160;&#160; Public</string>
     <string name="submit_episode">Submit Episode</string>
+    <string name="fetching_podcats">Fetching your podcasts now. Please wait…</string>
+
 </resources>

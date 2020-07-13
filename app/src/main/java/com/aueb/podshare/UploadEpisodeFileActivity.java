@@ -107,6 +107,8 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
                 startActivityForResult(i, RESULT_LOAD_AUDIO);
             }
         });
+        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
+        Log.d("session podcast name", podcastNameSharedPreference.getSession());
     }
 
     public void checkPermission(String permission, int requestCode) {
@@ -217,7 +219,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends  AppCompatActiv
     }
 
     private void saveToFirebase() {
-        if (filePath.equals("")) {
+        if (filePath == null) {
             alertEmptyFields();
         } else {
             final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
