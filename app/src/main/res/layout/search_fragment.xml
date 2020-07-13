@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
     tools:context=".HomeFragment">
 
     <TextView
+        android:id="@+id/search_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="SEARCH"
-        android:textSize="50sp"/>
+        android:text="@string/search_title"
+        android:gravity="top"
+        android:padding="@dimen/layout_padding"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSuperHuge"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/search_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_padding"
+        android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_padding"
+        android:text="@string/search_question"
+        android:gravity="top"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textExtraHuge"/>
+
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/searchtabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:tabTextColor="@color/gray_dark_x2"
+        app:tabSelectedTextColor="@color/gray"
+        app:tabMode="fixed"
+        app:tabGravity="fill" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/searchviewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class FavoriteFragment extends Fragment {
+public class FavoritesFragment extends Fragment {
 
 
-    public FavoriteFragment() {
+    public FavoritesFragment() {
         // Required empty public constructor
     }
 
