@@ -11,157 +11,145 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/spacingHuge"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/spacingSmall">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/back_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="@drawable/back_button"
-                android:lineSpacingExtra="8sp" />
-
-            <TextView
-                android:id="@+id/step_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacingSmall"
-                android:layout_marginLeft="@dimen/spacingSmall"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:padding="@dimen/spacingTiny"
-                android:text="@string/step_2"
-                android:textColor="@color/upload_purple"
-                android:textSize="@dimen/textTitle" />
-        </LinearLayout>
-
-
-        <com.kofigyan.stateprogressbar.StateProgressBar
-            android:id="@+id/step_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:spb_currentStateNumber="two"
-            app:spb_maxStateNumber="three"
-            app:spb_stateBackgroundColor="@color/step_color"
-            app:spb_stateForegroundColor="@color/step_color"
-            app:spb_stateNumberBackgroundColor="@color/step_color"
-            app:spb_stateNumberForegroundColor="@color/black"
-            app:spb_animateToCurrentProgressState="true"
-            app:spb_checkStateCompleted="true"/>
-
-        <TextView
-            android:id="@+id/podcast_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingHuge"
-            android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:padding="@dimen/spacingTiny"
-            android:text="@string/podcast_name"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textTitle" />
-
-        <com.aueb.podshare.view.InputLayoutWithEditTextView
-            android:id="@+id/podcast_name"
-            android:layout_width="276dp"
-            android:layout_height="58dp"
-            android:layout_gravity="center"
-            android:imeOptions="actionDone"
-            android:inputType="text" />
-
+            android:background="@drawable/back_button"
+            android:lineSpacingExtra="8sp" />
         <TextView
-            android:id="@+id/podcast_description_text"
+            android:id="@+id/step_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingHuge"
-            android:layout_marginLeft="@dimen/spacingHuge"
+            android:layout_marginStart="@dimen/spacingSmall"
+            android:layout_marginLeft="@dimen/spacingSmall"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:padding="@dimen/spacingTiny"
-            android:text="@string/episode_description"
-            android:textColor="@color/white"
+            android:padding="@dimen/layout_padding"
+            android:text="@string/step_2"
+            android:textColor="@color/upload_purple"
             android:textSize="@dimen/textTitle" />
+    </LinearLayout>
 
-        <com.aueb.podshare.view.InputLayoutWithEditTextView
-            android:id="@+id/podcast_description"
-            android:layout_width="276dp"
-            android:layout_height="58dp"
-            android:layout_gravity="center"
-            android:imeOptions="actionDone"
-            android:inputType="text" />
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/step_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:spb_currentStateNumber="two"
+        app:spb_maxStateNumber="three"
+        app:spb_stateBackgroundColor="@color/step_color"
+        app:spb_stateForegroundColor="@color/step_color"
+        app:spb_stateNumberBackgroundColor="@color/step_color"
+        app:spb_stateNumberForegroundColor="@color/black"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_checkStateCompleted="true"/>
 
-        <TextView
-            android:id="@+id/upload_image_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingHuge"
-            android:layout_marginLeft="@dimen/spacingHuge"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:padding="@dimen/spacingTiny"
-            android:text="@string/upload_image"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textTitle" />
+    <TextView
+        android:id="@+id/podcast_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:padding="@dimen/spacingTiny"
+        android:text="@string/podcast_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textTitle" />
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/podcast_name"
+        android:layout_width="276dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_gravity="start"
+        android:imeOptions="actionDone"
+        android:inputType="text" />
 
+    <TextView
+        android:id="@+id/podcast_description_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:padding="@dimen/spacingTiny"
+        android:text="@string/episode_description"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textTitle" />
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/podcast_description"
+        android:layout_width="276dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_gravity="start"
+        android:imeOptions="actionDone"
+        android:inputType="text" />
 
+    <TextView
+        android:id="@+id/upload_image_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:padding="@dimen/spacingTiny"
+        android:text="@string/upload_image"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textTitle" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
             android:id="@+id/add_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="45dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/layout_padding"
             android:layout_marginEnd="45dp"
             android:background="@drawable/add"
             android:gravity="center_horizontal|center_vertical"
             android:lineSpacingExtra="8sp" />
-
-            <ImageView
+        <ImageView
             android:id="@+id/imgView"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_weight="1" />
-        </LinearLayout>
-
-        <!-- Next -->
-        <Button
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="45dp"
-            android:background="@drawable/upload_episode_button_next"
-            android:gravity="center_horizontal|center_vertical"
-            android:lineSpacingExtra="8sp"
-            android:text="@string/next"
-            android:textAppearance="@style/next" />
-
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="45dp"
-            android:background="@drawable/upload_episode_button_back"
-            android:gravity="center_horizontal|center_vertical"
-            android:lineSpacingExtra="8sp"
-            android:text="@string/cancel"
-            android:textAppearance="@style/next" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+            <Button
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/upload_episode_button_next"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/next"
+                android:textAppearance="@style/next"
+                android:layout_marginBottom="@dimen/spacingLarge"/>
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/upload_episode_button_back"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/cancel"
+                android:textAppearance="@style/next" />
+        </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

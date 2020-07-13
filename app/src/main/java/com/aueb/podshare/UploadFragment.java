@@ -22,7 +22,7 @@ public class UploadFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.upload_fragment, container, false);
-        startActivity(new Intent(getActivity(), UploadEpisodeActivity.class));
+        startActivity(new Intent(getActivity(), UploadEpisodeFragment.class));
         return view;
     }
 

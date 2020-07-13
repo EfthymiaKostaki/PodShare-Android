@@ -11,24 +11,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/spacingHuge"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/spacingSmall">
-
-    <TextView
-        android:id="@+id/step_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingHuge"
-        android:layout_marginLeft="@dimen/spacingHuge"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:padding="@dimen/spacingTiny"
-        android:text="@string/step_1"
-        android:textColor="@color/upload_purple"
-        android:textSize="@dimen/textTitle" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/step_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="@dimen/spacingSmall"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:padding="@dimen/layout_padding"
+            android:text="@string/step_1"
+            android:textColor="@color/upload_purple"
+            android:textSize="@dimen/textTitle" />
+    </LinearLayout>
 
     <com.kofigyan.stateprogressbar.StateProgressBar
         android:id="@+id/step_bar"
@@ -54,16 +49,15 @@
         android:text="@string/episode_name"
         android:textColor="@color/white"
         android:textSize="@dimen/textTitle" />
-
-
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/episode_name"
         android:layout_width="276dp"
-        android:layout_height="58dp"
-        android:layout_gravity="center"
+        android:layout_height="68dp"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_gravity="start"
         android:imeOptions="actionDone"
-        android:inputType="text"
-        app:itemEditTextHint="@string/episode_name_example" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/episode_description_text"
@@ -76,15 +70,15 @@
         android:text="@string/episode_description"
         android:textColor="@color/white"
         android:textSize="@dimen/textTitle" />
-
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/episode_description"
         android:layout_width="276dp"
-        android:layout_height="58dp"
-        android:layout_gravity="center"
+        android:layout_height="68dp"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_gravity="start"
         android:imeOptions="actionDone"
-        android:inputType="text"
-        app:itemEditTextHint="@string/episode_description_example" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/episode_belongs_to_new_or_old"
@@ -105,7 +99,6 @@
         android:layout_marginStart="@dimen/spacingExtraHuge"
         android:layout_marginLeft="@dimen/spacingHuge"
         android:orientation="vertical">
-
         <RadioButton
             android:id="@+id/new_podcast_choice_button"
             android:layout_width="wrap_content"
@@ -116,7 +109,6 @@
             android:layout_marginBottom="@dimen/spacingSmall"
             android:text="@string/new_podcast"
             android:textColor="@color/white" />
-
         <RadioButton
             android:id="@+id/existing_podcast_choice_button"
             android:layout_width="wrap_content"
@@ -130,34 +122,34 @@
             android:textColor="@color/white" />
     </RadioGroup>
 
-    <!-- Next -->
-    <Button
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="45dp"
-        android:background="@drawable/upload_episode_button_next"
-        android:gravity="center_horizontal|center_vertical"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/next"
-        android:textAppearance="@style/next" />
-
-    <Button
-        android:id="@+id/cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="45dp"
-        android:background="@drawable/upload_episode_button_back"
-        android:gravity="center_horizontal|center_vertical"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/cancel"
-        android:textAppearance="@style/next" />
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+            <Button
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/upload_episode_button_next"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/next"
+                android:textAppearance="@style/next"
+                android:layout_marginBottom="@dimen/spacingLarge"/>
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/upload_episode_button_back"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/cancel"
+                android:textAppearance="@style/next" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

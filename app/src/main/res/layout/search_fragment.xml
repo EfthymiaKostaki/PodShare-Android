@@ -30,8 +30,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/textExtraHuge"/>
 
-
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/searchtabLayout"
         android:layout_width="match_parent"
