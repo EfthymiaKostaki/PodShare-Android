@@ -128,12 +128,12 @@
             android:layout_centerInParent="true"
             android:orientation="vertical" >
             <Button
-                android:id="@+id/next"
+                android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/upload_episode_button_next"
                 android:lineSpacingExtra="8sp"
-                android:text="@string/next"
+                android:text="@string/submit_episode"
                 android:textAppearance="@style/next"
                 android:layout_marginBottom="@dimen/spacingLarge"/>
             <Button

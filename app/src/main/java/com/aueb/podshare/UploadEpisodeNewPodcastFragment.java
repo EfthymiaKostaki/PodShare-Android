@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.aueb.podshare.Sessions.AudioSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
@@ -37,7 +40,7 @@ import com.aueb.podshare.view.InputLayoutWithEditTextView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
+public class UploadEpisodeNewPodcastFragment extends Fragment {
     private Button backButton;
     private Button addImage;
     private Button next;
@@ -52,27 +55,27 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 101;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upload_episode_new_podcast_fragment);
-        backButton = findViewById(R.id.back_button);
+        View view = inflater.inflate(R.layout.upload_episode_new_podcast_fragment, container, false);
+        backButton = view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToUploadEpisodeActivity();
             }
         });
-        podcastName = findViewById(R.id.podcast_name);
-        podcastDescription = findViewById(R.id.podcast_description);
-        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        podcastName = view.findViewById(R.id.podcast_name);
+        podcastDescription = view.findViewById(R.id.podcast_description);
+        PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(getActivity());
+        PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(getActivity());
         if (podcastNameSharedPreference.getSession() != null) {
             podcastName.setEditTextValue(podcastNameSharedPreference.getSession());
             podcastDescription.setEditTextValue(podcastDescriptionSharedPreference.getSession());
         }
-        addImage = findViewById(R.id.add_image);
-        imageView = findViewById(R.id.imgView);
-        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
+        addImage = view.findViewById(R.id.add_image);
+        imageView = view.findViewById(R.id.imgView);
+        ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getActivity());
         if (imageSharedPreference.getSession() != null) {
             image = BitmapUtil.decodeBase64(imageSharedPreference.getSession());
             imageView.setImageBitmap(image);
@@ -87,31 +90,33 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
-        next = findViewById(R.id.next);
+        next = view.findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToUploadEpisodeFileActivity();
             }
         });
-        cancel = findViewById(R.id.cancel_button);
+        cancel = view.findViewById(R.id.cancel_button);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertUser();
             }
         });
+
+        return view;
     }
 
     private void alertUser() {
-        final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeNewPodcastActivity.this);
-        final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeNewPodcastActivity.this);
-        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
+        final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(getActivity());
+        final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(getActivity());
+        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(getActivity());
+        final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(getActivity());
+        final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getActivity());
+        final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(getActivity());
+        final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(getActivity());
+        new AlertDialog.Builder(getActivity())
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -127,8 +132,8 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                         }
                         audioSharedPreference.terminateSession();
                         privacySharedPreference.terminateSession();
-                        startActivity(new Intent(UploadEpisodeNewPodcastActivity.this, MainActivity.class));
-                        finish();
+                        startActivity(new Intent(getActivity(), MainActivity.class));
+                        getActivity().finish();
                     }
                 })
                 // A null listener allows the button to dismiss the dialog and take no further action.
@@ -141,19 +146,19 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         if (podcastName.getEditTextValue().equals("") || podcastDescription.getEditTextValue().equals("") || image == null) {
             alertEmptyFields();
         } else {
-            PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeNewPodcastActivity.this);
-            PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeNewPodcastActivity.this);
-            ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
+            PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(getActivity());
+            PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(getActivity());
+            ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getActivity());
             podcastNameSharedPreference.saveSession(podcastName.getEditTextValue());
             podcastDescriptionSharedPreference.saveSession(podcastDescription.getEditTextValue());
             imageSharedPreference.saveSession(str_image, img_extension);
-            startActivityForResult(new Intent(this, UploadEpisodeFileActivity.class), 100);
-            finish();
+            startActivityForResult(new Intent(getActivity(), UploadEpisodeFileFragment.class), 100);
+            getActivity().finish();
         }
     }
 
     private void alertEmptyFields() {
-        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
+        new AlertDialog.Builder(getActivity())
                 .setTitle("Empty fields")
                 .setMessage("Please add values to all the fields")
                 .setNegativeButton(android.R.string.yes, null)
@@ -162,8 +167,8 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     }
 
     private void goToUploadEpisodeActivity() {
-        startActivity(new Intent(this, UploadEpisodeActivity.class));
-        finish();
+        startActivity(new Intent(getActivity(), UploadEpisodeFragment.class));
+        getActivity().finish();
     }
 
     @Override
@@ -182,13 +187,12 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 // Showing the toast message
-                Toast.makeText(UploadEpisodeNewPodcastActivity.this,
+                Toast.makeText(getActivity(),
                         "Storage Permission Granted",
                         Toast.LENGTH_SHORT)
                         .show();
             } else {
-                Toast.makeText(UploadEpisodeNewPodcastActivity.this,
-                        "Storage Permission Denied",
+                Toast.makeText(getActivity(), "Storage Permission Denied",
                         Toast.LENGTH_SHORT)
                         .show();
             }
@@ -199,18 +203,17 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     public void checkPermission(String permission, int requestCode) {
         // Checking if permission is not granted
         if (ContextCompat.checkSelfPermission(
-                UploadEpisodeNewPodcastActivity.this,
+                getActivity(),
                 permission)
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat
-                    .requestPermissions(
-                            UploadEpisodeNewPodcastActivity.this,
+                    .requestPermissions(getActivity(),
                             new String[] { permission },
                             requestCode);
         }
         else {
             Toast
-                    .makeText(UploadEpisodeNewPodcastActivity.this,
+                    .makeText(getActivity(),
                             "Permission already granted",
                             Toast.LENGTH_SHORT)
                     .show();
@@ -224,7 +227,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImage = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                     str_image = encodeToBase64(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -236,7 +239,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                     //FINE
                     img_extension = file_extn;
                     image = BitmapFactory.decodeFile(filePath);
-                    ImageView imageView = (ImageView) findViewById(R.id.imgView);
+                    ImageView imageView = (ImageView) getView().findViewById(R.id.imgView);
                     imageView.setImageBitmap(image);
                 }  //NOT IN REQUIRED FORMAT
 
@@ -245,7 +248,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
 
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
+        Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
         assert cursor != null;
         int column_index = cursor
                 .getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);

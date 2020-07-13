@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new SearchFragment());
                     return true;
                 case R.id.nb_upload:
-                    loadFragment(new UploadFragment());
+                    loadFragment(new UploadEpisodeFragment());
                     return true;
                 case R.id.nb_favourites:
                     loadFragment(new FavoritesFragment());

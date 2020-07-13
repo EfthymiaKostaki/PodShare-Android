@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/play_episode"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_upload"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".UploadEpisodeFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,7 +106,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/radiobuttonstyle"
-            android:onClick="onRadioButtonClicked"
             android:layout_marginTop="@dimen/spacingSmall"
             android:layout_marginBottom="@dimen/spacingSmall"
             android:text="@string/new_podcast"
@@ -117,7 +118,6 @@
             android:layout_marginBottom="@dimen/spacingSmall"
             android:button="@drawable/radiobuttonstyle"
             android:checked="true"
-            android:onClick="onRadioButtonClicked"
             android:text="@string/existing_podcast"
             android:textColor="@color/white" />
     </RadioGroup>
