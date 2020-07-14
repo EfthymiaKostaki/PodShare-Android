@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        getMenuInflater().inflate(R.menu.side_menu, menu);
         return true;
     }
 
@@ -69,6 +71,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.sm_following:
+                loadFragment(new ProfileFragment());
+                return true;
+            case R.id.sm_subscribed:
+                loadFragment(new ProfileFragment());
+                return true;
+            case R.id.sm_favourites:
+                loadFragment(new FavoritesFragment());
+                return true;
+            case R.id.sm_settings:
+                loadFragment(new ProfileFragment());
+                return true;
+            case R.id.sm_faq:
+                return super.onOptionsItemSelected(item);
             case R.id.menu_item_logout:
                 mAuth.signOut();
                 Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
@@ -107,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUIComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         BottomNavigationView navigation = findViewById(R.id.navbar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -127,10 +144,10 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new SearchFragment());
                     return true;
                 case R.id.nb_upload:
-                    loadFragment(new UploadFragment());
+                    goToUploadActivity();
                     return true;
                 case R.id.nb_favourites:
-                    loadFragment(new FavoriteFragment());
+                    loadFragment(new FavoritesFragment());
                     return true;
                 case R.id.nb_profile:
                     loadFragment(new ProfileFragment());
@@ -139,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    private void goToUploadActivity() {
+        startActivity(new Intent(this, UploadEpisodeActivity.class));
+    }
 
     private void loadFragment(Fragment fragment) {
         // load fragment

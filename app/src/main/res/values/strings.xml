@@ -34,19 +34,55 @@
     <string name="nb_profile">PROFILE</string>
 
     <!-- SIDE MENU -->
+    <string name="sm">SIDE MENU</string>
     <string name="sm_following">FOLLOWING</string>
     <string name="sm_subscribed">SUBSCRIBED</string>
     <string name="sm_favourites">FAVOURITES</string>
     <string name="sm_settings">ACCOUNT SETTINGS</string>
     <string name="sm_faq">FAQ</string>
     <string name="sm_logout">LOGOUT</string>
-
     <!-- HOMEPAGE-->
     <string name="trending">Trending</string>
     <string name="your_subscriptions">Your Subscriptions</string>
+    <string name="hp_podsharers">PodSharers</string>
+    <string name="hp_podcasts">Podcasts</string>
+    <string name="sub_podsharers">Podcast Episodes from PodSharers you follow will appear here</string>
+    <string name="sub_podcasts">Episodes from Podcasts you have subscribed to will appear here</string>
+
+    <!-- SEARCH-->
+    <string name="search_title">Search</string>
+    <string name="search_question">What are you looking for?</string>
+    <string name="search_option_1">Podcasts</string>
+    <string name="search_option_2">Podsharers</string>
+    <string name="search_recent">Recent Searches</string>
+    <string name="search_recent_default">You haven’t made any searches yet. Use the search button above!</string>
+
+    <!-- UPLOAD EPISODE -->
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="episode_name">Episode name:</string>
+    <string name="episode_name_example">Business Planning</string>
+    <string name="episode_description">Description:</string>
+    <string name="episode_description_example">A business plan is a valuable tool for business planning..</string>
+    <string name="episode_add_episode_to">Add episode to podcast:</string>
+    <string name="new_podcast">&#160;&#160;New Podcast</string>
+    <string name="existing_podcast">&#160;&#160;Existing Podcast</string>
+    <string name="step_1">"Step 1 "</string>
+    <string name="step_2">Step 2</string>
+    <string name="podcast_name">Podcast name:</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="select_podcast">Select Podcast</string>
+    <string name="step_3">Step 3</string>
+    <string name="upload_audio">Upload Audio File</string>
+    <string name="privacy">Privacy:</string>
+    <string name="privacy_private">&#160;&#160; Private</string>
+    <string name="privacy_public">&#160;&#160; Public</string>
+    <string name="submit_episode">Submit Episode</string>
+    <string name="fetching_podcats">Fetching your podcasts now. Please wait…</string>
 
     <!-- FAVORITES & PROFILE-->
     <string name="not_available">This feature is not available yet. More coming soon!</string>
-
-
 </resources>
+
+
+

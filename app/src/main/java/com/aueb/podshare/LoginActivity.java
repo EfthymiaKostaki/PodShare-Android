@@ -11,12 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.aueb.podshare.Sessions.SessionManagement;
+import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.aueb.podshare.view.InputLayoutWithEditTextView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * Created by Christina Chaniotaki (christinachaniotaki96@gmail.com) on 08,April,2019
@@ -76,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, ForgotPasswordActivity.class));
     }
 
-    private void loginUser(String email, String password) {
+    private void loginUser(final String email, String password) {
         //https://firebase.google.com/docs/auth/android/start/
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -86,7 +93,12 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             dismissLoading();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser firebaseuser = mAuth.getCurrentUser();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("users");
+                            User user = new User(email, firebaseuser.getDisplayName());
+                            SessionManagement sm = new SessionManagement(LoginActivity.this);
+                            sm.saveSession(email);
                             goToMainActivity();
                         } else {
                             // If sign in fails, display a message to the user.

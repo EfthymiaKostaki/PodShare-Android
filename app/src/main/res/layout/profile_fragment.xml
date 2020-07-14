@@ -12,7 +12,9 @@
         android:text="@string/not_available"
         android:textColor="@color/white"
         android:textSize="@dimen/textExtraHuge"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginRight="@dimen/layout_padding"/>
 
 
 </LinearLayout>

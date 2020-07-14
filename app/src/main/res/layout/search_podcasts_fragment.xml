@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".SearchPodcastsFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_field_podcasts"
+            android:layout_width="280dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="@dimen/spacingLarge"
+            android:layout_marginEnd="@dimen/spacingLarge"
+            android:background="@drawable/search_bar"
+            android:ems="10"
+            android:hint="@string/search_title"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/search_btn_podcasts"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="@dimen/spacingTiny"
+            android:background="@drawable/search_button"
+            android:clickable="true"
+            android:contentDescription="@string/search_title"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/results_podcasts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

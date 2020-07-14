@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class UploadFragment extends Fragment {
+public class FavoritesFragment extends Fragment {
 
 
-    public UploadFragment() {
+    public FavoritesFragment() {
         // Required empty public constructor
     }
 
@@ -20,7 +20,7 @@ public class UploadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.upload_fragment, container, false);
+        return inflater.inflate(R.layout.favorites_fragment, container, false);
     }
 
 }
