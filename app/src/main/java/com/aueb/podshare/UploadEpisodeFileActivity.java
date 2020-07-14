@@ -54,7 +54,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
 
-public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
+public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivity {
     private static final String TAG = "UPLOAD_FILE" ;
     private Button submit;
     private Button cancel;
@@ -73,11 +73,11 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.upload_episode_file_fragment, container, false);
-        cancel = view.findViewById(R.id.cancel_button);
-        submit = view.findViewById(R.id.submit);
+        setContentView(R.layout.activity_upload_episode_file);
+        cancel = findViewById(R.id.cancel_button);
+        submit = findViewById(R.id.submit);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,14 +90,14 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                 saveToFirebase();
             }
         });
-        backButton = view.findViewById(R.id.back_button);
+        backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToUploadPreviousActivity();
             }
         });
-        addAudio = view.findViewById(R.id.add_audio);
+        addAudio = findViewById(R.id.add_audio);
         addAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -108,27 +108,26 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                 startActivityForResult(i, RESULT_LOAD_AUDIO);
             }
         });
-        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(getActivity());
+        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
         Log.d("session podcast name", podcastNameSharedPreference.getSession());
 
-        return view;
     }
 
     public void checkPermission(String permission, int requestCode) {
         // Checking if permission is not granted
         if (ContextCompat.checkSelfPermission(
-                getActivity(),
+                UploadEpisodeFileActivity.this,
                 permission)
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat
                     .requestPermissions(
-                            getActivity(),
+                            UploadEpisodeFileActivity.this,
                             new String[] { permission },
                             requestCode);
         }
         else {
             Toast
-                    .makeText(getActivity(),
+                    .makeText(UploadEpisodeFileActivity.this,
                             "Permission already granted",
                             Toast.LENGTH_SHORT)
                     .show();
@@ -148,7 +147,7 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                     try {
                         stream = new FileInputStream(new File(filePath));
                         Toast
-                                .makeText(getActivity(),
+                                .makeText(UploadEpisodeFileActivity.this,
                                         "Audio was successfully uploaded.",
                                         Toast.LENGTH_SHORT)
                                 .show();
@@ -177,12 +176,12 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 // Showing the toast message
-                Toast.makeText(getActivity(),
+                Toast.makeText(UploadEpisodeFileActivity.this,
                         "Storage Permission Granted",
                         Toast.LENGTH_SHORT)
                         .show();
             } else {
-                Toast.makeText(getActivity(),
+                Toast.makeText(UploadEpisodeFileActivity.this,
                         "Storage Permission Denied",
                         Toast.LENGTH_SHORT)
                         .show();
@@ -192,7 +191,7 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
 
     public String getPath(Uri uri) {
         String[] projection = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
+        Cursor cursor = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
         assert cursor != null;
         int column_index = cursor
                 .getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
@@ -203,16 +202,16 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
     }
 
     private void goToUploadPreviousActivity() {
-        if (getActivity().getCallingActivity() != null) {
-            AudioSharedPreference audioSharedPreference = new AudioSharedPreference(getActivity());
+        if (getCallingActivity() != null) {
+            AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
             audioSharedPreference.saveSession(filePath, file_extn);
-            String shortClassName = getActivity().getCallingActivity().getClassName();
-            if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastFragment")) {
-                startActivity(new Intent(getActivity(), UploadEpisodeNewPodcastFragment.class));
-                getActivity().finish();
-            } else if (shortClassName.equals("com.aueb.podshare.UploadEpisodeExistingPodcastFragment")){
-                startActivity(new Intent(getActivity(), UploadEpisodeExistingPodcastFragment.class));
-                getActivity().finish();
+            String shortClassName = getCallingActivity().getClassName();
+            if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
+                startActivity(new Intent(this, UploadEpisodeNewPodcastActivity.class));
+                finish();
+            } else if (shortClassName.equals("com.aueb.podshare.UploadEpisodeExistingPodcastActivity")){
+                startActivity(new Intent(this, UploadEpisodeExistingPodcastActivity.class));
+                finish();
             } else {
                 Log.e("class was not found", shortClassName);
             }
@@ -225,13 +224,13 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
         if (filePath == null) {
             alertEmptyFields();
         } else {
-            final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(getActivity());
-            final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(getActivity());
-            final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(getActivity());
-            final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(getActivity());
-            final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getActivity());
-            final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(getActivity());
-            final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(getActivity());
+            final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
+            final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+            final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
+            final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+            final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
+            final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
+            final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser firebaseuser = mAuth.getCurrentUser();
             // save to firebase at the correct folder and redirect to main activity.
@@ -245,14 +244,14 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     try {
-                                        if (getActivity().getCallingActivity() != null) {
-                                            String shortClassName = getActivity().getCallingActivity().getClassName();
+                                        if (getCallingActivity() != null) {
+                                            String shortClassName = getCallingActivity().getClassName();
                                             final Episode episode = new Episode(episodeNameSharedPreference.getSession(), episodeDescriptionSharedPreference.getSession());
                                             episode.set_privacy(privacy_private);
                                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                             assert firebaseUser != null;
                                             String userId = firebaseUser.getUid();
-                                            if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastFragment")) {
+                                            if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
                                                 Podcast podcast = new Podcast(podcastNameSharedPreference.getSession(), podcastDescriptionSharedPreference.getSession(), Calendar.getInstance().getTime());
                                                 document.getReference().collection("podcasts").add(podcast);
                                                 Bitmap image = BitmapUtil.decodeBase64(imageSharedPreference.getSession());
@@ -296,7 +295,7 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                                                 public void onFailure(@NonNull Exception exception) {
                                                     // Handle unsuccessful uploads
                                                     Toast
-                                                            .makeText(getActivity(),
+                                                            .makeText(UploadEpisodeFileActivity.this,
                                                                     "Something went wrong. Please try again later.",
                                                                     Toast.LENGTH_SHORT)
                                                             .show();
@@ -306,7 +305,7 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                                                     Toast
-                                                            .makeText(getActivity(),
+                                                            .makeText(UploadEpisodeFileActivity.this,
                                                                     "Episode was successfully added.",
                                                                     Toast.LENGTH_SHORT)
                                                             .show();}
@@ -330,7 +329,7 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
-                                Toast.makeText(getActivity(), "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UploadEpisodeFileActivity.this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -339,13 +338,13 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
     }
 
     private void goToMainActivity() {
-        startActivity(new Intent(getActivity(), MainActivity.class));
-        getActivity().finish();
+        startActivity(new Intent(UploadEpisodeFileActivity.this, MainActivity.class));
+        finish();
     }
 
 
     private void alertEmptyFields() {
-        new AlertDialog.Builder(getActivity())
+        new AlertDialog.Builder(UploadEpisodeFileActivity.this)
                 .setTitle("Empty fields")
                 .setMessage("Please add values to all the fields")
                 .setNegativeButton(android.R.string.yes, null)
@@ -354,13 +353,13 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
     }
 
     private void produceDynamicStream() {
-        AudioSharedPreference audioSharedPreference = new AudioSharedPreference(getActivity());
+        AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
         String audio_extn = audioSharedPreference.getSession();
         if (audio_extn.equals("3gp") || audio_extn.equals("mp4") || audio_extn.equals("m4a") || audio_extn.equals("mp3") || audio_extn.equals("ogg")) {
             //FINE
             try {
                 stream = new FileInputStream(new File(filePath));
-                Toast.makeText(getActivity(),
+                Toast.makeText(UploadEpisodeFileActivity.this,
                         "Audio was successfully uploaded.",
                         Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
@@ -371,14 +370,14 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
     }
 
     private void alertUser() {
-        final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(getActivity());
-        final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(getActivity());
-        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(getActivity());
-        final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(getActivity());
-        final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getActivity());
-        final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(getActivity());
-        final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(getActivity());
-        new AlertDialog.Builder(getActivity())
+        final EpisodeNameSharedPreference episodeNameSharedPreference = new EpisodeNameSharedPreference(UploadEpisodeFileActivity.this);
+        final EpisodeDescriptionSharedPreference episodeDescriptionSharedPreference = new EpisodeDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+        final PodcastNameSharedPreference podcastNameSharedPreference = new PodcastNameSharedPreference(UploadEpisodeFileActivity.this);
+        final PodcastDescriptionSharedPreference podcastDescriptionSharedPreference = new PodcastDescriptionSharedPreference(UploadEpisodeFileActivity.this);
+        final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
+        final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
+        final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
+        new AlertDialog.Builder(UploadEpisodeFileActivity.this)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?"+episodeNameSharedPreference.getSession())
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -404,7 +403,7 @@ public class UploadEpisodeFileFragment<StorageReference> extends Fragment {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-        PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(getActivity());
+        PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
         if (((RadioButton) view).getText().toString().equals(privacySharedPreference.getSession())) {
             ((RadioButton) view).setChecked(true);
         }

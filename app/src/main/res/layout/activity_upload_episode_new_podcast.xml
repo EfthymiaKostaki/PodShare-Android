@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/play_episode"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_upload"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context=".UploadEpisodeFragment" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@drawable/back_button"
+            android:lineSpacingExtra="8sp" />
         <TextView
-            android:id="@+id/step_1"
+            android:id="@+id/step_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="@dimen/spacingSmall"
             android:layout_marginLeft="@dimen/spacingSmall"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:padding="@dimen/layout_padding"
-            android:text="@string/step_1"
+            android:text="@string/step_2"
             android:textColor="@color/upload_purple"
             android:textSize="@dimen/textTitle" />
     </LinearLayout>
@@ -31,7 +38,7 @@
         android:id="@+id/step_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:spb_currentStateNumber="one"
+        app:spb_currentStateNumber="two"
         app:spb_maxStateNumber="three"
         app:spb_stateBackgroundColor="@color/step_color"
         app:spb_stateForegroundColor="@color/step_color"
@@ -41,18 +48,18 @@
         app:spb_checkStateCompleted="true"/>
 
     <TextView
-        android:id="@+id/episode_name_text"
+        android:id="@+id/podcast_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacingHuge"
         android:layout_marginLeft="@dimen/spacingHuge"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:padding="@dimen/spacingTiny"
-        android:text="@string/episode_name"
+        android:text="@string/podcast_name"
         android:textColor="@color/white"
         android:textSize="@dimen/textTitle" />
     <com.aueb.podshare.view.InputLayoutWithEditTextView
-        android:id="@+id/episode_name"
+        android:id="@+id/podcast_name"
         android:layout_width="276dp"
         android:layout_height="68dp"
         android:layout_marginStart="@dimen/spacingHuge"
@@ -62,7 +69,7 @@
         android:inputType="text" />
 
     <TextView
-        android:id="@+id/episode_description_text"
+        android:id="@+id/podcast_description_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacingHuge"
@@ -73,7 +80,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/textTitle" />
     <com.aueb.podshare.view.InputLayoutWithEditTextView
-        android:id="@+id/episode_description"
+        android:id="@+id/podcast_description"
         android:layout_width="276dp"
         android:layout_height="68dp"
         android:layout_marginStart="@dimen/spacingHuge"
@@ -83,44 +90,41 @@
         android:inputType="text" />
 
     <TextView
-        android:id="@+id/episode_belongs_to_new_or_old"
+        android:id="@+id/upload_image_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacingHuge"
         android:layout_marginLeft="@dimen/spacingHuge"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:padding="@dimen/spacingTiny"
-        android:text="@string/episode_add_episode_to"
+        android:text="@string/upload_image"
         android:textColor="@color/white"
         android:textSize="@dimen/textTitle" />
 
-    <RadioGroup
-        android:id="@+id/accuracy_choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingExtraHuge"
-        android:layout_marginLeft="@dimen/spacingHuge"
-        android:orientation="vertical">
-        <RadioButton
-            android:id="@+id/new_podcast_choice_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/radiobuttonstyle"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginBottom="@dimen/spacingSmall"
-            android:text="@string/new_podcast"
-            android:textColor="@color/white" />
-        <RadioButton
-            android:id="@+id/existing_podcast_choice_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacingSmall"
-            android:layout_marginBottom="@dimen/spacingSmall"
-            android:button="@drawable/radiobuttonstyle"
-            android:checked="true"
-            android:text="@string/existing_podcast"
-            android:textColor="@color/white" />
-    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/add_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/layout_padding"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="@dimen/layout_padding"
+            android:background="@drawable/add"
+            android:gravity="center_horizontal|center_vertical"
+            android:lineSpacingExtra="8sp" />
+        <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/layout_padding"
+            android:layout_marginBottom="@dimen/layout_padding" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

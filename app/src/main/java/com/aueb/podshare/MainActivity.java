@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new SearchFragment());
                     return true;
                 case R.id.nb_upload:
-                    loadFragment(new UploadEpisodeFragment());
+                    goToUploadActivity();
                     return true;
                 case R.id.nb_favourites:
                     loadFragment(new FavoritesFragment());
@@ -156,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    private void goToUploadActivity() {
+        startActivity(new Intent(this, UploadEpisodeActivity.class));
+    }
 
     private void loadFragment(Fragment fragment) {
         // load fragment

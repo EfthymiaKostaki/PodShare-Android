@@ -47,6 +47,18 @@
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="unspecified" />
 
+        <activity android:name=".UploadEpisodeActivity"
+            android:screenOrientation="unspecified" />
+
+        <activity android:name=".UploadEpisodeExistingPodcastActivity"
+            android:screenOrientation="unspecified" />
+
+        <activity android:name=".UploadEpisodeNewPodcastActivity"
+            android:screenOrientation="unspecified" />
+
+        <activity android:name=".UploadEpisodeFileActivity"
+            android:screenOrientation="unspecified" />
+
     </application>
 
 </manifest>
