@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/play_episode"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextAppearance="@style/ActivityTitle"
+            app:titleTextColor="@color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/spacingHuge"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/spacingSmall">
+
+        <TextView
+            android:id="@+id/episode_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/spacingTiny"
+            android:text="@string/episode_name_default"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textExtra" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/spacingTiny"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/spacingSmall"
+            android:baselineAligned="false"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/media_player_podsharer"
+                android:layout_height="@dimen/media_player_podsharer"
+                android:layout_gravity="center"
+                android:src="@drawable/user" />
+            <TextView
+                android:id="@+id/podsharer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/spacingTiny"
+                android:text="@string/podsharer_name_default"
+                android:textColor="@color/podsharer_media_player"
+                android:textSize="@dimen/textSubtitle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/play_image"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/spacingTiny"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/spacingSmall">
+
+            <LinearLayout
+                android:id="@+id/play_inside"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/play_image"
+                android:baselineAligned="false"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/spacingTiny"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/spacingSmall">
+                <ImageView
+                    android:layout_width="@dimen/replay_size"
+                    android:layout_height="@dimen/replay_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/replay" />
+
+                <ImageView
+                    android:layout_width="@dimen/spacingSuperHuge"
+                    android:layout_height="@dimen/spacingSuperHuge"
+                    android:layout_gravity="center"
+                    android:src="@drawable/play_button" />
+
+                <ImageView
+                    android:layout_width="@dimen/replay_size"
+                    android:layout_height="@dimen/replay_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/next" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/spacingTiny"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/spacingSmall"
+            android:baselineAligned="false"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/like"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/spacingTiny"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/spacingSmall"
+                android:baselineAligned="false"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/replay_size"
+                    android:layout_height="@dimen/replay_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/like" />
+
+                <TextView
+                    android:id="@+id/number_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/spacingSmall"
+                    android:text="37 501"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSubtitle" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/spacingTiny"
+                android:text="4:17"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSubtitle" />
+
+            <LinearLayout
+                android:id="@+id/views"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/spacingTiny"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/spacingSmall"
+                android:baselineAligned="false"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/replay_size"
+                    android:layout_height="@dimen/replay_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/heart" />
+
+                <TextView
+                    android:id="@+id/number_views"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/spacingTiny"
+                    android:text="200K Views"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSubtitle" />
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/podsharer_media_player"/>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/spacingTiny"
+            android:text="Cooking sessions with Sally. In today’s episode we will be making Spagetti Bolognese using a true italian  recipe."
+            android:textColor="@color/description"
+            android:textSize="@dimen/textSubtitle" />
+
+        <Button
+            android:id="@+id/main_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/spacingSmall"
+            android:text="Go to main"
+            android:textAlignment="center"
+            android:textColor="@color/podshare_purple" />
+    </LinearLayout>
+
+</LinearLayout>
