@@ -82,6 +82,9 @@
 
     <!-- FAVORITES & PROFILE-->
     <string name="not_available">This feature is not available yet. More coming soon!</string>
+    <string name="preparing_results">Preparing search function. Please wait...</string>
+    <string name="podcasts_text">Podcasts:</string>
+    <string name="follow">Follow</string>
 </resources>
 
 

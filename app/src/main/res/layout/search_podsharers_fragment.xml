@@ -25,6 +25,7 @@ tools:context=".SearchPodsharersFragment">
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
+        tools:context=".SearchPodsharersFragment"
         android:layout_marginStart="@dimen/spacingLarge"
         android:layout_marginEnd="@dimen/spacingLarge"
         android:textColor="@color/gray"
@@ -47,5 +48,11 @@ tools:context=".SearchPodsharersFragment">
     android:id="@+id/resuls_podsharers"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_view"
+        android:layout_below="@+id/txt_search"></ListView>
 
 </LinearLayout>
