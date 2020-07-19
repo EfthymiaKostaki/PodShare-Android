@@ -82,6 +82,10 @@
 
     <!-- FAVORITES & PROFILE-->
     <string name="not_available">This feature is not available yet. More coming soon!</string>
+
+    <!-- MEDIA PLAYER -->
+    <string name="episode_name_default">Episode Name</string>
+    <string name="podsharer_name_default">PodSharer</string>
 </resources>
 
 
