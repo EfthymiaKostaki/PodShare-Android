@@ -20,6 +20,7 @@
     <color name="pink">#fb4c69</color>
     <color name="yellow">#f4e139</color>
     <color name="purple">#6942FD</color>
+    <color name="podshare_purple">#6942FD</color>
     <color name="galleryBg">#212121</color>
 
     <!-- NAVIGATION BAR -->
