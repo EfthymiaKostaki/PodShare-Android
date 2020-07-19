@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -90,6 +92,23 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(final String email, String password, final String username) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").whereEqualTo("username", username).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult() == null || task.getResult().size() != 0) {
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        dismissLoading();
+                        Toast.makeText(RegisterActivity.this, "Username already exists in database.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                    Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         //https://firebase.google.com/docs/auth/android/start/
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
