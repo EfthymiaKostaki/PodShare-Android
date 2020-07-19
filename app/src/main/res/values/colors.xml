@@ -41,4 +41,10 @@
     <color name="background_upload">#09121C</color>
     <color name="step_color">#C220D0</color>
     <color name="add_color">#DADADA</color>
+
+    <!-- Media Player -->
+    <color name="background">#09121C</color>
+    <color name="podsharer_media_player">#898F97</color>
+    <color name="like">#3369FF</color>
+    <color name="description">#DADADA</color>
 </resources>
