@@ -41,4 +41,7 @@
     <color name="background_upload">#09121C</color>
     <color name="step_color">#C220D0</color>
     <color name="add_color">#DADADA</color>
+
+    <!-- Background-->
+    <color name="background_card">#260033</color>
 </resources>

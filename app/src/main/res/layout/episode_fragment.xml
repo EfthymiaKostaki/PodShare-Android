@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/episode_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingHuge"
+            android:layout_marginLeft="@dimen/spacingMedium"
+            android:layout_marginTop="@dimen/spacingHuge"
+            android:layout_marginEnd="@dimen/spacingHuge"
+            android:layout_marginBottom="@dimen/spacingHuge"
+            android:orientation="horizontal"
+            android:background="@color/background_card"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/spacingHuge"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/spacingSmall">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/spacingMedium"
+                android:src="@drawable/play"
+                android:layout_marginRight="@dimen/spacingMedium" />
+
+            <LinearLayout
+                android:id="@+id/episode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/episode_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sneak Peek - Part 1"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/spacingHuge"
+                        android:textSize="@dimen/textTitle"
+                        android:layout_marginRight="@dimen/spacingHuge" />
+
+                    <TextView
+                        android:id="@+id/episode_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="29:15"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textHint" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/episode_publish_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18 April 2020"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textLarge" />
+                <TextView
+                    android:id="@+id/episode_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A journey through the notes of my first ever book."
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSubtitle" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

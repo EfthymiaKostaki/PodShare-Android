@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/podcast_card"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingHuge"
+            android:layout_marginLeft="@dimen/spacingMedium"
+            android:layout_marginTop="@dimen/spacingHuge"
+            android:layout_marginEnd="@dimen/spacingHuge"
+            android:layout_marginBottom="@dimen/spacingHuge"
+            android:background="@color/background_card"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/spacingHuge"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/spacingSmall">
+
+            <ImageView
+                android:id="@+id/background_image_podcast"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/spacingMedium"
+                android:layout_marginRight="@dimen/spacingMedium"
+                android:src="@drawable/play" />
+
+            <LinearLayout
+                android:id="@+id/podcast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/podcast_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/podcast_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacingHuge"
+                        android:layout_marginRight="@dimen/spacingHuge"
+                        android:text="Sneak Peek"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textTitle" />
+                    <TextView
+                        android:id="@+id/number_of_episodes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacingHuge"
+                        android:layout_marginRight="@dimen/spacingHuge"
+                        android:text="Episodes: 21"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textTitle" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/episode_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A journey through the notes of my first ever book."
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSubtitle" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
