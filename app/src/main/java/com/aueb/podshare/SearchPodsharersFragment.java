@@ -8,16 +8,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.adapter.ValueAdapter;
 import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,6 +52,7 @@ public class SearchPodsharersFragment extends Fragment {
     private static String TAG = "SEARCH PODSHARERS FRAGMENT";
     private ValueAdapter valueAdapter;
     private ListView mSearchNFilterLv;
+    private TextView podsharers;
 
 
     public SearchPodsharersFragment() {
@@ -62,14 +67,28 @@ public class SearchPodsharersFragment extends Fragment {
         view = inflater.inflate(R.layout.search_podsharers_fragment, container, false);
         mSearchNFilterLv= view.findViewById(R.id.list_view);
         mSearchNFilterLv.setAdapter(valueAdapter);
+        mSearchNFilterLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // selected item
+                String selected = ((TextView) view.findViewById(R.id.txt_listitem)).getText().toString();
+
+                Toast toast = Toast.makeText(getContext(), selected, Toast.LENGTH_SHORT);
+                toast.show();
+                PodsharerNameSharedPreference podsharer = new PodsharerNameSharedPreference(getContext());
+                podsharer.saveSession(selected);
+                loadFragment(new PodsharerProfileFragment());
+            }
+        });
+        /*
         recyclerView = view.findViewById(R.id.resuls_podsharers);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+*/
         searchBar = view.findViewById(R.id.search_field_podsharers);
         mUsers = new ArrayList<>();
-        userAdapter = new UserAdapter(getContext(), mUsers);
-        recyclerView.setAdapter(userAdapter);
+        userAdapter = new UserAdapter(getActivity(), mUsers, users);
+        //recyclerView.setAdapter(userAdapter);
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,7 +98,11 @@ public class SearchPodsharersFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                valueAdapter.getFilter().filter(charSequence);
+                valueAdapter.getFilter().filter(charSequence.toString().toLowerCase());
+                int numberOfPodsharers = valueAdapter.getCount();
+                podsharers= (TextView) view.findViewById(R.id.number_of_podsharers);
+                podsharers.setText(String.valueOf(numberOfPodsharers));
+                //userAdapter.getFilter().filter(charSequence.toString().toLowerCase());
                 //searchUsers(charSequence.toString().toLowerCase());
                 //String value = searchBar.getText().toString();
             }
@@ -179,6 +202,14 @@ public class SearchPodsharersFragment extends Fragment {
     private void dismissLoading() {
         if (progressDialog != null)
             progressDialog.dismiss();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

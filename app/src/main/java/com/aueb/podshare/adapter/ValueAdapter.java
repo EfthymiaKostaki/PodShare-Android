@@ -1,6 +1,7 @@
 package com.aueb.podshare.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,13 +84,15 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
             if(constraint!=null && constraint.length()>0){
                 ArrayList<String> filterList=new ArrayList<String>();
                 for(int i=0;i<mStringFilterList.size();i++){
-                    if(mStringFilterList.get(i).contains(constraint)) {
+                    if(mStringFilterList.get(i).toLowerCase().contains(constraint)) {
+                        Log.d("ADD to new list", mStringFilterList.get(i));
                         filterList.add(mStringFilterList.get(i));
                     }
                 }
                 results.count=filterList.size();
                 results.values=filterList;
             }else{
+                Log.d("ADD to new list", "all values");
                 results.count=mStringFilterList.size();
                 results.values=mStringFilterList;
             }
