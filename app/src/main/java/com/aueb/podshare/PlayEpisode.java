@@ -26,11 +26,11 @@ public class PlayEpisode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.);
+        setContentView(R.layout.activity_play_episode);
 
-        playButton = (Button) findViewById();
-        elapsedTime = (TextView) findViewById();
-        remainingTime = (TextView) findViewById();
+        playButton = (Button) findViewById(R.id.playButton);
+        elapsedTime = (TextView) findViewById(R.id.elapsedTime);
+        remainingTime = (TextView) findViewById(R.id.remainingTime);
 
         mediaPlayer = MediaPlayer(this, /* audio file */);
         mediaPlayer.setLooping(false);
@@ -38,7 +38,7 @@ public class PlayEpisode extends AppCompatActivity {
         mediaPlayer.setVolume(0.5f, 0.5f);
         totalTime = mediaPlayer.getDuration();
 
-        progressBar = (ProgressBar) findViewById();
+        progressBar = (SeekBar) findViewById(R.id.progressBar);
         progressBar.setMax(totalTime);
         progressBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -62,7 +62,7 @@ public class PlayEpisode extends AppCompatActivity {
                 }
         );
 
-        volumeBar = (SeekBar) findViewById();
+        volumeBar = (SeekBar) findViewById(R.id.progressBar);
         volumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -123,10 +123,10 @@ public class PlayEpisode extends AppCompatActivity {
     public void playAudio(View view) {
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-            playButton.setBackgroundResource();
+            playButton.setBackgroundResource(R.drawable.pause);
         } else {
             mediaPlayer.pause();
-            playButton.setBackgroundResource();
+            playButton.setBackgroundResource(R.drawable.play_button);
         }
     }
 
