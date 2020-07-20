@@ -1,24 +1,22 @@
-package com.aueb.podshare.classes;
+package com.aueb.podshare.database;
+
+import com.aueb.podshare.classes.Podcast;
 
 import java.util.ArrayList;
 
-public class User {
-
+public class UserDAO {
     public String username;
     public String email;
-    public String description;
-    public ArrayList<Podcast> podcasts;
     private String uid;
 
-    public User() {
+    public UserDAO() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String email, String username) {
+    public UserDAO(String email, String username) {
 
         this.email = email;
         this.username = username;
-        podcasts = new ArrayList<>();
     }
     public String getUid() {
         return uid;
@@ -27,17 +25,6 @@ public class User {
         this.uid = uid;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void addPodcast(Podcast podcast) {
-        podcasts.add(podcast);
-    }
 
     public String getUsername() {
         return username;
@@ -54,9 +41,4 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public ArrayList<Podcast> getPodcasts() {
-        return podcasts;
-    }
-
 }

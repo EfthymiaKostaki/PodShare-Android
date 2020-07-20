@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.aueb.podshare.classes.User;
+import com.aueb.podshare.database.UserDAO;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -177,7 +178,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void writeUserToFirestore(String email, String username) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        User user = new User(email, username);
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        assert firebaseUser != null;
+        UserDAO user = new UserDAO(email, username);
+        user.setUid( firebaseUser.getUid());
         // Add a new document with a generated ID
         db.collection("users")
                 .add(user)
