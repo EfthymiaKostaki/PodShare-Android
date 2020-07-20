@@ -6,6 +6,7 @@ public class User {
 
     public String username;
     public String email;
+    public String description;
     public ArrayList<Podcast> podcasts;
 
     public User() {
@@ -17,6 +18,14 @@ public class User {
         this.email = email;
         this.username = username;
         podcasts = new ArrayList<>();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void addPodcast(Podcast podcast) {
