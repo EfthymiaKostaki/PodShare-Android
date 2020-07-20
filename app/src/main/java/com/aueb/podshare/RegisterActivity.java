@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    private void registerUser(final String email, String password, final String username) {
+    private void registerUser(final String email, final String password, final String username) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").whereEqualTo("username", username).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -102,6 +102,29 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                         dismissLoading();
                         Toast.makeText(RegisterActivity.this, "Username already exists in database.", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        //https://firebase.google.com/docs/auth/android/start/
+                        mAuth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            writeNewUser(email, username); //Realtime Database
+                                            writeUserToFirestore(email, username); // Firestore
+                                            createUserStorage(email, username);
+                                            Log.d(TAG, "createUserWithEmail:success");
+                                            dismissLoading();
+                                            updateUI();
+                                        } else {
+                                            // If sign in fails, display a message to the user.
+                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                            dismissLoading();
+                                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -109,27 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        //https://firebase.google.com/docs/auth/android/start/
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            writeNewUser(email, username); //Realtime Database
-                            writeUserToFirestore(email, username); // Firestore
-                            createUserStorage(email, username);
-                            Log.d(TAG, "createUserWithEmail:success");
-                            dismissLoading();
-                            updateUI();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            dismissLoading();
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
     }
 
     private void createUserStorage(String email, String username) {
