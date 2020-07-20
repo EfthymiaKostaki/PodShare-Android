@@ -12,6 +12,7 @@
         android:background="@drawable/podsharer_background_profile">
 
         <ImageView
+            android:id="@+id/podsharer_image"
             android:layout_width="181dp"
             android:layout_height="match_parent"
             android:contentDescription="podsharer"
