@@ -6,15 +6,15 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/podsharer_card"
         android:layout_centerInParent="true"
-        android:layout_marginStart="@dimen/spacingMedium"
-        android:layout_marginTop="@dimen/spacingMedium"
-        android:layout_marginBottom="@dimen/spacingMedium"
+        android:layout_marginStart="@dimen/spacingSmall"
+        android:layout_marginLeft="@dimen/spacingSmall"
+        android:layout_marginTop="@dimen/spacingSmall"
+        android:layout_marginBottom="@dimen/spacingSmall"
         android:background="@drawable/podsharer_background_search"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:textAlignment="center"
         android:id="@+id/txt_listitem"
-        android:layout_marginLeft="@dimen/spacingMedium"
-        android:gravity="center_horizontal" />
+        android:gravity="center" />
 
 </RelativeLayout>

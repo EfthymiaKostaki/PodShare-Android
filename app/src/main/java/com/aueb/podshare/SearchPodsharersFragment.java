@@ -11,22 +11,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
+import com.aueb.podshare.adapter.UserAdapter;
 import com.aueb.podshare.adapter.ValueAdapter;
 import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,7 +39,6 @@ import java.util.List;
 
 public class SearchPodsharersFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private List<User> mUsers;
     EditText searchBar;
@@ -53,7 +49,7 @@ public class SearchPodsharersFragment extends Fragment {
     private ValueAdapter valueAdapter;
     private ListView mSearchNFilterLv;
     private TextView podsharers;
-
+    public int numberOfPodsharers;
 
     public SearchPodsharersFragment() {
         // Required empty public constructor
@@ -80,31 +76,22 @@ public class SearchPodsharersFragment extends Fragment {
                 loadFragment(new PodsharerProfileFragment());
             }
         });
-        /*
-        recyclerView = view.findViewById(R.id.resuls_podsharers);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-*/
+
         searchBar = view.findViewById(R.id.search_field_podsharers);
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter(getActivity(), mUsers, users);
-        //recyclerView.setAdapter(userAdapter);
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 valueAdapter.getFilter().filter(charSequence.toString().toLowerCase());
-                int numberOfPodsharers = valueAdapter.getCount();
-                podsharers= (TextView) view.findViewById(R.id.number_of_podsharers);
+                podsharers = (TextView) view.findViewById(R.id.number_of_podsharers);
+                numberOfPodsharers = valueAdapter.getCount();
                 podsharers.setText(String.valueOf(numberOfPodsharers));
-                //userAdapter.getFilter().filter(charSequence.toString().toLowerCase());
-                //searchUsers(charSequence.toString().toLowerCase());
-                //String value = searchBar.getText().toString();
             }
 
             @Override

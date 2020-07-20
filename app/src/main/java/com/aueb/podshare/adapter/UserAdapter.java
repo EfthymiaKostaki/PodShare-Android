@@ -1,7 +1,6 @@
-package com.aueb.podshare;
+package com.aueb.podshare.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aueb.podshare.adapter.ValueAdapter;
+import com.aueb.podshare.R;
 import com.aueb.podshare.classes.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

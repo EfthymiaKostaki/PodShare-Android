@@ -10,8 +10,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import com.aueb.podshare.R;
 import java.util.ArrayList;
 
