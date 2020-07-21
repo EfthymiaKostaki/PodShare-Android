@@ -31,14 +31,14 @@ public class PodcastsFragment extends Fragment {
     private void addPodcasts() {
         LinearLayout podcasts = getView().findViewById(R.id.podcasts_linear);
         ArrayList<Podcast> userPodcasts = user.getPodcasts();
-        for (Podcast podcast: userPodcasts) {
-            /* This is not working because these ids not exist in the view we just created
+        /*for (Podcast podcast: userPodcasts) {
+             This is not working because these ids not exist in the view we just created
             LinearLayout linearLayout = getView().findViewById(R.id.podcast_card);
             TextView podcastName = getView().findViewById(R.id.podcast_name_text);
             podcastName.setText(podcast.getName());
             TextView podcastDescription = getView().findViewById(R.id.podcast_description_text);
             podcastDescription.setText(podcast.getDescription());
-            podcasts.addView(linearLayout);*/
-        }
+            podcasts.addView(linearLayout);
+        }*/
     }
 }

@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.adapter.Adapter;
+import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,6 +75,28 @@ public class PodsharerProfileFragment extends Fragment {
                                                     for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
                                                         user.addPodcast(new Podcast(podcastDocument.getString("name"),
                                                                 podcastDocument.getString("description"), podcastDocument.getTimestamp("pub_date").toDate()));
+                                                        Log.d("adding podcast", podcastDocument.getString("name"));
+                                                        podcastDocument.getReference().collection("episodes").get()
+                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            int k = 0;
+                                                                            for (QueryDocumentSnapshot episodeDocument : task.getResult()) {
+                                                                                // Possible issue here. How the
+                                                                                Episode episode = new Episode(episodeDocument.getString("_name"), episodeDocument.getString("_description"));
+                                                                                episode.set_privacy(episodeDocument.getBoolean("_privacy"));
+                                                                                episode.setPub_date(episodeDocument.getDate("_pubDate"));
+                                                                                user.getPodcasts().get(k).addEpisode(episode);
+                                                                                Log.d(TAG, episode.get_name());
+                                                                                if(k++ == task.getResult().size() - 1){
+                                                                                    Log.d(TAG, "disconnecting inside iterator");
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                );
                                                         if(i++ == task.getResult().size() - 1){
                                                             Log.d(TAG, "disconnecting inside iterator");
                                                             setUpPodsharerInfoPodcasts();
@@ -142,7 +165,11 @@ public class PodsharerProfileFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
         // to do create fragments for recents and podcasts.
-        adapter.addFragment(new PodcastsFragment(user), "Podcasts");
+        if (user.getPodcasts() == null) {
+            adapter.addFragment(new NullPodcasts(), "Podcasts");
+        } else {
+            adapter.addFragment(new PodcastsFragment(user), "Podcasts");
+        }
         adapter.addFragment(new RecentsFragment(), "Recents");
         viewPager.setAdapter(adapter);
     }

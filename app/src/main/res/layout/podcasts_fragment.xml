@@ -8,22 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/podcasts_scroll">
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/podcasts_linear" >
-            <TextView
-                android:id="@+id/test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacingSmall"
-                android:layout_marginLeft="@dimen/spacingSmall"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:padding="@dimen/layout_padding"
-                android:text="test"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textTitle" />
-        </LinearLayout>
+            android:id="@+id/podcasts_linear">
+        </FrameLayout>
     </ScrollView>
 </RelativeLayout>
