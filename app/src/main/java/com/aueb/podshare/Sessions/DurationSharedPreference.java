@@ -14,15 +14,15 @@ public class DurationSharedPreference {
         editor = sharedPreferences.edit();
     }
 
-    public void saveSession(int duration) {
-        editor.putInt(DURATION_KEY, duration).commit();
+    public void saveSession(String duration) {
+        editor.putString(DURATION_KEY, duration).commit();
     }
 
-    public int getSession() {
-        return sharedPreferences.getInt(DURATION_KEY, -1);
+    public String getSession() {
+        return sharedPreferences.getString(DURATION_KEY, null);
     }
 
     public void terminateSession() {
-        editor.putInt(DURATION_KEY, -1).commit();
+        editor.putString(DURATION_KEY, null).commit();
     }
 }

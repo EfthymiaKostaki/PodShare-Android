@@ -15,7 +15,7 @@ public class Episode {
     private int likes;
     private int views;
     private Date pub_date;
-    private int duration;
+    private String duration;
 
     public Episode(String name, String description) {
         if (name.trim().equals("")) {
@@ -62,7 +62,7 @@ public class Episode {
         return privacy;
     }
 
-    public void set_duration(int dur) {
+    public void set_duration(String dur) {
         duration = dur;
     }
 
@@ -98,7 +98,7 @@ public class Episode {
         return pub_date;
     }
 
-    public int get_duration() {
+    public String get_duration() {
         return duration;
     }
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -192,10 +193,6 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
     }
 
     public String getPath(Uri uri) {
-        MediaPlayer mp = MediaPlayer.create(this, uri);
-        int duration = mp.getDuration();
-        DurationSharedPreference durationSharedPreference = new DurationSharedPreference(this);
-        durationSharedPreference.saveSession(duration);
         String[] projection = {MediaStore.MediaColumns.DATA};
         Cursor cursor = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
         assert cursor != null;
@@ -254,8 +251,6 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
                                             String shortClassName = getCallingActivity().getClassName();
                                             final Episode episode = new Episode(episodeNameSharedPreference.getSession(), episodeDescriptionSharedPreference.getSession());
                                             episode.set_privacy(privacy_private);
-                                            DurationSharedPreference durationSharedPreference = new DurationSharedPreference(UploadEpisodeFileActivity.this);
-                                            episode.set_duration(durationSharedPreference.getSession());
                                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                             assert firebaseUser != null;
                                             String userId = firebaseUser.getUid();
