@@ -48,8 +48,7 @@ public class PodsharerProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         showLoading();
         getUserDetails();
-        View view = inflater.inflate(R.layout.podsharer_profile_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.podsharer_profile_fragment, container, false);
     }
 
     private void getUserDetails() {

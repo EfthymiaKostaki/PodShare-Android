@@ -50,7 +50,7 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
         Holder viewHolder;
         if(convertView==null) {
             viewHolder=new Holder();
-            convertView=mInflater.inflate(R.layout.list_item,null);
+            convertView=mInflater.inflate(R.layout.search_results_list_item,null);
             viewHolder.nameTv= convertView.findViewById(R.id.txt_listitem);
             convertView.setTag(viewHolder);
         }else{

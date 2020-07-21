@@ -92,7 +92,7 @@
     <string name="follow">Follow</string>
     <string name="subscribe">Subscribe</string>
     <string name="podsharers">Podsharers:</string>
-    <string name="no_podcasts">User hasn\'t added any podcast yet!</string>
+    <string name="no_podcasts">This PodSharer hasn\'t created any podcasts yet!</string>
 
 </resources>
 

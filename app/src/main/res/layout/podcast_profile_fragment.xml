@@ -109,7 +109,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
@@ -119,6 +119,10 @@
             android:padding="@dimen/layout_padding"
             android:textColor="@color/white"
             android:textSize="@dimen/textExtraHuge" />
+        <FrameLayout
+            android:id="@+id/episodes_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

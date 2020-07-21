@@ -21,12 +21,17 @@
             android:paddingBottom="@dimen/spacingSmall">
 
             <ImageView
+                android:id="@+id/background_image_podcast"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/spacingMedium"
                 android:layout_marginEnd="@dimen/spacingMedium"
-                android:src="@drawable/play"
-                android:layout_marginRight="@dimen/spacingMedium" />
+                android:layout_marginRight="@dimen/spacingMedium"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:src="@drawable/play" />
+
 
             <LinearLayout
                 android:id="@+id/episode"

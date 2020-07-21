@@ -23,13 +23,13 @@ public class PodcastsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.podcasts_fragment, container, false);
+        View view = inflater.inflate(R.layout.podsharer_profile_podcasts_fragment, container, false);
         addPodcasts();
         return view;
     }
 
     private void addPodcasts() {
-        LinearLayout podcasts = getView().findViewById(R.id.podcasts_linear);
+        LinearLayout podcasts = getView().findViewById(R.id.podcasts_frame);
         ArrayList<Podcast> userPodcasts = user.getPodcasts();
         /*for (Podcast podcast: userPodcasts) {
              This is not working because these ids not exist in the view we just created

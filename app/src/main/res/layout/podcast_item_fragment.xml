@@ -5,8 +5,8 @@
     android:background="@color/colorPrimary">
 
         <LinearLayout
-            android:layout_width="match_parent"
             android:id="@+id/podcast_card"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacingHuge"
             android:layout_marginLeft="@dimen/spacingMedium"
@@ -24,9 +24,12 @@
                 android:id="@+id/background_image_podcast"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/spacingMedium"
                 android:layout_marginEnd="@dimen/spacingMedium"
                 android:layout_marginRight="@dimen/spacingMedium"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:layout_marginTop="@dimen/spacingSmall"
                 android:src="@drawable/play" />
 
             <LinearLayout
@@ -51,12 +54,20 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSubtitle" />
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/episodes_text"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textSubtitle" />
+                    <TextView
                         android:id="@+id/number_of_episodes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacingTiny"
+                        android:layout_marginLeft="@dimen/spacingTiny"
                         android:layout_marginEnd="@dimen/spacingHuge"
                         android:layout_marginRight="@dimen/spacingHuge"
-                        android:text="Episodes: 21"
+                        android:text="21"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/textSubtitle" />
                 </LinearLayout>
