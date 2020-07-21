@@ -1,5 +1,6 @@
 package com.aueb.podshare;
 
+
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +33,7 @@ public class PlayEpisode extends AppCompatActivity {
         elapsedTime = (TextView) findViewById(R.id.elapsedTime);
         remainingTime = (TextView) findViewById(R.id.remainingTime);
 
-        mediaPlayer = MediaPlayer(this, /* audio file */);
+        mediaPlayer = MediaPlayer.create(this, R.raw.podcast);
         mediaPlayer.setLooping(false);
         mediaPlayer.seekTo(0);
         mediaPlayer.setVolume(0.5f, 0.5f);
