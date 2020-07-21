@@ -156,7 +156,7 @@ public class PodsharerProfileFragment extends Fragment {
     }
     private void setUpPodsharerInfoPodcasts() {
         TextView numberOfPodcasts = (TextView) getView().findViewById(R.id.number_of_podcasts);
-        if (user.getPodcasts().isEmpty()) {
+        if (!user.getPodcasts().isEmpty()) {
             numberOfPodcasts.setText(String.valueOf(user.getPodcasts().size()));
         }
         // Setting ViewPager for each Tabs

@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
-import com.aueb.podshare.adapter.UserAdapter;
 import com.aueb.podshare.adapter.ValueAdapter;
 import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,12 +28,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SearchPodsharersFragment extends Fragment {
 
-    private UserAdapter userAdapter;
     private List<User> mUsers;
     EditText searchBar;
     View view;
@@ -56,7 +53,7 @@ public class SearchPodsharersFragment extends Fragment {
         findUsers();
         valueAdapter=new ValueAdapter(users,getActivity());
         view = inflater.inflate(R.layout.search_podsharers_fragment, container, false);
-        mSearchNFilterLv= view.findViewById(R.id.list_view);
+        mSearchNFilterLv = view.findViewById(R.id.list_view);
         mSearchNFilterLv.setAdapter(valueAdapter);
         mSearchNFilterLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -74,7 +71,6 @@ public class SearchPodsharersFragment extends Fragment {
 
         searchBar = view.findViewById(R.id.search_field_podsharers);
         mUsers = new ArrayList<>();
-        userAdapter = new UserAdapter(getActivity(), mUsers, users);
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,30 +42,6 @@
             android:focusable="true"
             android:scaleType="fitCenter"
             android:src="@drawable/search" />
-    </LinearLayout>
-    <!--
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/resuls_podsharers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/podsharers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingMedium"
-            android:layout_marginLeft="@dimen/spacingMedium"
-            android:layout_marginTop="@dimen/spacingMedium"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:padding="@dimen/spacingTiny"
-            android:text="@string/podsharers"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textTitle" />
     </LinearLayout>
 
     <ScrollView
