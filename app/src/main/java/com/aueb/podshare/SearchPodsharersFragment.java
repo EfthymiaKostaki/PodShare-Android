@@ -84,13 +84,6 @@ public class SearchPodsharersFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 valueAdapter.getFilter().filter(charSequence.toString().toLowerCase());
-
-                TextView test = (TextView) view.findViewById(R.id.test);
-                test.setText(Arrays.toString(valueAdapter.print().toArray()));
-
-                podsharers = (TextView) view.findViewById(R.id.number_of_podsharers);
-                numberOfPodsharers = valueAdapter.getCount();
-                podsharers.setText(String.valueOf(numberOfPodsharers));
             }
 
             @Override

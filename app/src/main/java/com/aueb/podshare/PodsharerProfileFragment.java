@@ -101,6 +101,10 @@ public class PodsharerProfileFragment extends Fragment {
                                                             setUpPodsharerInfoPodcasts();
                                                         }
                                                     }
+                                                    if (i == 0) {
+                                                        setUpPodsharerInfoPodcasts();
+                                                        Log.d(TAG, " no podcasts");
+                                                    }
                                                     // TO DO ADD ALSO EPISODES TO PODCASTS
                                                     FirebaseStorage storage = FirebaseStorage.getInstance();
                                                     StorageReference storageRef = storage.getReference();
@@ -152,7 +156,9 @@ public class PodsharerProfileFragment extends Fragment {
     }
     private void setUpPodsharerInfoPodcasts() {
         TextView numberOfPodcasts = (TextView) getView().findViewById(R.id.number_of_podcasts);
-        numberOfPodcasts.setText(String.valueOf(user.getPodcasts().size()));
+        if (user.getPodcasts().isEmpty()) {
+            numberOfPodcasts.setText(String.valueOf(user.getPodcasts().size()));
+        }
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) getView().findViewById(R.id.viewPagerPodsharer);
         setupViewPager(viewPager);
@@ -164,7 +170,7 @@ public class PodsharerProfileFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
         // to do create fragments for recents and podcasts.
-        if (user.getPodcasts() == null) {
+        if (user.getPodcasts().isEmpty()) {
             adapter.addFragment(new NullPodcasts(), "Podcasts");
         } else {
             adapter.addFragment(new PodcastsFragment(user), "Podcasts");
