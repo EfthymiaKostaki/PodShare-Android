@@ -1,14 +1,10 @@
 package com.aueb.podshare;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,7 +19,6 @@ public class PodcastsFragment extends Fragment {
     public PodcastsFragment(User user) {
         // Required empty public constructor
         this.user = user;
-
     }
 
     @Override

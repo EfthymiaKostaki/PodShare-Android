@@ -5,11 +5,11 @@
     android:background="@color/colorPrimary">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/not_available"
+        android:text="@string/search_podsharers"
         android:textColor="@color/white"
-        android:textSize="@dimen/textExtraHuge"
+        android:textSize="@dimen/textLarge"
         android:layout_marginLeft="@dimen/layout_padding"
         android:layout_marginRight="@dimen/layout_padding"
         android:gravity="center" />

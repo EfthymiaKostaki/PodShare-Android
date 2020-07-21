@@ -60,6 +60,10 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
         return convertView;
     }
 
+    public ArrayList<String> print() {
+        return mStringList;
+    }
+
     private class  Holder{
         TextView nameTv;
     }
