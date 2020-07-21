@@ -56,7 +56,7 @@ public class PodcastsFragment extends Fragment {
                 toast.show();
                 PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
                 podcast.saveSession(selected);
-                loadFragment(new PodcastProfileFragment());
+                loadFragment(new PodcastProfileFragment(user));
             }
         });
 
