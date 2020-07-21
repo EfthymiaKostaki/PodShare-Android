@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/layout_padding"
+            android:padding="@dimen/spacingTiny"
             android:text="@string/podcasts_text"
             android:textColor="@color/white"
             android:textSize="@dimen/textSubtitle" />
@@ -81,7 +81,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/layout_padding"
             android:text="20"
             android:textColor="@color/white"
             android:textSize="@dimen/textSubtitle" />
