@@ -15,7 +15,7 @@ public class Episode {
     private int likes;
     private int views;
     private Date pub_date;
-    private Duration duration;
+    private int duration;
 
     public Episode(String name, String description) {
         if (name.trim().equals("")) {
@@ -62,6 +62,10 @@ public class Episode {
         return privacy;
     }
 
+    public void set_duration(int dur) {
+        duration = dur;
+    }
+
     public void increase_favourites() {
         favourites += 1;
         podcast.set_favourites(favourites);
@@ -94,7 +98,7 @@ public class Episode {
         return pub_date;
     }
 
-    public Duration get_duration() {
+    public int get_duration() {
         return duration;
     }
 
