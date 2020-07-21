@@ -103,12 +103,6 @@
                     android:src="@drawable/replay" />
 
                 <ImageView
-                    android:layout_width="@dimen/spacingSuperHuge"
-                    android:layout_height="@dimen/spacingSuperHuge"
-                    android:layout_gravity="center"
-                    android:src="@drawable/play_button" />
-
-                <ImageView
                     android:layout_width="@dimen/replay_size"
                     android:layout_height="@dimen/replay_size"
                     android:layout_gravity="center"
@@ -141,7 +135,7 @@
                     android:id="@+id/playButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/pause"
+                    android:background="@drawable/play_button"
                     android:layout_marginTop="40dp"
                     android:onClick="playAudio"/>
 

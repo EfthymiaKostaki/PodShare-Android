@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -190,6 +191,9 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
     }
 
     public String getPath(Uri uri) {
+        MediaPlayer mp = MediaPlayer.create(this, uri);
+        int duration = mp.getDuration();
+
         String[] projection = {MediaStore.MediaColumns.DATA};
         Cursor cursor = getApplicationContext().getContentResolver().query(uri, projection, null, null, null);
         assert cursor != null;
