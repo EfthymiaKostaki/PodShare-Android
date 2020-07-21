@@ -135,7 +135,7 @@
                     android:id="@+id/playButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/play_button"
+                    android:background="@drawable/play"
                     android:layout_marginTop="40dp"
                     android:onClick="playAudio"/>
 

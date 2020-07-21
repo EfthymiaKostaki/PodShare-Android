@@ -1,6 +1,7 @@
 package com.aueb.podshare;
 
 
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -98,6 +99,7 @@ public class PlayEpisode extends AppCompatActivity {
         }).start();
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message message) {
@@ -124,10 +126,10 @@ public class PlayEpisode extends AppCompatActivity {
     public void playAudio(View view) {
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-            playButton.setBackgroundResource(R.drawable.pause);
+            playButton.setBackgroundResource(R.drawable.play_button);
         } else {
             mediaPlayer.pause();
-            playButton.setBackgroundResource(R.drawable.play_button);
+            playButton.setBackgroundResource(R.drawable.play);
         }
     }
 
