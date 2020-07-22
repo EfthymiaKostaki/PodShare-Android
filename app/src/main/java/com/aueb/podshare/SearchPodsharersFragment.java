@@ -40,8 +40,6 @@ public class SearchPodsharersFragment extends Fragment {
     private static String TAG = "SEARCH PODSHARERS FRAGMENT";
     private ValueAdapter valueAdapter;
     private ListView mSearchNFilterLv;
-    private TextView podsharers;
-    public int numberOfPodsharers;
 
     public SearchPodsharersFragment() {
         // Required empty public constructor
@@ -142,6 +140,13 @@ public class SearchPodsharersFragment extends Fragment {
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onDestroy() {
+        users.clear();
+        mUsers.clear();
+        super.onDestroy();
     }
 
 }

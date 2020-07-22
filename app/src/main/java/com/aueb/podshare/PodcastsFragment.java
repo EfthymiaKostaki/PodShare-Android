@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PodcastsFragment extends Fragment {
 
     private User user;
-    private ListView PodcastsList;
+    private ListView podcastsList;
     private ArrayList<Podcast> userPodcasts = new ArrayList<>();
     private ArrayList<String> podcastTitles = new ArrayList<>();
 
@@ -44,10 +44,10 @@ public class PodcastsFragment extends Fragment {
 
         PodcastAdapter podcastAdapter = new PodcastAdapter(podcastTitles, getActivity());
 
-        PodcastsList = view.findViewById(R.id.podcasts_list);
-        PodcastsList.setAdapter(podcastAdapter);
+        podcastsList = view.findViewById(R.id.podcasts_list);
+        podcastsList.setAdapter(podcastAdapter);
 
-        PodcastsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        podcastsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // selected item
                 String selected = ((TextView) view.findViewById(R.id.podcast_name_text)).getText().toString();
@@ -70,5 +70,11 @@ public class PodcastsFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-    
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userPodcasts = new ArrayList<>();
+        podcastTitles = new ArrayList<>();
+    }
 }

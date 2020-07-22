@@ -14,9 +14,4 @@
         android:layout_marginRight="@dimen/layout_padding"
         android:gravity="center" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/episodes_scroll">
-    </ScrollView>
 </RelativeLayout>

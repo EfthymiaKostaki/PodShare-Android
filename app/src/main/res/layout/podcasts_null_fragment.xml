@@ -9,9 +9,9 @@
         android:layout_height="match_parent"
         android:text="@string/no_podcasts"
         android:textColor="@color/white"
-        android:textSize="@dimen/textSmall"
+        android:textSize="@dimen/textLarge"
         android:gravity="center"
-        android:layout_marginLeft="@dimen/toolbar_height"
-        android:layout_marginRight="@dimen/toolbar_height"/>
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginRight="@dimen/layout_padding"/>
 
 </LinearLayout>
