@@ -62,6 +62,9 @@
         <activity android:name=".PlayEpisode"
             android:screenOrientation="unspecified"/>
 
+        <activity android:name=".MyMediaPlayer"
+            android:screenOrientation="unspecified"/>
+
     </application>
 
 </manifest>

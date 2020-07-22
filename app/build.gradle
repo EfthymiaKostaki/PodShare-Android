@@ -27,6 +27,7 @@ android {
             java {
                 srcDir 'src'
                 exclude '**/com/aueb/podshare/SubmitUpload.java'
+                exclude '**/com/aueb/podshare/PlayEpisode.java'
             }
         }
     }

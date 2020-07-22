@@ -2,16 +2,19 @@ package com.aueb.podshare;
 
 
 import android.annotation.SuppressLint;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aueb.podshare.R;
@@ -54,6 +57,7 @@ public class PlayEpisode extends AppCompatActivity {
 
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) {
+                        Log.d("re", "koo");
 
                     }
 
@@ -99,15 +103,15 @@ public class PlayEpisode extends AppCompatActivity {
         }).start();
     }
 
-    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message message) {
-            int currentPosition = message.what;
+        public void handleMessage(Message msg) {
+            int currentPosition = msg.what;
             progressBar.setProgress(currentPosition);
+
             String elapsedTimeLabel = createTimeLabel(currentPosition);
             elapsedTime.setText(elapsedTimeLabel);
-            String remainingTimeLabel = createTimeLabel(totalTime - currentPosition);
+            String remainingTimeLabel = createTimeLabel(totalTime-currentPosition);
             remainingTime.setText("- " +remainingTimeLabel);
         }
     };

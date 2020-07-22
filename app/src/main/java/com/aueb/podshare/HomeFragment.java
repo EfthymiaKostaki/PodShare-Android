@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void goToPlayEpisode() {
-        Intent intent = new Intent(context, PlayEpisode.class);
+        Intent intent = new Intent(context, MyMediaPlayer.class);
         startActivity(intent);
     }
 
