@@ -71,6 +71,14 @@ public class Podcast {
         this.likes = likes;
     }
 
+    public ArrayList<Episode> getEpisodes() {
+        return episodes;
+    }
+
+    public void setEpisodes(ArrayList<Episode> episodes) {
+        this.episodes = episodes;
+    }
+
     public int get_likes() {
         return likes;
     }

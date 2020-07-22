@@ -16,11 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.adapter.Adapter;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
+import com.aueb.podshare.utils.BitmapUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -145,6 +147,8 @@ public class PodsharerProfileFragment extends Fragment {
         ImageView podsharerimage = (ImageView) getView().findViewById(R.id.podsharer_image);
         Bitmap bitmap = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
         podsharerimage.setImageBitmap(bitmap);
+        final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getContext());
+        imageSharedPreference.saveSession(BitmapUtil.encodeToBase64(bitmap), "no file extension");
     }
 
     private void setUpPodsharerInfoUser() {
