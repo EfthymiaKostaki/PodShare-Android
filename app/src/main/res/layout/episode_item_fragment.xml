@@ -9,16 +9,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacingHuge"
-            android:layout_marginLeft="@dimen/spacingMedium"
-            android:layout_marginTop="@dimen/spacingHuge"
+            android:layout_marginLeft="@dimen/spacingHuge"
+            android:layout_marginTop="@dimen/spacingSmall"
             android:layout_marginEnd="@dimen/spacingHuge"
-            android:layout_marginBottom="@dimen/spacingHuge"
+            android:layout_marginBottom="@dimen/spacingSmall"
             android:orientation="horizontal"
             android:background="@color/background_card"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/spacingHuge"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingBottom="@dimen/spacingSmall">
+            android:paddingBottom="@dimen/spacingSmall" >
 
             <ImageView
                 android:id="@+id/background_image_podcast"
@@ -40,12 +40,13 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/episode_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/episode_name"
+                        android:id="@+id/episode_name_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sneak Peek - Part 1"

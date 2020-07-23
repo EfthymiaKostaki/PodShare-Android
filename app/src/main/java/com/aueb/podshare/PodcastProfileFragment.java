@@ -9,15 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.adapter.EpisodeAdapter;
+import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.aueb.podshare.utils.BitmapUtil;
@@ -30,12 +34,14 @@ import java.util.ArrayList;
 
 public class PodcastProfileFragment extends Fragment {
 
-
     private ProgressDialog progressDialog;
     private User user;
     private static final String TAG = "PODCAST PROFILE FRAG";
     private View view;
     private byte[] userImage;
+    private ListView episodesList;
+    private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
+    private ArrayList<String> episodeTitles = new ArrayList<>();
 
     public PodcastProfileFragment(User user) {
         // Required empty public constructor
@@ -92,9 +98,20 @@ public class PodcastProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "Could not retrieve Podsharer image.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        podcastEpisodes = podcast.getEpisodes();
+
+        for (int i=0; i<podcastEpisodes.size(); i++) {
+            episodeTitles.add(podcastEpisodes.get(i).get_name());
+        }
+
+        EpisodeAdapter episodeAdapter = new EpisodeAdapter(episodeTitles, getActivity());
+
+        episodesList = view.findViewById(R.id.episodes_list);
+        episodesList.setAdapter(episodeAdapter);
+
         dismissLoading();
     }
-
 
     private void showLoading() {
         if (progressDialog == null)
@@ -110,4 +127,12 @@ public class PodcastProfileFragment extends Fragment {
         if (progressDialog != null)
             progressDialog.dismiss();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        podcastEpisodes = new ArrayList<>();
+        episodeTitles = new ArrayList<>();
+    }
+
 }

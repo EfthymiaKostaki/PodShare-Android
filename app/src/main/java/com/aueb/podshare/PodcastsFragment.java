@@ -26,7 +26,6 @@ public class PodcastsFragment extends Fragment {
     private ArrayList<Podcast> userPodcasts = new ArrayList<>();
     private ArrayList<String> podcastTitles = new ArrayList<>();
 
-
     public PodcastsFragment(User user) {
         // Required empty public constructor
         this.user = user;
@@ -42,7 +41,7 @@ public class PodcastsFragment extends Fragment {
             podcastTitles.add(userPodcasts.get(i).getName());
         }
 
-        PodcastAdapter podcastAdapter = new PodcastAdapter(podcastTitles, getActivity());
+        PodcastAdapter podcastAdapter = new PodcastAdapter(userPodcasts, podcastTitles, getActivity());
 
         podcastsList = view.findViewById(R.id.podcasts_list);
         podcastsList.setAdapter(podcastAdapter);

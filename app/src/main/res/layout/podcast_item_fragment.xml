@@ -46,11 +46,10 @@
 
                     <TextView
                         android:id="@+id/podcast_name_text"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/avatar_size"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacingHuge"
-                        android:layout_marginRight="@dimen/spacingHuge"
-                        android:text="Sneak Peek"
+                        android:layout_marginEnd="@dimen/spacingMedium"
+                        android:layout_marginRight="@dimen/spacingMedium"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSubtitle" />
                     <TextView
@@ -67,16 +66,15 @@
                         android:layout_marginLeft="@dimen/spacingTiny"
                         android:layout_marginEnd="@dimen/spacingHuge"
                         android:layout_marginRight="@dimen/spacingHuge"
-                        android:text="21"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/textSubtitle" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/episode_description"
+                    android:id="@+id/podcast_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="A journey through the notes of my first ever book."
+                    android:text="yjthdrgs"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/textHint" />
             </LinearLayout>
