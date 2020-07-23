@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
     <item
         android:icon="@drawable/side_menu"
-        android:title="@string/"
+        android:title=""
         app:showAsAction="always">
 
         <menu
@@ -12,36 +12,30 @@
                 android:id="@+id/sm_following"
                 android:enabled="true"
                 android:icon="@drawable/menufollowing"
-                app:itemBackground="@color/colorPrimary"
                 android:title="@string/sm_following" />
             <item
                 android:id="@+id/sm_subscribed"
                 android:enabled="true"
                 android:icon="@drawable/menusubscribed"
-                app:itemBackground="@color/colorPrimary"
                 android:title="@string/sm_subscribed" />
             <item
                 android:id="@+id/sm_favourites"
                 android:enabled="true"
                 android:icon="@drawable/menufavourites"
-                app:itemBackground="@color/colorPrimary"
                 android:title="@string/sm_favourites" />
             <item
                 android:id="@+id/sm_settings"
                 android:enabled="true"
                 android:icon="@drawable/menusettings"
-                app:itemBackground="@color/colorPrimary"
                 android:title="@string/sm_settings" />
             <item
                 android:id="@+id/sm_faq"
                 android:enabled="true"
                 android:icon="@drawable/menufaq"
-                app:itemBackground="@color/colorPrimary"
                 android:title="@string/sm_faq" />
             <item
                 android:id="@+id/menu_item_logout"
                 android:icon="@drawable/logout"
-                app:itemBackground="@color/popupmenu"
                 android:title="@string/sm_logout" />
         </menu>
 
