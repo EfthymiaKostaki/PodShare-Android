@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -18,8 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
@@ -54,6 +57,17 @@ public class PodcastProfileFragment extends Fragment {
         view =inflater.inflate(R.layout.podcast_profile_fragment, container, false);
         showLoading();
         getPodcastDetails();
+        episodesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // selected item
+                String selected = ((TextView) view.findViewById(R.id.episode_name_txt)).getText().toString();
+
+                Toast toast = Toast.makeText(getContext(), selected, Toast.LENGTH_SHORT);
+                toast.show();
+                EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(getContext());
+                episode.saveSession(selected);
+            }
+        });
         return view;
     }
 
