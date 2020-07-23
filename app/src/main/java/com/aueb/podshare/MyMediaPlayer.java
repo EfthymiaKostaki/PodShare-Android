@@ -67,18 +67,20 @@ public class MyMediaPlayer extends AppCompatActivity {
     public void playCycle() {
         seekBar.setProgress(mediaPlayer.getCurrentPosition());
 
-        if (mediaPlayer.isPlaying()) {
-            runnable = new Runnable() {
-                @Override
-                public void run() {
-                    playCycle();
-                    Message message = new Message();
-                    message.what = mediaPlayer.getCurrentPosition();
-                    handler.sendMessage(message);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (mediaPlayer != null) {
+                    try {
+                        Message message = new Message();
+                        message.what = mediaPlayer.getCurrentPosition();
+                        handler.sendMessage(message);
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                    }
                 }
-            };
-            handler.postDelayed(runnable, 1000);
-        }
+            }
+        }).start();
     }
 
     private Handler handler = new Handler() {
