@@ -77,6 +77,7 @@ public class PodsharerProfileFragment extends Fragment {
                                                         user.addPodcast(new Podcast(podcastDocument.getString("name"),
                                                                 podcastDocument.getString("description"), podcastDocument.getTimestamp("pub_date").toDate()));
                                                         Log.d("adding podcast", podcastDocument.getString("name"));
+                                                        final int finalI = i;
                                                         podcastDocument.getReference().collection("episodes").get()
                                                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                                     @Override
@@ -88,7 +89,7 @@ public class PodsharerProfileFragment extends Fragment {
                                                                                 Episode episode = new Episode(episodeDocument.getString("_name"), episodeDocument.getString("_description"));
                                                                                 episode.set_privacy(episodeDocument.getBoolean("_privacy"));
                                                                                 episode.setPub_date(episodeDocument.getDate("_pubDate"));
-                                                                                user.getPodcasts().get(k).addEpisode(episode);
+                                                                                user.getPodcasts().get(finalI).addEpisode(episode);
                                                                                 Log.d(TAG, episode.get_name());
                                                                                 if(k++ == task.getResult().size() - 1){
                                                                                     Log.d(TAG, "disconnecting inside iterator");
