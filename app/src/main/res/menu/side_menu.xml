@@ -7,7 +7,7 @@
         app:showAsAction="always">
 
         <menu
-            android:panelFullBackground="@color/colorPrimary" >
+            android:panelFullBackground="@color/colorPrimaryDark" >
             <item
                 android:id="@+id/sm_following"
                 android:enabled="true"

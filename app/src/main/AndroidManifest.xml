@@ -45,7 +45,6 @@
 
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan"
-            android:theme="@style/SideMenuTheme"
             android:screenOrientation="unspecified" />
 
         <activity android:name=".UploadEpisodeActivity"
