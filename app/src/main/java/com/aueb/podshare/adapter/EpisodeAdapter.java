@@ -50,9 +50,9 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder viewHolder;
         if (convertView == null) {
-            viewHolder = new Holder();
             convertView = mInflater.inflate(R.layout.episode_item_fragment,null);
-            viewHolder.title= convertView.findViewById(R.id.episode_name_text);
+            viewHolder = new Holder();
+            viewHolder.title= convertView.findViewById(R.id.episode_name_txt);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (Holder) convertView.getTag();
@@ -66,7 +66,7 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
         return mStringList;
     }
 
-    private class  Holder{
+    private static class  Holder{
         TextView title;
     }
 
