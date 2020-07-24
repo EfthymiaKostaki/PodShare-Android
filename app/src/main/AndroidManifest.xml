@@ -66,7 +66,7 @@
             android:screenOrientation="unspecified"/>
 
         <receiver android:name=".Services.NotificationActionService"/>
-        <receiver android:name=".Services.OnClearFromRecentService"/>
+        <service android:name=".Services.OnClearFromRecentService"/>
 
     </application>
 

@@ -2,6 +2,9 @@ package com.aueb.podshare;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -15,8 +18,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MyMediaPlayer extends AppCompatActivity {
+import com.aueb.podshare.classes.Episode;
 
+import java.util.List;
+
+public class MyMediaPlayer extends AppCompatActivity implements Playable{
+
+    List<Episode> episodes;
+    int position = 0;
+    boolean isPlaying = false;
     TextView elapsedTime;
     TextView remainingTime;
     Button playButton;
@@ -164,5 +174,51 @@ public class MyMediaPlayer extends AppCompatActivity {
         super.onDestroy();
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
+    }
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getExtras().getString("action_name");
+
+            switch (action) {
+                case MyNotification.ACTION_PREVIOUS:
+                    onEpisodePrevious();
+                    break;
+                case MyNotification.ACTION_PLAY:
+                    if (isPlaying) {
+                        onEpisodePause();
+                    } else {
+                        onEpisodePlay();
+                    }
+                    break;
+                case MyNotification.ACTION_NEXT:
+                    onEpisodeNext();
+                    break;
+            }
+        }
+    };
+
+    @Override
+    public void onEpisodePrevious() {
+        position--;
+        MyNotification.createNotification(MyMediaPlayer.this, episodes.get(position), R.drawable.pause, position, episodes.size() - 1);
+    }
+
+    @Override
+    public void onEpisodePlay() {
+
+    }
+
+    @Override
+    public void onEpisodePause() {
+
+    }
+
+    @Override
+    public void onEpisodeNext() {
+        position++;
+        MyNotification.createNotification(MyMediaPlayer.this, episodes.get(position), R.drawable.play, position, episodes.size() - 1)
+
     }
 }
