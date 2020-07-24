@@ -18,7 +18,7 @@ import com.aueb.podshare.classes.Episode;
 
 public class MyNotification {
 
-    public static final String CHANNEL_ID = "";
+    public static final String CHANNEL_ID = "channel";
     public static final String ACTION_PREVIOUS = "action_previous";
     public static final String ACTION_PLAY = "action_play";
     public static final String ACTION_NEXT = "action_next";
