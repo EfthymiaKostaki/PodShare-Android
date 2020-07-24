@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.aueb.podshare.adapter.Adapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {

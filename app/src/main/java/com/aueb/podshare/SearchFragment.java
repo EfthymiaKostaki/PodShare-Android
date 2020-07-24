@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.aueb.podshare.adapter.Adapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class SearchFragment extends Fragment {
@@ -37,14 +37,14 @@ public class SearchFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new SearchPodcastsFragment(), "Podcasts");
         adapter.addFragment(new SearchPodsharersFragment(), "PodSharers");
+        adapter.addFragment(new SearchPodcastsFragment(), "Podcasts");
         viewPager.setAdapter(adapter);
     }
 
     private void setupTabIcons() {
-        tabs.getTabAt(0).setIcon(R.drawable.search_podcasts);
-        tabs.getTabAt(1).setIcon(R.drawable.search_podsharers);
+        tabs.getTabAt(0).setIcon(R.drawable.search_podsharers);
+        tabs.getTabAt(1).setIcon(R.drawable.search_podcasts);
     }
 
 }

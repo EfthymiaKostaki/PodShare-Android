@@ -9,6 +9,16 @@ public class UserDAO {
     public String email;
     private String uid;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
     public UserDAO() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }

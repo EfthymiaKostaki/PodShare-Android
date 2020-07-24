@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/podsharer_background_profile">
+
+        <ImageView
+            android:id="@+id/podsharer_image"
+            android:layout_width="181dp"
+            android:layout_height="match_parent"
+            android:contentDescription="podsharer"
+            android:src="@drawable/podsharer_example_image" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/podsharer_background_profile"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/podsharer_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingSmall"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:padding="@dimen/layout_padding"
+                android:text="After writing his first book his life completely changed. In every book he writes, he dives into a new adventure where societal status ... Read More"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textHint" />
+
+            <TextView
+                android:id="@+id/podsharer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingSmall"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:padding="@dimen/layout_padding"
+                android:text="Robert Duoni"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textTitle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_marginTop="@dimen/spacingMedium"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/spacingPreHuge"
+            android:layout_height="@dimen/spacingPreHuge"
+            android:layout_gravity="center"
+            android:contentDescription="podsharer"
+            android:src="@drawable/search_podcasts" />
+
+        <TextView
+            android:id="@+id/podcasts_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/spacingTiny"
+            android:text="@string/podcasts_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSubtitle" />
+
+        <TextView
+            android:id="@+id/number_of_podcasts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="20"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSubtitle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacingHuge"
+        android:layout_marginLeft="@dimen/spacingHuge"
+        android:layout_marginTop="@dimen/spacingMedium"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/follow_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacingSmall"
+        android:background="@drawable/follow_button"
+        android:lineSpacingExtra="8sp"
+        android:text="@string/follow"
+        android:textAppearance="@style/next" />
+
+        <TextView
+            android:id="@+id/followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:layout_gravity="center_vertical"
+            android:text="511 followers"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSmall" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:tabTextColor="@color/gray"
+        app:tabSelectedTextColor="@color/violet" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerPodsharer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

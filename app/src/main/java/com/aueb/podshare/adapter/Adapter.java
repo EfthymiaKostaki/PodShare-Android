@@ -1,4 +1,4 @@
-package com.aueb.podshare;
+package com.aueb.podshare.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
