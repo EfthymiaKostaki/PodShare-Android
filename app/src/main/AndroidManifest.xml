@@ -65,6 +65,9 @@
         <activity android:name=".MyMediaPlayer"
             android:screenOrientation="unspecified"/>
 
+        <receiver android:name=".Services.NotificationActionService"/>
+        <receiver android:name=".Services.OnClearFromRecentService"/>
+
     </application>
 
 </manifest>
