@@ -70,6 +70,7 @@ public class PodcastProfileFragment extends Fragment {
                 String descriptionEp  =  ((TextView) view.findViewById(R.id.episode_description)).getText().toString();
                 description.saveSession(descriptionEp);
                 episode.saveSession(selected);
+                loadFragment(new MyMediaPlayerFragment());
             }
         });
         return view;
@@ -151,6 +152,14 @@ public class PodcastProfileFragment extends Fragment {
         super.onResume();
         podcastEpisodes = new ArrayList<>();
         episodeTitles = new ArrayList<>();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

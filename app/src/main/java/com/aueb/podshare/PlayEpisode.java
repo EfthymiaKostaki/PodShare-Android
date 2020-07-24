@@ -1,8 +1,6 @@
 package com.aueb.podshare;
 
 
-import android.annotation.SuppressLint;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,14 +8,10 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.aueb.podshare.R;
 
 public class PlayEpisode extends AppCompatActivity {
     Button playButton;
@@ -31,7 +25,7 @@ public class PlayEpisode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_play_episode);
+        setContentView(R.layout.play_episode_fragment);
 
         playButton = (Button) findViewById(R.id.playButton);
         elapsedTime = (TextView) findViewById(R.id.elapsedTime);
