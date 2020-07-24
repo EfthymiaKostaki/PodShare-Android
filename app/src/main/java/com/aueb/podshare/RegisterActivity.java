@@ -4,37 +4,34 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.aueb.podshare.classes.User;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.aueb.podshare.database.UserDAO;
+import com.aueb.podshare.view.InputLayoutWithEditTextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.aueb.podshare.view.InputLayoutWithEditTextView;
-import com.aueb.podshare.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 /**
  * Created by Christina Chaniotaki (christinachaniotaki96@gmail.com) on 08,April,2019
@@ -89,28 +86,48 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    private void registerUser(final String email, String password, final String username) {
-        //https://firebase.google.com/docs/auth/android/start/
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            writeNewUser(email, username); //Realtime Database
-                            writeUserToFirestore(email, username); // Firestore
-                            createUserStorage(email, username);
-                            Log.d(TAG, "createUserWithEmail:success");
-                            dismissLoading();
-                            updateUI();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            dismissLoading();
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        }
+    private void registerUser(final String email, final String password, final String username) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").whereEqualTo("username", username).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult() == null || task.getResult().size() != 0) {
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        dismissLoading();
+                        Toast.makeText(RegisterActivity.this, "Username already exists in database.", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        //https://firebase.google.com/docs/auth/android/start/
+                        mAuth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            writeNewUser(email, username); //Realtime Database
+                                            writeUserToFirestore(email, username); // Firestore
+                                            createUserStorage(email, username);
+                                            Log.d(TAG, "createUserWithEmail:success");
+                                            dismissLoading();
+                                            updateUI();
+                                        } else {
+                                            // If sign in fails, display a message to the user.
+                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                            dismissLoading();
+                                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                     }
-                });
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                    Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private void createUserStorage(String email, String username) {
@@ -155,7 +172,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void writeUserToFirestore(String email, String username) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        User user = new User(email, username);
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        assert firebaseUser != null;
+        UserDAO user = new UserDAO(email, username);
+        user.setUid( firebaseUser.getUid());
         // Add a new document with a generated ID
         db.collection("users")
                 .add(user)

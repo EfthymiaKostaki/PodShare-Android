@@ -35,7 +35,7 @@
         android:paddingBottom="@dimen/spacingSmall">
 
         <TextView
-            android:id="@+id/episode_name"
+            android:id="@+id/episode_name_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -59,10 +59,11 @@
                 android:layout_width="@dimen/media_player_podsharer"
                 android:layout_height="@dimen/media_player_podsharer"
                 android:layout_gravity="center"
-                android:src="@drawable/user" />
+                android:src="@drawable/user"
+                android:id="@+id/podsharer_play"/>
 
             <TextView
-                android:id="@+id/podsharer"
+                android:id="@+id/podsharer_play_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -243,7 +244,7 @@
         android:background="@color/podsharer_media_player" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/description_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacingMedium"
