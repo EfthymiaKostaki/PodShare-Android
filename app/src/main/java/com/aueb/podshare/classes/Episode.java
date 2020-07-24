@@ -85,6 +85,10 @@ public class Episode {
         podcast.set_likes(likes);
     }
 
+    public void setPub_date(Date pub_date) {
+        this.pub_date = pub_date;
+    }
+
     public void decrease_likes() {
         likes -= 1;
         podcast.set_likes(likes);

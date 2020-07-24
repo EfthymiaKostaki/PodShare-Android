@@ -41,6 +41,7 @@
     <string name="sm_settings">ACCOUNT SETTINGS</string>
     <string name="sm_faq">FAQ</string>
     <string name="sm_logout">LOGOUT</string>
+
     <!-- HOMEPAGE-->
     <string name="trending">Trending</string>
     <string name="your_subscriptions">Your Subscriptions</string>
@@ -55,6 +56,7 @@
     <string name="search_option_1">Podcasts</string>
     <string name="search_option_2">Podsharers</string>
     <string name="search_recent">Recent Searches</string>
+    <string name="search_podsharers">This feature is not available yet</string>
     <string name="search_recent_default">You haven’t made any searches yet. Use the search button above!</string>
 
     <!-- UPLOAD EPISODE -->
@@ -83,9 +85,20 @@
     <!-- FAVORITES & PROFILE-->
     <string name="not_available">This feature is not available yet. More coming soon!</string>
 
+
     <!-- MEDIA PLAYER -->
     <string name="episode_name_default">Episode Name</string>
     <string name="podsharer_name_default">PodSharer</string>
+
+    <string name="preparing_results">Preparing search function. Please wait...</string>
+    <string name="podcasts_text">Podcasts:</string>
+    <string name="episodes_text">Episodes:</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="episodes">Episodes</string>
+    <string name="follow">Follow</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="podsharers">Podsharers:</string>
+    <string name="no_podcasts">This PodSharer hasn\'t created any podcasts yet!</string>
 </resources>
 
 

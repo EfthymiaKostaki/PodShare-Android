@@ -2,19 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    tools:context=".SearchPodcastsFragment">
+    android:background="@color/colorPrimary" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/search_podsharers"
+        android:text="@string/no_podcasts"
         android:textColor="@color/white"
         android:textSize="@dimen/textLarge"
         android:gravity="center"
-        android:layout_marginLeft="@dimen/toolbar_height"
-        android:layout_marginRight="@dimen/toolbar_height"/>
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginRight="@dimen/layout_padding"/>
 
 </LinearLayout>
