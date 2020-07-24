@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -29,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.aueb.podshare.Services.OnClearFromRecentService;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
@@ -53,7 +55,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public class MyMediaPlayer extends AppCompatActivity implements Playable{
+public class MyMediaPlayer extends AppCompatActivity {
 
     List<Episode> episodes;
     int position = 0;
@@ -69,11 +71,11 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
     private User user;
     private byte[] userImage;
     public static String TAG = "MEDIA PLAYER";
-    private ArrayList<Bitmap> episodes1;
+    /*private ArrayList<Bitmap> episodes1;
     final PodsharerNameSharedPreference podsharer = new PodsharerNameSharedPreference(this);
     final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(this);
     final EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(this);
-    final EpisodeDescriptionSharedPreference episodeDescription = new EpisodeDescriptionSharedPreference(this);
+    final EpisodeDescriptionSharedPreference episodeDescription = new EpisodeDescriptionSharedPreference(this);*/
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -137,12 +139,25 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
             }
         });
 
+        /*playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer.isPlaying()) {
+                    onEpisodePause();
+                } else {
+                    onEpisodePlay();
+                }
+            }
+        });*/
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
+            /*registerReceiver(broadcastReceiver, new IntentFilter("EPISODES_EPISODES"));*/
+            startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
         }
     }
 
-    private void getAudio() {
+    /*private void getAudio() {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -164,7 +179,7 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
                                     public void onSuccess(byte[] bytes) {
                                         userImage = bytes;
                                         Bitmap bitmap = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
-                                        /*dismissLoading();*/
+                                        /*dismissLoading();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -179,7 +194,7 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
                         }
                     }
                 });
-    }
+    }*/
 
     private void createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -263,8 +278,13 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
         super.onDestroy();
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.cancelAll();
+        }
+        /*unregisterReceiver(broadcastReceiver);*/
     }
 
+    /*
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -288,6 +308,7 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
         }
     };
 
+    /*
     @Override
     public void onEpisodePrevious() {
         position--;
@@ -296,6 +317,7 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
 
     @Override
     public void onEpisodePlay() {
+        MyNotification.createNotification(MyMediaPlayer.this, episodes.get(position), R.drawable.play, position, episodes.size() - 1);
 
     }
 
@@ -308,6 +330,7 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
     public void onEpisodeNext() {
         position++;
         MyNotification.createNotification(MyMediaPlayer.this, episodes.get(position), R.drawable.play, position, episodes.size() - 1);
+    }
 
 
     /*private void showLoading() {
@@ -325,4 +348,5 @@ public class MyMediaPlayer extends AppCompatActivity implements Playable{
             progressDialog.dismiss();
 >>>>>>> a075bb56ec5dd734a77b9cdc494e582739dbb8bc
     }*/
-}}
+
+}
