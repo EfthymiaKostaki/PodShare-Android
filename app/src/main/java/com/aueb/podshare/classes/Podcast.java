@@ -1,13 +1,13 @@
 package com.aueb.podshare.classes;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Podcast {
 
+    public String url;
     private String name;
     private String description;
-    public String url;
     private String imagePath;
     private int subscriptions;
     private int likes;
@@ -67,10 +67,6 @@ public class Podcast {
         return subscriptions;
     }
 
-    public void set_likes(int likes) {
-        this.likes = likes;
-    }
-
     public ArrayList<Episode> getEpisodes() {
         return episodes;
     }
@@ -83,20 +79,24 @@ public class Podcast {
         return likes;
     }
 
-    public void set_favourites(int favs) {
-        favourites = favs;
+    public void set_likes(int likes) {
+        this.likes = likes;
     }
 
     public int get_favourites() {
         return favourites;
     }
 
-    public void set_views(int views) {
-        this.views = views;
+    public void set_favourites(int favs) {
+        favourites = favs;
     }
 
     public int get_views() {
         return views;
+    }
+
+    public void set_views(int views) {
+        this.views = views;
     }
 
     public Date getPub_date() {

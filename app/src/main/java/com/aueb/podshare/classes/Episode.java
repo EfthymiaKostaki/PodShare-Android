@@ -1,8 +1,8 @@
 package com.aueb.podshare.classes;
 
-import java.util.Date;
 import java.time.Duration;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Episode {
     private String name;
@@ -54,12 +54,12 @@ public class Episode {
         return views;
     }
 
-    public void set_privacy(boolean privacy) {
-        this.privacy = privacy;
-    }
-
     public boolean get_privacy() {
         return privacy;
+    }
+
+    public void set_privacy(boolean privacy) {
+        this.privacy = privacy;
     }
 
     public void increase_favourites() {

@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:id="@+id/root"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:focusable="true"
-android:focusableInTouchMode="true"
-android:orientation="vertical"
-android:paddingBottom="@dimen/spacingSmall"
-android:background="@drawable/microphone">
-
-<ImageView
-    android:layout_width="288dp"
-    android:layout_height="101.5dp"
-    android:layout_gravity="center"
-    android:src="@drawable/logo_full"
-    android:background="@color/transparent"/>
-
-<TextView
-    android:id="@+id/signInMoto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_horizontal_margin"
-    android:layout_marginBottom="@dimen/spacingMedium"
-    android:padding="@dimen/spacingMedium"
-    android:text="@string/login_moto"
-    android:textColor="@color/white"
-    android:textSize="@dimen/textExtraHuge" />
-
-<com.aueb.podshare.view.InputLayoutWithEditTextView
-    android:id="@+id/emailInput"
-    android:layout_width="276dp"
-    android:layout_height="68dp"
-    android:layout_gravity="center"
-    android:imeOptions="actionNext"
-    android:layout_marginTop="100dp"
-    android:inputType="textEmailAddress"
-    android:visibility="visible"
-    app:itemEditTextHint="@string/email" />
-
-<com.aueb.podshare.view.InputLayoutWithEditTextView
-    android:id="@+id/passwordInput"
-    android:layout_width="276dp"
-    android:layout_height="68dp"
-    android:layout_gravity="center"
-    android:imeOptions="actionDone"
-    android:inputType="textPassword"
-    app:itemEditTextHint="@string/password" />
-
-<Button
-    android:id="@+id/forgotPass"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
+    android:layout_height="match_parent"
+    android:background="@drawable/microphone"
     android:focusable="true"
-    android:gravity="end"
-    android:padding="@dimen/spacingSmall"
-    android:text="@string/forgot_password"
-    android:textColor="@color/white" />
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/spacingSmall">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_marginStart="@dimen/spacingTiny"
-    android:layout_marginEnd="@dimen/spacingTiny"
-    android:layout_weight="1">
+    <ImageView
+        android:layout_width="288dp"
+        android:layout_height="101.5dp"
+        android:layout_gravity="center"
+        android:background="@color/transparent"
+        android:src="@drawable/logo_full" />
 
-    <Button
-        android:id="@+id/logInButton"
-        android:layout_width="276dp"
-        android:layout_height="51dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/login_btn"
-        android:padding="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/login_continue"
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/noAccountBtn"
+    <TextView
+        android:id="@+id/signInMoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logInButton"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/spacingMedium"
+        android:padding="@dimen/spacingMedium"
+        android:text="@string/login_moto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textExtraHuge" />
+
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/emailInput"
+        android:layout_width="276dp"
+        android:layout_height="@dimen/text_input"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:visibility="visible"
+        app:itemEditTextHint="@string/email" />
+
+    <com.aueb.podshare.view.InputLayoutWithEditTextView
+        android:id="@+id/passwordInput"
+        android:layout_width="276dp"
+        android:layout_height="@dimen/text_input"
+        android:layout_gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        app:itemEditTextHint="@string/password" />
+
+    <Button
+        android:id="@+id/forgotPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+        android:gravity="end"
         android:padding="@dimen/spacingSmall"
-        android:text="@string/no_account"
-        android:textAlignment="center"
+        android:text="@string/forgot_password"
         android:textColor="@color/white" />
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/spacingTiny"
+        android:layout_marginEnd="@dimen/spacingTiny"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/logInButton"
+            android:layout_width="276dp"
+            android:layout_height="51dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/login_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:text="@string/login_continue"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/noAccountBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logInButton"
+            android:layout_gravity="center_horizontal"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacingSmall"
+            android:text="@string/no_account"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -52,7 +52,9 @@ import java.io.InputStream;
 import java.util.Calendar;
 
 public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivity {
-    private static final String TAG = "UPLOAD_FILE" ;
+    private static final String TAG = "UPLOAD_FILE";
+    private static final int STORAGE_PERMISSION_CODE = 101;
+    private static int RESULT_LOAD_AUDIO = 1;
     private Button submit;
     private Button cancel;
     private Button backButton;
@@ -60,8 +62,6 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
     private boolean privacy_private = true;
     private Bitmap audio;
     private FirebaseAuth mAuth;
-    private static final int STORAGE_PERMISSION_CODE = 101;
-    private static int RESULT_LOAD_AUDIO = 1;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private com.google.firebase.storage.StorageReference usersRef = storage.getReference();
     private InputStream stream;
@@ -98,7 +98,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
         addAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE,STORAGE_PERMISSION_CODE);
+                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
                 Intent i = new Intent(
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
@@ -119,10 +119,9 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
             ActivityCompat
                     .requestPermissions(
                             UploadEpisodeFileActivity.this,
-                            new String[] { permission },
+                            new String[]{permission},
                             requestCode);
-        }
-        else {
+        } else {
             Toast
                     .makeText(UploadEpisodeFileActivity.this,
                             "Permission already granted",
@@ -151,7 +150,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    Log.d("audio log",filePath);
+                    Log.d("audio log", filePath);
                 }  //NOT IN REQUIRED FORMAT
 
             }
@@ -206,7 +205,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
             if (shortClassName.equals("com.aueb.podshare.UploadEpisodeNewPodcastActivity")) {
                 startActivity(new Intent(this, UploadEpisodeNewPodcastActivity.class));
                 finish();
-            } else if (shortClassName.equals("com.aueb.podshare.UploadEpisodeExistingPodcastActivity")){
+            } else if (shortClassName.equals("com.aueb.podshare.UploadEpisodeExistingPodcastActivity")) {
                 startActivity(new Intent(this, UploadEpisodeExistingPodcastActivity.class));
                 finish();
             } else {
@@ -255,7 +254,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
                                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                                 image.compress(Bitmap.CompressFormat.PNG, 100, baos);
                                                 byte[] data = baos.toByteArray();
-                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/" + userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/"+ podcastNameSharedPreference.getSession()+ "." +imageSharedPreference.getImgExtension());
+                                                com.google.firebase.storage.StorageReference podcastRef = usersRef.child("users/" + userId + "/podcasts/" + podcastNameSharedPreference.getSession() + "/" + podcastNameSharedPreference.getSession() + "." + imageSharedPreference.getImgExtension());
                                                 UploadTask uploadTask = podcastRef.putBytes(data);
                                                 uploadTask.addOnFailureListener(new OnFailureListener() {
                                                     @Override
@@ -286,7 +285,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
                                                 produceDynamicStream();
                                                 file_extn = audioSharedPreference.getAudioExtension();
                                             }
-                                            UploadTask uploadTask = usersRef.child("users/"+ userId + "/podcasts/" + podcastNameSharedPreference.getSession()+ "/episodes/"+ episodeNameSharedPreference.getSession() + "/" + episodeNameSharedPreference.getSession() + "." +file_extn).putStream(stream);
+                                            UploadTask uploadTask = usersRef.child("users/" + userId + "/podcasts/" + podcastNameSharedPreference.getSession() + "/episodes/" + episodeNameSharedPreference.getSession() + "/" + episodeNameSharedPreference.getSession() + "." + file_extn).putStream(stream);
                                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception exception) {
@@ -305,10 +304,11 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
                                                             .makeText(UploadEpisodeFileActivity.this,
                                                                     "Episode was successfully added.",
                                                                     Toast.LENGTH_SHORT)
-                                                            .show();}
+                                                            .show();
+                                                }
                                             });
 
-                                            Log.d("audio log",filePath);
+                                            Log.d("audio log", filePath);
                                             episodeNameSharedPreference.terminateSession();
                                             episodeDescriptionSharedPreference.terminateSession();
                                             podcastNameSharedPreference.terminateSession();
@@ -362,7 +362,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            Log.d("audio log",filePath);
+            Log.d("audio log", filePath);
         }  //NOT IN REQUIRED FORMAT
     }
 
@@ -376,7 +376,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
         new AlertDialog.Builder(UploadEpisodeFileActivity.this)
                 .setTitle("Disregard additions")
-                .setMessage("Are you sure you want to disregard your additions?"+episodeNameSharedPreference.getSession())
+                .setMessage("Are you sure you want to disregard your additions?" + episodeNameSharedPreference.getSession())
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
@@ -406,7 +406,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
         }
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.privacy_private:
                 if (checked)
                     privacy_private = true;

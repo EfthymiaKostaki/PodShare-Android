@@ -11,18 +11,19 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.aueb.podshare.R;
+
 import java.util.ArrayList;
 
-public class ValueAdapter  extends BaseAdapter implements Filterable {
+public class ValueAdapter extends BaseAdapter implements Filterable {
     private ArrayList<String> mStringList;
     private ArrayList<String> mStringFilterList;
     private LayoutInflater mInflater;
     private ValueFilter valueFilter;
 
     public ValueAdapter(ArrayList<String> mStringList, Context context) {
-        this.mStringList=mStringList;
-        this.mStringFilterList=mStringList;
-        mInflater=LayoutInflater.from(context);
+        this.mStringList = mStringList;
+        this.mStringFilterList = mStringList;
+        mInflater = LayoutInflater.from(context);
         getFilter();
     }
 
@@ -48,15 +49,15 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder viewHolder;
-        if(convertView==null) {
-            viewHolder=new Holder();
-            convertView=mInflater.inflate(R.layout.search_results_list_item,null);
-            viewHolder.nameTv= convertView.findViewById(R.id.txt_listitem);
+        if (convertView == null) {
+            viewHolder = new Holder();
+            convertView = mInflater.inflate(R.layout.search_results_list_item, null);
+            viewHolder.nameTv = convertView.findViewById(R.id.txt_listitem);
             convertView.setTag(viewHolder);
-        }else{
-            viewHolder=(Holder)convertView.getTag();
+        } else {
+            viewHolder = (Holder) convertView.getTag();
         }
-        viewHolder.nameTv.setText(mStringList.get(position).toString());
+        viewHolder.nameTv.setText(mStringList.get(position));
         return convertView;
     }
 
@@ -64,17 +65,17 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
         return mStringList;
     }
 
-    private class  Holder{
-        TextView nameTv;
-    }
-
     //Returns a filter that can be used to constrain data with a filtering pattern.
     @Override
     public Filter getFilter() {
-        if(valueFilter==null) {
-            valueFilter=new ValueFilter();
+        if (valueFilter == null) {
+            valueFilter = new ValueFilter();
         }
         return valueFilter;
+    }
+
+    private class Holder {
+        TextView nameTv;
     }
 
     private class ValueFilter extends Filter {
@@ -82,21 +83,21 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
         //Invoked in a worker thread to filter the data according to the constraint.
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults results=new FilterResults();
-            if(constraint!=null && constraint.length()>0){
-                ArrayList<String> filterList=new ArrayList<String>();
-                for(int i=0;i<mStringFilterList.size();i++){
-                    if(mStringFilterList.get(i).toLowerCase().contains(constraint)) {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<String> filterList = new ArrayList<String>();
+                for (int i = 0; i < mStringFilterList.size(); i++) {
+                    if (mStringFilterList.get(i).toLowerCase().contains(constraint)) {
                         Log.d("ADD to new list", mStringFilterList.get(i));
                         filterList.add(mStringFilterList.get(i));
                     }
                 }
-                results.count=filterList.size();
-                results.values=filterList;
-            }else{
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
                 Log.d("ADD to new list", "all values");
-                results.count=mStringFilterList.size();
-                results.values=mStringFilterList;
+                results.count = mStringFilterList.size();
+                results.values = mStringFilterList;
             }
             return results;
         }
@@ -106,7 +107,7 @@ public class ValueAdapter  extends BaseAdapter implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint,
                                       FilterResults results) {
-            mStringList=(ArrayList<String>) results.values;
+            mStringList = (ArrayList<String>) results.values;
             notifyDataSetChanged();
         }
     }

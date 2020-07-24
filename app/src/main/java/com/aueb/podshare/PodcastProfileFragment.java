@@ -17,12 +17,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
-import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
@@ -37,9 +35,9 @@ import java.util.ArrayList;
 
 public class PodcastProfileFragment extends Fragment {
 
+    private static final String TAG = "PODCAST PROFILE FRAG";
     private ProgressDialog progressDialog;
     private User user;
-    private static final String TAG = "PODCAST PROFILE FRAG";
     private View view;
     private byte[] userImage;
     private ListView episodesList;
@@ -54,7 +52,7 @@ public class PodcastProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =inflater.inflate(R.layout.podcast_profile_fragment, container, false);
+        view = inflater.inflate(R.layout.podcast_profile_fragment, container, false);
         showLoading();
         getPodcastDetails();
         episodesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,7 +74,7 @@ public class PodcastProfileFragment extends Fragment {
         String podcastName = podcastSession.getSession();
         ArrayList<Podcast> podcasts = user.getPodcasts();
         Podcast podcast = null;
-        for (Podcast pod: podcasts) {
+        for (Podcast pod : podcasts) {
             if (pod.getName().equals(podcastName)) {
                 podcast = pod;
             }
@@ -94,7 +92,7 @@ public class PodcastProfileFragment extends Fragment {
         numberEpisodes.setText(String.valueOf(podcast.get_number_of_episodes()));
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference userImageRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcastName + "/" +podcastName + ".png" );
+        StorageReference userImageRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcastName + "/" + podcastName + ".png");
         final long ONE_MEGABYTE = 1024 * 1024;
         userImageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
@@ -115,7 +113,7 @@ public class PodcastProfileFragment extends Fragment {
 
         podcastEpisodes = podcast.getEpisodes();
 
-        for (int i=0; i<podcastEpisodes.size(); i++) {
+        for (int i = 0; i < podcastEpisodes.size(); i++) {
             episodeTitles.add(podcastEpisodes.get(i).get_name());
         }
 

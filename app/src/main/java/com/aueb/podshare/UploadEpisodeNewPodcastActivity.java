@@ -38,6 +38,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
+    private static final int STORAGE_PERMISSION_CODE = 101;
+    private static int RESULT_LOAD_IMAGE = 1;
     private Button backButton;
     private Button addImage;
     private Button next;
@@ -48,8 +50,17 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     private String img_extension;
     private InputLayoutWithEditTextView podcastName;
     private InputLayoutWithEditTextView podcastDescription;
-    private static int RESULT_LOAD_IMAGE = 1;
-    private static final int STORAGE_PERMISSION_CODE = 101;
+
+    public static String encodeToBase64(Bitmap image) {
+        Bitmap bitmap = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +91,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE,STORAGE_PERMISSION_CODE);
+                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
                 Intent i = new Intent(
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -195,7 +206,6 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         }
     }
 
-
     public void checkPermission(String permission, int requestCode) {
         // Checking if permission is not granted
         if (ContextCompat.checkSelfPermission(
@@ -204,10 +214,9 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat
                     .requestPermissions(UploadEpisodeNewPodcastActivity.this,
-                            new String[] { permission },
+                            new String[]{permission},
                             requestCode);
-        }
-        else {
+        } else {
             Toast
                     .makeText(UploadEpisodeNewPodcastActivity.this,
                             "Permission already granted",
@@ -252,16 +261,5 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         String path = cursor.getString(column_index);
         cursor.close();
         return path;
-    }
-
-    public static String encodeToBase64(Bitmap image) {
-        Bitmap bitmap = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-
-        Log.d("Image Log:", imageEncoded);
-        return imageEncoded;
     }
 }

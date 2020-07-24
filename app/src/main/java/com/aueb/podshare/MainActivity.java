@@ -33,6 +33,31 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private Toolbar toolbar;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nb_home:
+                    loadFragment(new HomeFragment());
+                    return true;
+                case R.id.nb_search:
+                    loadFragment(new SearchFragment());
+                    return true;
+                case R.id.nb_upload:
+                    goToUploadActivity();
+                    return true;
+                case R.id.nb_favourites:
+                    loadFragment(new FavoritesFragment());
+                    return true;
+                case R.id.nb_profile:
+                    loadFragment(new ProfileFragment());
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,32 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
         loadFragment(new HomeFragment());
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.nb_home:
-                    loadFragment(new HomeFragment());
-                    return true;
-                case R.id.nb_search:
-                    loadFragment(new SearchFragment());
-                    return true;
-                case R.id.nb_upload:
-                    goToUploadActivity();
-                    return true;
-                case R.id.nb_favourites:
-                    loadFragment(new FavoritesFragment());
-                    return true;
-                case R.id.nb_profile:
-                    loadFragment(new ProfileFragment());
-                    return true;
-            }
-            return false;
-        }
-    };
 
     private void goToUploadActivity() {
         startActivity(new Intent(this, UploadEpisodeActivity.class));

@@ -80,26 +80,26 @@ public class PodsharerProfileFragment extends Fragment {
                                                         final int finalI = i;
                                                         podcastDocument.getReference().collection("episodes").get()
                                                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                        if (task.isSuccessful()) {
-                                                                            int k = 0;
-                                                                            for (QueryDocumentSnapshot episodeDocument : task.getResult()) {
-                                                                                // Possible issue here. How the
-                                                                                Episode episode = new Episode(episodeDocument.getString("_name"), episodeDocument.getString("_description"));
-                                                                                episode.set_privacy(episodeDocument.getBoolean("_privacy"));
-                                                                                episode.setPub_date(episodeDocument.getDate("_pubDate"));
-                                                                                user.getPodcasts().get(finalI).addEpisode(episode);
-                                                                                Log.d(TAG, episode.get_name());
-                                                                                if(k++ == task.getResult().size() - 1){
-                                                                                    Log.d(TAG, "disconnecting inside iterator");
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
+                                                                                           @Override
+                                                                                           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                                               if (task.isSuccessful()) {
+                                                                                                   int k = 0;
+                                                                                                   for (QueryDocumentSnapshot episodeDocument : task.getResult()) {
+                                                                                                       // Possible issue here. How the
+                                                                                                       Episode episode = new Episode(episodeDocument.getString("_name"), episodeDocument.getString("_description"));
+                                                                                                       episode.set_privacy(episodeDocument.getBoolean("_privacy"));
+                                                                                                       episode.setPub_date(episodeDocument.getDate("_pubDate"));
+                                                                                                       user.getPodcasts().get(finalI).addEpisode(episode);
+                                                                                                       Log.d(TAG, episode.get_name());
+                                                                                                       if (k++ == task.getResult().size() - 1) {
+                                                                                                           Log.d(TAG, "disconnecting inside iterator");
+                                                                                                       }
+                                                                                                   }
+                                                                                               }
+                                                                                           }
+                                                                                       }
                                                                 );
-                                                        if(i++ == task.getResult().size() - 1){
+                                                        if (i++ == task.getResult().size() - 1) {
                                                             Log.d(TAG, "disconnecting inside iterator");
                                                             setUpPodsharerInfoPodcasts();
                                                         }
@@ -131,7 +131,7 @@ public class PodsharerProfileFragment extends Fragment {
                                             }
                                         });
                             }
-                            if(j++ == task.getResult().size() - 1){
+                            if (j++ == task.getResult().size() - 1) {
                                 Log.d(TAG, "disconnecting inside iterator");
                                 setUpPodsharerInfoUser();
                             }
@@ -159,6 +159,7 @@ public class PodsharerProfileFragment extends Fragment {
         podsharerDescription.setText(user.getDescription());
 
     }
+
     private void setUpPodsharerInfoPodcasts() {
         TextView numberOfPodcasts = (TextView) getView().findViewById(R.id.number_of_podcasts);
         if (!user.getPodcasts().isEmpty()) {

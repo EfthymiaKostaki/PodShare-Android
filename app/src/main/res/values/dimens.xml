@@ -39,4 +39,5 @@
 
     <dimen name="info">200dp</dimen>
     <dimen name="podsharer_card">60dp</dimen>
+    <dimen name="text_input">80dp</dimen>
 </resources>

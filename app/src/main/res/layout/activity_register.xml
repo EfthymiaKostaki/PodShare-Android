@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/microphone"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@drawable/microphone">
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="288dp"
         android:layout_height="101.5dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo_full"
         android:background="@color/transparent"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/logo_full" />
 
     <TextView
         android:id="@+id/registerText"
@@ -33,7 +32,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/emailInput"
         android:layout_width="276dp"
-        android:layout_height="68dp"
+        android:layout_height="@dimen/text_input"
         android:layout_gravity="center"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
@@ -43,17 +42,17 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/usernameInput"
         android:layout_width="276dp"
-        android:layout_height="68dp"
+        android:layout_height="@dimen/text_input"
         android:layout_gravity="center"
         android:imeOptions="actionNext"
         android:inputType="textPersonName"
         android:visibility="visible"
-        app:itemEditTextHint="@string/username"/>
+        app:itemEditTextHint="@string/username" />
 
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/passwordInput"
         android:layout_width="276dp"
-        android:layout_height="68dp"
+        android:layout_height="@dimen/text_input"
         android:layout_gravity="center"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
@@ -62,7 +61,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/confirmPasswordInput"
         android:layout_width="276dp"
-        android:layout_height="68dp"
+        android:layout_height="@dimen/text_input"
         android:layout_gravity="center"
         android:imeOptions="actionDone"
         android:inputType="textPassword"

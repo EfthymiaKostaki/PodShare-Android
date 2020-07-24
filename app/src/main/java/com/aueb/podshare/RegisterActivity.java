@@ -90,43 +90,43 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").whereEqualTo("username", username).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult() == null || task.getResult().size() != 0) {
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        dismissLoading();
-                        Toast.makeText(RegisterActivity.this, "Username already exists in database.", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else {
-                        //https://firebase.google.com/docs/auth/android/start/
-                        mAuth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            // Sign in success, update UI with the signed-in user's information
-                                            writeNewUser(email, username); //Realtime Database
-                                            writeUserToFirestore(email, username); // Firestore
-                                            createUserStorage(email, username);
-                                            Log.d(TAG, "createUserWithEmail:success");
-                                            dismissLoading();
-                                            updateUI();
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                            dismissLoading();
-                                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult() == null || task.getResult().size() != 0) {
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                dismissLoading();
+                                Toast.makeText(RegisterActivity.this, "Username already exists in database.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                //https://firebase.google.com/docs/auth/android/start/
+                                mAuth.createUserWithEmailAndPassword(email, password)
+                                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Sign in success, update UI with the signed-in user's information
+                                                    writeNewUser(email, username); //Realtime Database
+                                                    writeUserToFirestore(email, username); // Firestore
+                                                    createUserStorage(email, username);
+                                                    Log.d(TAG, "createUserWithEmail:success");
+                                                    dismissLoading();
+                                                    updateUI();
+                                                } else {
+                                                    // If sign in fails, display a message to the user.
+                                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                                    dismissLoading();
+                                                    Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                    Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                });
 
     }
 
@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         String userId = firebaseUser.getUid();
         StorageReference storageRef = storage.getReference();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.user);
-        StorageReference riversRef = storageRef.child("users/"+userId+"/user.png");
+        StorageReference riversRef = storageRef.child("users/" + userId + "/user.png");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         assert firebaseUser != null;
         UserDAO user = new UserDAO(email, username);
-        user.setUid( firebaseUser.getUid());
+        user.setUid(firebaseUser.getUid());
         // Add a new document with a generated ID
         db.collection("users")
                 .add(user)

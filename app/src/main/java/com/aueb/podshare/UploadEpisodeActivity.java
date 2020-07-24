@@ -118,7 +118,7 @@ public class UploadEpisodeActivity extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.new_podcast_choice_button:
                 if (checked)
                     existingPodcastChecked = false;

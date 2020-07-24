@@ -37,7 +37,7 @@ public class PodcastsFragment extends Fragment {
 
         userPodcasts = user.getPodcasts();
 
-        for (int i=0; i<userPodcasts.size(); i++) {
+        for (int i = 0; i < userPodcasts.size(); i++) {
             podcastTitles.add(userPodcasts.get(i).getName());
         }
 

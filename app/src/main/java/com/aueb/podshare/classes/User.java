@@ -13,11 +13,12 @@ public class User {
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
+
     public User(String email, String username, String description, String uid) {
         this.description = description;
         this.email = email;
         this.username = username;
-        this.uid= uid;
+        this.uid = uid;
         podcasts = new ArrayList<>();
     }
 
@@ -28,9 +29,11 @@ public class User {
         this.username = username;
         podcasts = new ArrayList<>();
     }
+
     public String getUid() {
         return uid;
     }
+
     public void setUid(String uid) {
         this.uid = uid;
     }

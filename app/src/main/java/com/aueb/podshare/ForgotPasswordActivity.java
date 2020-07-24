@@ -30,6 +30,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private InputLayoutWithEditTextView password;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
