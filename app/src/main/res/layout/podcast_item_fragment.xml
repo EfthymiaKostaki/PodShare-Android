@@ -64,9 +64,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacingTiny"
                         android:layout_marginLeft="@dimen/spacingTiny"
-                        android:layout_marginEnd="@dimen/spacingHuge"
-                        android:layout_marginRight="@dimen/spacingHuge"
+                        android:layout_marginEnd="@dimen/spacingMedium"
+                        android:layout_marginRight="@dimen/spacingMedium"
                         android:textColor="@color/gray"
+                        android:text="1"
                         android:textSize="@dimen/textSubtitle" />
                 </LinearLayout>
 

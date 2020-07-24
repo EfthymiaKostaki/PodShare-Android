@@ -54,14 +54,6 @@
                         android:layout_marginEnd="@dimen/spacingHuge"
                         android:textSize="@dimen/textSubtitle"
                         android:layout_marginRight="@dimen/spacingHuge" />
-
-                    <TextView
-                        android:id="@+id/episode_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="29:15"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/textHint" />
                 </LinearLayout>
                 <TextView
                     android:id="@+id/episode_publish_date"

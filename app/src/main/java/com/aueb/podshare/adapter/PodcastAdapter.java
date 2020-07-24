@@ -66,7 +66,9 @@ public class PodcastAdapter extends BaseAdapter implements Filterable {
         viewHolder.title.setText(mStringList.get(position).toString());
         for (int i = 0 ; i < podcasts.size(); i++) {
             if (podcasts.get(i).getName().equals(mStringList.get(position))) {
-                viewHolder.noOfEpisodes.setText(String.valueOf(podcasts.get(i).get_number_of_episodes()));
+                if (podcasts.get(i).get_number_of_episodes() != 0) {
+                    viewHolder.noOfEpisodes.setText(String.valueOf(podcasts.get(i).get_number_of_episodes()));
+                }
                 viewHolder.description.setText(podcasts.get(i).getDescription().toString());
             }
         }

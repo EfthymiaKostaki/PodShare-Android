@@ -11,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.aueb.podshare.R;
+import com.aueb.podshare.classes.Episode;
 
 import java.util.ArrayList;
 
@@ -19,10 +20,12 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
     private ArrayList<String> mStringFilterList;
     private LayoutInflater mInflater;
     private ValueFilter valueFilter;
+    private ArrayList<Episode> episodes;
 
-    public EpisodeAdapter(ArrayList<String> mStringList, Context context) {
+    public EpisodeAdapter(ArrayList<String> mStringList, ArrayList<Episode> episodes, Context context) {
         this.mStringList = mStringList;
         this.mStringFilterList = mStringList;
+        this.episodes = episodes;
         mInflater = LayoutInflater.from(context);
         getFilter();
     }
@@ -53,12 +56,19 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
             convertView = mInflater.inflate(R.layout.episode_item_fragment,null);
             viewHolder = new Holder();
             viewHolder.title= convertView.findViewById(R.id.episode_name_txt);
+            viewHolder.publishDate = convertView.findViewById(R.id.episode_publish_date);
+            viewHolder.description = convertView.findViewById(R.id.episode_description);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (Holder) convertView.getTag();
         }
-        //This results in null pointer exception
         viewHolder.title.setText(mStringList.get(position));
+        for (int i = 0; i < episodes.size(); i++) {
+            if (episodes.get(i).get_name().equals(mStringList.get(position))) {
+                viewHolder.publishDate.setText(String.valueOf(episodes.get(i).get_pubDate()));
+                viewHolder.description.setText(episodes.get(i).get_description());
+            }
+        }
         return convertView;
     }
 
@@ -68,6 +78,8 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
 
     private static class  Holder{
         TextView title;
+        TextView publishDate;
+        TextView description;
     }
 
     //Returns a filter that can be used to constrain data with a filtering pattern.

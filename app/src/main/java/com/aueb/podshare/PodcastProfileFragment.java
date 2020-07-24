@@ -119,7 +119,7 @@ public class PodcastProfileFragment extends Fragment {
             episodeTitles.add(podcastEpisodes.get(i).get_name());
         }
 
-        EpisodeAdapter episodeAdapter = new EpisodeAdapter(episodeTitles, getActivity());
+        EpisodeAdapter episodeAdapter = new EpisodeAdapter(episodeTitles, podcastEpisodes, getActivity());
 
         episodesList = view.findViewById(R.id.episodes_list);
         episodesList.setAdapter(episodeAdapter);
