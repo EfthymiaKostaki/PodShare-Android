@@ -2,18 +2,39 @@ package com.aueb.podshare;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
+import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class MyMediaPlayer extends AppCompatActivity {
 
@@ -24,17 +45,33 @@ public class MyMediaPlayer extends AppCompatActivity {
     Runnable runnable;
     MediaPlayer mediaPlayer;
     NotificationManager notificationManager;
+    private ProgressDialog progressDialog;
+    public static String TAG = "MEDIA PLAYER";
+    private ArrayList<Bitmap> episodes;
+    final PodsharerNameSharedPreference podsharer = new PodsharerNameSharedPreference(this);
+    final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(this);
+    final EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(this);
+    final EpisodeDescriptionSharedPreference episodeDescription = new EpisodeDescriptionSharedPreference(this);
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_play_episode);
-
+        ImageView podsharerPlay = findViewById(R.id.podsharer_play);
+        final ImageSharedPreference image = new ImageSharedPreference(this);
+        podsharerPlay.setImageBitmap(BitmapFactory.decodeFile(image.getSession()));
+        TextView episodeText =  findViewById(R.id.episode_name_play);
+        episodeText.setText(episode.getSession());
+        TextView posharerText =  findViewById(R.id.podsharer_play_text);
+        posharerText.setText(podsharer.getSession());
         seekBar = (SeekBar) findViewById(R.id.progressBar);
         playButton = (Button) findViewById(R.id.playButton);
         elapsedTime = (TextView) findViewById(R.id.elapsedTime);
         remainingTime = (TextView) findViewById(R.id.remainingTime);
-
+        TextView descriptionEpisode = (TextView) findViewById(R.id.description_play);
+        descriptionEpisode.setText(episodeDescription.getSession());
+        showLoading();
+        getAudio();
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.podcast);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
@@ -44,7 +81,7 @@ public class MyMediaPlayer extends AppCompatActivity {
                 seekBar.setMax(mediaPlayer.getDuration());
                 playCycle();
                 mediaPlayer.start();
-                MyNotification.createNotification(MyMediaPlayer.this, );
+                //MyNotification.createNotification(MyMediaPlayer.this, );
             }
         });
 
@@ -80,6 +117,26 @@ public class MyMediaPlayer extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
+    }
+
+    private void getAudio() {
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").whereEqualTo("username", podsharer.getSession()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int j = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                            }
+                        } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
     private void createChannel() {
@@ -164,5 +221,20 @@ public class MyMediaPlayer extends AppCompatActivity {
         super.onDestroy();
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
+    }
+
+    private void showLoading() {
+        if (progressDialog == null)
+            progressDialog = new ProgressDialog(MyMediaPlayer.this);
+
+        progressDialog.setMessage(getString(R.string.fetching_podcats));
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
+    }
+
+    private void dismissLoading() {
+        if (progressDialog != null)
+            progressDialog.dismiss();
     }
 }

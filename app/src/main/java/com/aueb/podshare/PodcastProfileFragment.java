@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
@@ -65,6 +66,9 @@ public class PodcastProfileFragment extends Fragment {
                 Toast toast = Toast.makeText(getContext(), selected, Toast.LENGTH_SHORT);
                 toast.show();
                 EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(getContext());
+                EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                String descriptionEp  =  ((TextView) view.findViewById(R.id.episode_description)).getText().toString();
+                description.saveSession(descriptionEp);
                 episode.saveSession(selected);
             }
         });
