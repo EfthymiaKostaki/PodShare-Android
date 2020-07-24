@@ -97,8 +97,7 @@
                         android:id="@+id/playButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:background="@drawable/play_button"
-                        android:onClick="playAudio" />
+                        android:background="@drawable/play_button" />
 
                     <ImageView
                         android:layout_width="@dimen/replay_size"

@@ -56,7 +56,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public class MyMediaPlayerFragment extends Fragment implements Playable{
+public class MyMediaPlayerFragment extends Fragment {
 
     List<Episode> episodes;
     int position = 0;
@@ -72,7 +72,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
     private User user;
     private byte[] userImage;
     public static String TAG = "MEDIA PLAYER";
-    private ArrayList<Bitmap> episodes1;
+    /*private ArrayList<Bitmap> episodes1;*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -143,7 +143,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
-        dismissLoading();
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playAudio(v);
+            }
+        });
 
         return view;
     }
@@ -172,7 +178,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
                                     public void onSuccess(byte[] bytes) {
                                         userImage = bytes;
                                         Bitmap bitmap = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
-                                        /*dismissLoading();*/
+                                        dismissLoading();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -271,8 +277,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
         super.onDestroy();
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.cancelAll();
+        }
+        /*unregisterReceiver(broadcastReceiver);*/
     }
 
+    /*
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -294,8 +305,9 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
                     break;
             }
         }
-    };
+    };*/
 
+/*
     @Override
     public void onEpisodePrevious() {
         position--;
@@ -316,7 +328,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
     public void onEpisodeNext() {
         position++;
         MyNotification.createNotification(getActivity(), episodes.get(position), R.drawable.play, position, episodes.size() - 1);
-    }
+    }*/
 
 
     private void showLoading() {
