@@ -1,7 +1,10 @@
 package com.aueb.podshare;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +23,7 @@ public class MyMediaPlayer extends AppCompatActivity {
     SeekBar seekBar;
     Runnable runnable;
     MediaPlayer mediaPlayer;
+    NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -40,6 +44,7 @@ public class MyMediaPlayer extends AppCompatActivity {
                 seekBar.setMax(mediaPlayer.getDuration());
                 playCycle();
                 mediaPlayer.start();
+                MyNotification.createNotification(MyMediaPlayer.this, );
             }
         });
 
@@ -71,6 +76,22 @@ public class MyMediaPlayer extends AppCompatActivity {
 
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createChannel();
+        }
+    }
+
+    private void createChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(MyNotification.CHANNEL_ID,
+                    "PODSHARE", NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
     }
 
     public void playCycle() {
