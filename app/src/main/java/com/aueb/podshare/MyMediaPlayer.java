@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,11 @@ import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
+import com.aueb.podshare.classes.User;
+import com.aueb.podshare.utils.BitmapUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -46,6 +51,8 @@ public class MyMediaPlayer extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     NotificationManager notificationManager;
     private ProgressDialog progressDialog;
+    private User user;
+    private byte[] userImage;
     public static String TAG = "MEDIA PLAYER";
     private ArrayList<Bitmap> episodes;
     final PodsharerNameSharedPreference podsharer = new PodsharerNameSharedPreference(this);
@@ -57,6 +64,7 @@ public class MyMediaPlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_play_episode);
+        /*
         ImageView podsharerPlay = findViewById(R.id.podsharer_play);
         final ImageSharedPreference image = new ImageSharedPreference(this);
         podsharerPlay.setImageBitmap(BitmapFactory.decodeFile(image.getSession()));
@@ -64,14 +72,14 @@ public class MyMediaPlayer extends AppCompatActivity {
         episodeText.setText(episode.getSession());
         TextView posharerText =  findViewById(R.id.podsharer_play_text);
         posharerText.setText(podsharer.getSession());
+        TextView descriptionEpisode = (TextView) findViewById(R.id.description_play);
+        descriptionEpisode.setText(episodeDescription.getSession());
+        showLoading();
+        getAudio();*/
         seekBar = (SeekBar) findViewById(R.id.progressBar);
         playButton = (Button) findViewById(R.id.playButton);
         elapsedTime = (TextView) findViewById(R.id.elapsedTime);
         remainingTime = (TextView) findViewById(R.id.remainingTime);
-        TextView descriptionEpisode = (TextView) findViewById(R.id.description_play);
-        descriptionEpisode.setText(episodeDescription.getSession());
-        showLoading();
-        getAudio();
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.podcast);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
@@ -131,6 +139,25 @@ public class MyMediaPlayer extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             int j = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                user = new User(document.getString("email"),
+                                        document.getString("username"), document.getString("description"), document.getString("uid"));
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                StorageReference userImageRef = storageRef.child("users/" + user.getUid() + "/user.png");
+                                final long ONE_MEGABYTE = 1024 * 1024;
+                                userImageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                    @Override
+                                    public void onSuccess(byte[] bytes) {
+                                        userImage = bytes;
+                                        Bitmap bitmap = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
+                                        dismissLoading();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception exception) {
+                                        // Handle any errors
+                                        Toast.makeText(MyMediaPlayer.this, "Could not retrieve Podsharer image.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         } else {
                         Log.w(TAG, "Error getting documents.", task.getException());
