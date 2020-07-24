@@ -61,6 +61,7 @@ public class Episode {
 
     public void set_duration(String dur) {
         duration = dur;
+    }
 
     public void set_privacy(boolean privacy) {
         this.privacy = privacy;
