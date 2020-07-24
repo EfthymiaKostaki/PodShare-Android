@@ -32,12 +32,12 @@ import java.util.List;
 
 public class SearchPodsharersFragment extends Fragment {
 
-    private List<User> mUsers;
+    private static String TAG = "SEARCH PODSHARERS FRAGMENT";
     EditText searchBar;
     View view;
+    private List<User> mUsers;
     private ProgressDialog progressDialog;
     private ArrayList<String> users = new ArrayList<>();
-    private static String TAG = "SEARCH PODSHARERS FRAGMENT";
     private ValueAdapter valueAdapter;
     private ListView mSearchNFilterLv;
 
@@ -49,7 +49,7 @@ public class SearchPodsharersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         showLoading();
         findUsers();
-        valueAdapter=new ValueAdapter(users,getActivity());
+        valueAdapter = new ValueAdapter(users, getActivity());
         view = inflater.inflate(R.layout.search_podsharers_fragment, container, false);
         mSearchNFilterLv = view.findViewById(R.id.list_view);
         mSearchNFilterLv.setAdapter(valueAdapter);
@@ -100,7 +100,7 @@ public class SearchPodsharersFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 try {
                                     String username = document.getString("username");
-                                    mUsers.add(new User(document.getString("email"),username));
+                                    mUsers.add(new User(document.getString("email"), username));
                                     users.add(username);
                                     Log.d(TAG, username);
                                     if (i++ == task.getResult().size() - 1) {

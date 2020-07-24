@@ -53,13 +53,13 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder viewHolder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.episode_item_fragment,null);
+            convertView = mInflater.inflate(R.layout.episode_item_fragment, null);
             viewHolder = new Holder();
-            viewHolder.title= convertView.findViewById(R.id.episode_name_txt);
+            viewHolder.title = convertView.findViewById(R.id.episode_name_txt);
             viewHolder.publishDate = convertView.findViewById(R.id.episode_publish_date);
             viewHolder.description = convertView.findViewById(R.id.episode_description);
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (Holder) convertView.getTag();
         }
         viewHolder.title.setText(mStringList.get(position));
@@ -76,19 +76,19 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
         return mStringList;
     }
 
-    private static class  Holder{
-        TextView title;
-        TextView publishDate;
-        TextView description;
-    }
-
     //Returns a filter that can be used to constrain data with a filtering pattern.
     @Override
     public Filter getFilter() {
-        if(valueFilter==null) {
-            valueFilter=new ValueFilter();
+        if (valueFilter == null) {
+            valueFilter = new ValueFilter();
         }
         return valueFilter;
+    }
+
+    private static class Holder {
+        TextView title;
+        TextView publishDate;
+        TextView description;
     }
 
     private class ValueFilter extends Filter {
@@ -97,9 +97,9 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            if (constraint!=null && constraint.length()>0) {
-                ArrayList<String> filterList = new ArrayList<>() ;
-                for (int i=0;i<mStringFilterList.size();i++) {
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<String> filterList = new ArrayList<>();
+                for (int i = 0; i < mStringFilterList.size(); i++) {
                     if (mStringFilterList.get(i).toLowerCase().contains(constraint)) {
                         Log.d("ADD to new list", mStringFilterList.get(i));
                         filterList.add(mStringFilterList.get(i));
@@ -107,7 +107,7 @@ public class EpisodeAdapter extends BaseAdapter implements Filterable {
                 }
                 results.count = filterList.size();
                 results.values = filterList;
-            }else{
+            } else {
                 Log.d("ADD to new list", "all values");
                 results.count = mStringFilterList.size();
                 results.values = mStringFilterList;

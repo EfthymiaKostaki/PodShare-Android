@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/relative_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/relative_image"
-        android:background="@drawable/podcast_background" >
+        android:background="@drawable/podcast_background">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/podcast_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/podcast_name"
                 android:text="Music Therapy"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textExtraHuge" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center" >
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
                 <ImageView
+                    android:id="@+id/podcast_creator_picture"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/podcast_creator_picture"
-                    android:src="@drawable/podsharer_example_image"
-                    android:contentDescription="@string/podsharers"  />
+                    android:contentDescription="@string/podsharers"
+                    android:src="@drawable/podsharer_example_image" />
+
                 <TextView
+                    android:id="@+id/podcast_creator_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/podcast_creator_name"
                     android:text="John Holmes"
                     android:textColor="@color/white" />
             </LinearLayout>
@@ -52,7 +57,7 @@
         android:layout_marginStart="@dimen/spacingHuge"
         android:layout_marginLeft="@dimen/spacingHuge"
         android:layout_marginTop="@dimen/spacingMedium"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="@dimen/spacingPreHuge"
@@ -87,6 +92,7 @@
         android:layout_marginLeft="@dimen/spacingHuge"
         android:layout_marginTop="@dimen/spacingMedium"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/subscribe_button"
             android:layout_width="wrap_content"
@@ -101,8 +107,8 @@
             android:id="@+id/subscribers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
             android:layout_gravity="center_vertical"
+            android:padding="@dimen/layout_padding"
             android:text="8.2k subscribers"
             android:textColor="@color/white"
             android:textSize="@dimen/textSmall" />
@@ -111,15 +117,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:fillViewport="true" >
+        android:fillViewport="true"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/episodes"
             android:padding="@dimen/layout_padding"
+            android:text="@string/episodes"
             android:textColor="@color/white"
             android:textSize="@dimen/textExtraHuge" />
+
         <ListView
             android:id="@+id/episodes_list"
             android:layout_width="match_parent"

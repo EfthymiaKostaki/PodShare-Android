@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
-    tools:context=".ProfileFragment" >
+    tools:context=".ProfileFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:gravity="center"
         android:text="@string/not_available"
         android:textColor="@color/white"
-        android:textSize="@dimen/textExtraHuge"
-        android:gravity="center"
-        android:layout_marginLeft="@dimen/layout_padding"
-        android:layout_marginRight="@dimen/layout_padding"/>
+        android:textSize="@dimen/textExtraHuge" />
 
 
 </LinearLayout>

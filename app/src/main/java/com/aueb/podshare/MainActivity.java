@@ -2,6 +2,12 @@ package com.aueb.podshare;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +39,31 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private Toolbar toolbar;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nb_home:
+                    loadFragment(new HomeFragment());
+                    return true;
+                case R.id.nb_search:
+                    loadFragment(new SearchFragment());
+                    return true;
+                case R.id.nb_upload:
+                    goToUploadActivity();
+                    return true;
+                case R.id.nb_favourites:
+                    loadFragment(new FavoritesFragment());
+                    return true;
+                case R.id.nb_profile:
+                    loadFragment(new ProfileFragment());
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,38 +152,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         BottomNavigationView navigation = findViewById(R.id.navbar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new HomeFragment());
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.nb_home:
-                    loadFragment(new HomeFragment());
-                    return true;
-                case R.id.nb_search:
-                    loadFragment(new SearchFragment());
-                    return true;
-                case R.id.nb_upload:
-                    goToUploadActivity();
-                    return true;
-                case R.id.nb_favourites:
-                    loadFragment(new FavoritesFragment());
-                    return true;
-                case R.id.nb_profile:
-                    loadFragment(new ProfileFragment());
-                    return true;
-            }
-            return false;
-        }
-    };
 
     private void goToUploadActivity() {
         startActivity(new Intent(this, UploadEpisodeActivity.class));

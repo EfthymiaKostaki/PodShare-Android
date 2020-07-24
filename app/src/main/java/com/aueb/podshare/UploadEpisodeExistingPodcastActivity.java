@@ -35,13 +35,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
+    private static final String TAG = "GET_PODCASTS";
+    RadioGroup rgb;
     private Button backButton;
     private Button next;
     private String podcast_name_chosen = "";
     private Button cancel;
     private FirebaseAuth mAuth;
-    RadioGroup rgb;
-    private static final String TAG = "GET_PODCASTS" ;
     private ArrayList<String> podcasts = new ArrayList<String>();
     private ProgressDialog progressDialog;
 
@@ -72,8 +72,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
             }
         });
         rgb = findViewById(R.id.podcast_choice);
-        rgb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
+        rgb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // Check which radio button was clicked
@@ -175,7 +174,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         finish();
     }
 
-    public void getPodcasts(){
+    public void getPodcasts() {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseuser = mAuth.getCurrentUser();
         // save to firebase at the correct folder and redirect to main activity.
@@ -194,17 +193,17 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
-                                                        int i = 0;
-                                                        for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
-                                                            String name = podcastDocument.getString("name");
-                                                            podcasts.add(name);
-                                                            Log.d(TAG, name);
-                                                            if(i++ == task.getResult().size() - 1){
-                                                                Log.d(TAG, "disconnecting inside iterator");
-                                                                dismissLoading();
-                                                                loadPodcasts();
-                                                            }
+                                                    int i = 0;
+                                                    for (QueryDocumentSnapshot podcastDocument : task.getResult()) {
+                                                        String name = podcastDocument.getString("name");
+                                                        podcasts.add(name);
+                                                        Log.d(TAG, name);
+                                                        if (i++ == task.getResult().size() - 1) {
+                                                            Log.d(TAG, "disconnecting inside iterator");
+                                                            dismissLoading();
+                                                            loadPodcasts();
                                                         }
+                                                    }
                                                 } else {
                                                     Log.d(TAG, "disconnecting when task is not successful");
                                                     dismissLoading();

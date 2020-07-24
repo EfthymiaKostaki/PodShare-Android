@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
+    android:orientation="vertical"
     tools:context=".HomeFragment">
 
     <LinearLayout
@@ -13,6 +13,7 @@
         android:layout_height="300dp"
         android:background="@drawable/microphone_mini"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/TrendingTitle"
             android:layout_width="match_parent"
@@ -22,26 +23,30 @@
             android:text="@string/trending"
             android:textColor="@color/white"
             android:textSize="@dimen/textExtraHuge" />
+
         <HorizontalScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:id="@+id/pl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:src="@drawable/trending1"
-                    android:contentDescription="@string/trending" />
+                    android:contentDescription="@string/trending"
+                    android:src="@drawable/trending1" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:src="@drawable/trending2"
-                    android:contentDescription="@string/trending" />
+                    android:contentDescription="@string/trending"
+                    android:src="@drawable/trending2" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
@@ -51,23 +56,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/your_subscriptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/your_subscriptions"
             android:gravity="top"
             android:padding="@dimen/spacingMedium"
+            android:text="@string/your_subscriptions"
             android:textColor="@color/white"
-            android:textSize="@dimen/textExtraHuge"/>
+            android:textSize="@dimen/textExtraHuge" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            app:tabTextColor="@color/gray"
-            app:tabSelectedTextColor="@color/violet" />
+            app:tabSelectedTextColor="@color/violet"
+            app:tabTextColor="@color/gray" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
