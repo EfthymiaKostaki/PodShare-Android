@@ -87,6 +87,7 @@
     <!-- MEDIA PLAYER -->
     <string name="episode_name_default">Episode Name</string>
     <string name="podsharer_name_default">PodSharer</string>
+    <string name="podcast_name_default">Podcast Name</string>
 
     <!-- PODSHARER AND PODCAST PROFILE-->
     <string name="podcasts_text">Podcasts:</string>
