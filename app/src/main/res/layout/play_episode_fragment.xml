@@ -78,11 +78,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <Button
+                    android:id="@+id/previous"
                     android:layout_width="@dimen/replay_size"
                     android:layout_height="@dimen/replay_size"
                     android:layout_gravity="center"
-                    android:src="@drawable/previous" />
+                    android:background="@drawable/previous" />
 
                 <Button
                     android:id="@+id/playButton"
@@ -90,11 +91,11 @@
                     android:layout_height="30dp"
                     android:background="@drawable/play_button" />
 
-                <ImageView
+                <Button
                     android:layout_width="@dimen/replay_size"
                     android:layout_height="@dimen/replay_size"
                     android:layout_gravity="center"
-                    android:src="@drawable/next" />
+                    android:background="@drawable/next" />
             </LinearLayout>
 
             <SeekBar

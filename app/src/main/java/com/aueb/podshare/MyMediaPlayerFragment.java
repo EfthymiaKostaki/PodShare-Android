@@ -105,6 +105,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     private ArrayList<Uri> episodesAudioUri;
     private Bitmap audioPlay;
     private int indexCurrentAudioPlaying;
+    Button next;
+    Button previous;
 
     private Handler handler = new Handler() {
         @Override
@@ -140,8 +142,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         podsharerPlay.setImageBitmap(BitmapUtil.decodeBase64(image.getSession()));
         TextView episodeText = view.findViewById(R.id.episode_name_play);
         episodeText.setText(episode.getSession());
-        TextView posharerText = view.findViewById(R.id.podsharer_play_text);
-        posharerText.setText(podsharer.getSession());
+        TextView podsharerText = view.findViewById(R.id.podsharer_play_text);
+        podsharerText.setText(podsharer.getSession());
         TextView podcastText = view.findViewById(R.id.podcast_name_play);
         podcastText.setText(podcast.getSession());
         TextView descriptionEpisode = view.findViewById(R.id.description_play);
@@ -151,6 +153,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmap);
         lin.setBackground(bitmapDrawable);
 
+        next = view.findViewById(R.id.next);
+        previous = view.findViewById(R.id.previous);
         seekBar = view.findViewById(R.id.progressBar);
         playButton = view.findViewById(R.id.playButton);
         elapsedTime = view.findViewById(R.id.elapsedTime);
@@ -204,6 +208,16 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             getActivity().startService(new Intent(getActivity().getBaseContext(), OnClearFromRecentService.class));
         }
 
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (indexCurrentAudioPlaying >= episodes.size()) {
+
+                }
+
+            }
+        });
+
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,6 +225,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                 MyNotification.createNotification(getActivity(), "loko", R.drawable.pause, position, 1);
             }
         });
+
+
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
