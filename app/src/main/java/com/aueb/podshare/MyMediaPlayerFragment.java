@@ -115,7 +115,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                 seekBar.setMax(mediaPlayer.getDuration());
                 playCycle();
                 mediaPlayer.start();
-                MyNotification.createNotification(getActivity(), "koko", R.drawable.pause, position, 0);
+                MyNotification.createNotification(getActivity(), "koko", R.drawable.pause, position, 1);
             }
         });
 
