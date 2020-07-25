@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
+import com.aueb.podshare.Services.NotificationActionService;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
@@ -93,8 +94,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         podsharerPlay.setImageBitmap(BitmapUtil.decodeBase64(image.getSession()));
         TextView episodeText = view.findViewById(R.id.episode_name_play);
         episodeText.setText(episode.getSession());
-        TextView posharerText = view.findViewById(R.id.podsharer_play_text);
-        posharerText.setText(podsharer.getSession());
+        TextView podsharerText = view.findViewById(R.id.podsharer_play_text);
+        podsharerText.setText(podsharer.getSession());
         TextView descriptionEpisode = (TextView) view.findViewById(R.id.description_play);
         descriptionEpisode.setText(episodeDescription.getSession());
         Bitmap bitmap = BitmapFactory.decodeByteArray(podcastImage, 0, podcastImage.length);
@@ -261,7 +262,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     }
 
 
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    NotificationActionService broadcastReceiver = new NotificationActionService() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getExtras().getString("action_name");
