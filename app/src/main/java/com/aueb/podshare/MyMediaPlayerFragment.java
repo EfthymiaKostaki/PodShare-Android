@@ -235,7 +235,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (indexCurrentAudioPlaying >= podcastEpisodes.size()) {
+                if (indexCurrentAudioPlaying == podcastEpisodes.size() - 1) {
                     new AlertDialog.Builder(getActivity(), R.style.AlertDialog)
                             .setTitle("Last episode")
                             .setMessage("You are listening to the last episode of the podcast!")
