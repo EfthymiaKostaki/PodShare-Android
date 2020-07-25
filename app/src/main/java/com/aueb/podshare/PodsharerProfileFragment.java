@@ -145,7 +145,7 @@ public class PodsharerProfileFragment extends Fragment {
     }
 
     private void setUpPodsharerInfoImage() {
-        ImageView podsharerimage = (ImageView) getView().findViewById(R.id.podsharer_image);
+        ImageView podsharerimage = getView().findViewById(R.id.podsharer_image);
         Bitmap bitmap = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
         podsharerimage.setImageBitmap(bitmap);
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getContext());
@@ -153,23 +153,23 @@ public class PodsharerProfileFragment extends Fragment {
     }
 
     private void setUpPodsharerInfoUser() {
-        TextView podsharerName = (TextView) getView().findViewById(R.id.podsharer_name);
+        TextView podsharerName = getView().findViewById(R.id.podsharer_name);
         podsharerName.setText(user.getUsername());
-        TextView podsharerDescription = (TextView) getView().findViewById(R.id.podsharer_description);
+        TextView podsharerDescription = getView().findViewById(R.id.podsharer_description);
         podsharerDescription.setText(user.getDescription());
 
     }
 
     private void setUpPodsharerInfoPodcasts() {
-        TextView numberOfPodcasts = (TextView) getView().findViewById(R.id.number_of_podcasts);
+        TextView numberOfPodcasts = getView().findViewById(R.id.number_of_podcasts);
         if (!user.getPodcasts().isEmpty()) {
             numberOfPodcasts.setText(String.valueOf(user.getPodcasts().size()));
         }
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) getView().findViewById(R.id.viewPagerPodsharer);
+        ViewPager viewPager = getView().findViewById(R.id.viewPagerPodsharer);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) getView().findViewById(R.id.tabLayout);
+        TabLayout tabs = getView().findViewById(R.id.tabLayout);
         tabs.setupWithViewPager(viewPager);
     }
 

@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.aueb.podshare.Sessions.AudioSharedPreference;
-import com.aueb.podshare.Sessions.DurationSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
