@@ -125,7 +125,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
     public MyMediaPlayerFragment(User user, byte[] podcastImage, ArrayList<Uri> uris, int index) {
         this.user = user;
-
         this.podcastImage = podcastImage;
         this.episodesAudioUri = uris;
         this.indexCurrentAudioPlaying = index;
@@ -233,7 +232,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                 MyNotification.createNotification(getActivity(), "loko", R.drawable.pause, position, 1);
             }
         });
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,7 +247,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                 }
             }
         });
-
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -277,7 +274,9 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         podcastEpisodes = myPodcast.getEpisodes();
 
         for (int i = 0; i < podcastEpisodes.size(); i++) {
-            episodeTitles.add(podcastEpisodes.get(i).get_name());
+            if (! podcastEpisodes.get(i).get_name().equals(episode.getSession())) {
+                episodeTitles.add(podcastEpisodes.get(i).get_name());
+            }
         }
 
         EpisodeAdapter episodeAdapter = new EpisodeAdapter(episodeTitles, podcastEpisodes, getActivity());
@@ -296,42 +295,17 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                 String descriptionEp = ((TextView) view.findViewById(R.id.episode_description)).getText().toString();
                 description.saveSession(descriptionEp);
                 episode.saveSession(selected);
-                showLoading();
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReference();
-                final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
                 int index = 0;
-                final int[] countDownloadedUris = {0};
                 ArrayList<Episode> episodes = getPodcast().getEpisodes();
-                ArrayList<Uri> uris = new ArrayList<>();
-                for (final int[] i = {0}; i[0] < episodes.size(); i[0]++) {
-                    Log.d(TAG, "Inside for: " + i[0]);
-                    if (episode.getSession().equals(episodes.get(i[0]).get_name())) {
-                        index = i[0];
-                        Log.d(TAG, "Found episode selected index: " + i[0]);
+                for (int i = 0; i < episodes.size(); i++) {
+                    Log.d(TAG, "Inside for: " + i);
+                    if (episode.getSession().equals(episodes.get(i).get_name())) {
+                        index = i;
+                        Log.d(TAG, "Found episode selected index: " + i);
                     }
-
-                    StorageReference episodesRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcast.getSession() + "/episodes/" + episodes.get(i[0]).get_name() + "/" + episodes.get(i[0]).get_name() + ".mp3");
-                    int finalIndex = index;
-                    episodesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            // Got the download URL for 'users/me/profile.png'
-                            uris.add(uri);
-                            Log.d(TAG, "Adding uri in position: " + finalIndex);
-                            if (countDownloadedUris[0] == episodes.size() - 1) {
-                                dismissLoading();
-                                loadFragment(new MyMediaPlayerFragment(user, podcastImage, uris, finalIndex));
-                            }
-                            countDownloadedUris[0]++;
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                            Log.d(TAG, "Failure in index: " + finalIndex);
-                        }
-                    });
+                    if (i == episodes.size() - 1) {
+                        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, index));
+                    }
                 }
 
             }
@@ -459,21 +433,4 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-    private void showLoading() {
-        if (progressDialog == null)
-            progressDialog = new ProgressDialog(getContext());
-
-        progressDialog.setMessage(getString(R.string.fetching_episodes));
-        progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-    }
-
-    private void dismissLoading() {
-        if (progressDialog != null)
-            progressDialog.dismiss();
-    }
-
-
 }
