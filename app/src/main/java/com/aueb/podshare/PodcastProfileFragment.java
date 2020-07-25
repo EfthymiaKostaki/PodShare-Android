@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,27 +75,46 @@ public class PodcastProfileFragment extends Fragment {
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageRef = storage.getReference();
                 final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
-                StorageReference episodesRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcast.getSession() + "/episodes/" + episode.getSession() + "/" + episode.getSession() + ".mp3");
-                episodesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Got the download URL for 'users/me/profile.png'
-                        dismissLoading();
-                        loadFragment(new MyMediaPlayerFragment(user, uri, podcastImage));
+                int index = 0;
+                final int[] countDownloadedUris = {0};
+                ArrayList<Episode> episodes = getPodcast().getEpisodes();
+                ArrayList<Uri> uris = new ArrayList<>();
+                for (final int[] i = {0}; i[0] < episodes.size(); i[0]++) {
+                    Log.d(TAG, "Inside for: " + i[0]);
+                    if (episode.getSession().equals(episodes.get(i[0]).get_name())) {
+                        index = i[0];
+                        Log.d(TAG, "Found episode selected index: " + i[0]);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
+
+                    StorageReference episodesRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcast.getSession() + "/episodes/" + episodes.get(i[0]).get_name() + "/" + episodes.get(i[0]).get_name() + ".mp3");
+                    int finalIndex = index;
+                    episodesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            uris.add(uri);
+                            countDownloadedUris[0]++;
+                            Log.d(TAG, "Adding uri in position: " + finalIndex);
+                            if (countDownloadedUris[0] == episodes.size() -1){
+                                dismissLoading();
+                                loadFragment(new MyMediaPlayerFragment(user, podcastImage, uris, finalIndex));
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                            Log.d(TAG, "Failure in index: " + finalIndex);
+                        }
+                    });
+                }
 
             }
         });
         return view;
     }
 
-    private void getPodcastDetails() {
+    private Podcast  getPodcast() {
         PodcastNameSharedPreference podcastSession = new PodcastNameSharedPreference(getContext());
         String podcastName = podcastSession.getSession();
         ArrayList<Podcast> podcasts = user.getPodcasts();
@@ -104,6 +124,13 @@ public class PodcastProfileFragment extends Fragment {
                 podcast = pod;
             }
         }
+        return podcast;
+    }
+
+    private void getPodcastDetails() {
+        PodcastNameSharedPreference podcastSession = new PodcastNameSharedPreference(getContext());
+        String podcastName = podcastSession.getSession();
+        Podcast podcast = getPodcast();
         final RelativeLayout relativeImage = view.findViewById(R.id.relative_image);
         TextView podcastNameText = view.findViewById(R.id.podcast_name);
         podcastNameText.setText(podcastName);

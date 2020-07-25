@@ -68,15 +68,17 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     private User user;
     private byte[] podcastImage;
     public static String TAG = "MEDIA PLAYER";
-    private ArrayList<Bitmap> episodesAudio;
+    private ArrayList<Uri> episodesAudioUri;
     private Bitmap audioPlay;
-    private Uri uri;
+    private int indexCurrentAudioPlaying;
 
 
-    public MyMediaPlayerFragment(User user, Uri uri, byte[] podcastImage) {
+    public MyMediaPlayerFragment(User user, byte[] podcastImage, ArrayList<Uri> uris, int index ) {
         this.user = user;
-        this.uri = uri;
+
         this.podcastImage = podcastImage;
+        this.episodesAudioUri = uris;
+        this.indexCurrentAudioPlaying = index;
     }
 
     @Override
@@ -105,7 +107,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         playButton = (Button) view.findViewById(R.id.playButton);
         elapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
         remainingTime = (TextView) view.findViewById(R.id.remainingTime);
-        mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), uri);
+        mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), episodesAudioUri.get(indexCurrentAudioPlaying));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         TextView durationView = (TextView) view.findViewById(R.id.duration_play_episode);
         durationView.setText(createTimeLabel(mediaPlayer.getDuration()));
