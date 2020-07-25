@@ -126,7 +126,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeExistingPodcastActivity.this);
-        new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this)
+        new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this, R.style.AlertDialog)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

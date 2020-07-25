@@ -164,7 +164,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new PodcastProfileFragment(user));
+                loadFragment(new PodsharerProfileFragment());
             }
         });
 

@@ -123,7 +123,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeNewPodcastActivity.this);
         final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeNewPodcastActivity.this);
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeNewPodcastActivity.this);
-        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
+        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this, R.style.AlertDialog)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -165,7 +165,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
     }
 
     private void alertEmptyFields() {
-        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this)
+        new AlertDialog.Builder(UploadEpisodeNewPodcastActivity.this, R.style.AlertDialog)
                 .setTitle("Empty fields")
                 .setMessage("Please add values to all the fields")
                 .setNegativeButton(android.R.string.yes, null)

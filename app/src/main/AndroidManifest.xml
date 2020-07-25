@@ -59,9 +59,6 @@
         <activity android:name=".UploadEpisodeFileActivity"
             android:screenOrientation="unspecified" />
 
-        <activity android:name=".PlayEpisode"
-            android:screenOrientation="unspecified"/>
-
         <receiver android:name=".Services.NotificationActionService"/>
         <service android:name=".Services.OnClearFromRecentService"/>
 
