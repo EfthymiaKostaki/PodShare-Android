@@ -2,16 +2,14 @@ package com.aueb.podshare;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
 import android.app.ProgressDialog;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -22,26 +20,22 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 
 import com.aueb.podshare.Services.OnClearFromRecentService;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
@@ -49,8 +43,11 @@ import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
+import com.aueb.podshare.adapter.EpisodeAdapter;
+import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.aueb.podshare.utils.BitmapUtil;
@@ -59,34 +56,70 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyMediaPlayerFragment extends Fragment implements Playable {
 
+    public static String TAG = "MEDIA PLAYER";
     List<Episode> episodes;
     int position = 0;
     boolean isPlaying = false;
     TextView elapsedTime;
+    private ProgressDialog progressDialog;
     TextView remainingTime;
-    private Button playButton;
-    private ListView episodesList;
-    private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
-    private ArrayList<String> episodeTitles = new ArrayList<>();
     SeekBar seekBar;
     Runnable runnable;
     MediaPlayer mediaPlayer;
     NotificationManager notificationManager;
+    private Button playButton;
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getExtras().getString("action_name");
+
+            switch (action) {
+                case MyNotification.ACTION_PREVIOUS:
+                    onEpisodePrevious();
+                    break;
+                case MyNotification.ACTION_PLAY:
+                    if (mediaPlayer.isPlaying()) {
+                        onEpisodePause();
+                    } else {
+                        onEpisodePlay();
+                    }
+                    break;
+                case MyNotification.ACTION_NEXT:
+                    onEpisodeNext();
+                    break;
+            }
+        }
+    };
+
+    private ListView episodesList;
+    private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
+    private ArrayList<String> episodeTitles = new ArrayList<>();
     private User user;
     private byte[] podcastImage;
-    public static String TAG = "MEDIA PLAYER";
     private ArrayList<Uri> episodesAudioUri;
     private Bitmap audioPlay;
     private int indexCurrentAudioPlaying;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int currentPosition = msg.what;
+            seekBar.setProgress(currentPosition);
 
-    public MyMediaPlayerFragment(User user, byte[] podcastImage, ArrayList<Uri> uris, int index ) {
+            String elapsedTimeLabel = createTimeLabel(currentPosition);
+            elapsedTime.setText(elapsedTimeLabel);
+            String remainingTimeLabel = createTimeLabel(mediaPlayer.getDuration() - currentPosition);
+            remainingTime.setText("- " + remainingTimeLabel);
+        }
+    };
+
+    public MyMediaPlayerFragment(User user, byte[] podcastImage, ArrayList<Uri> uris, int index) {
         this.user = user;
 
         this.podcastImage = podcastImage;
@@ -102,27 +135,29 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
         final ImageSharedPreference image = new ImageSharedPreference(getContext());
         View view = inflater.inflate(R.layout.play_episode_fragment, container, false);
-        
+
         ImageView podsharerPlay = view.findViewById(R.id.podsharer_play);
         podsharerPlay.setImageBitmap(BitmapUtil.decodeBase64(image.getSession()));
         TextView episodeText = view.findViewById(R.id.episode_name_play);
         episodeText.setText(episode.getSession());
         TextView posharerText = view.findViewById(R.id.podsharer_play_text);
         posharerText.setText(podsharer.getSession());
-        TextView descriptionEpisode = (TextView) view.findViewById(R.id.description_play);
+        TextView podcastText = view.findViewById(R.id.podcast_name_play);
+        podcastText.setText(podcast.getSession());
+        TextView descriptionEpisode = view.findViewById(R.id.description_play);
         descriptionEpisode.setText(episodeDescription.getSession());
         Bitmap bitmap = BitmapFactory.decodeByteArray(podcastImage, 0, podcastImage.length);
         LinearLayout lin = view.findViewById(R.id.play_inside);
         BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmap);
         lin.setBackground(bitmapDrawable);
 
-        seekBar = (SeekBar) view.findViewById(R.id.progressBar);
-        playButton = (Button) view.findViewById(R.id.playButton);
-        elapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
-        remainingTime = (TextView) view.findViewById(R.id.remainingTime);
+        seekBar = view.findViewById(R.id.progressBar);
+        playButton = view.findViewById(R.id.playButton);
+        elapsedTime = view.findViewById(R.id.elapsedTime);
+        remainingTime = view.findViewById(R.id.remainingTime);
         mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), episodesAudioUri.get(indexCurrentAudioPlaying));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        TextView durationView = (TextView) view.findViewById(R.id.duration);
+        TextView durationView = view.findViewById(R.id.duration);
         durationView.setText(createTimeLabel(mediaPlayer.getDuration()));
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -214,11 +249,70 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
         episodesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // The selected episode will start playing
+                String selected = ((TextView) view.findViewById(R.id.episode_name_txt)).getText().toString();
+
+                Toast toast = Toast.makeText(getContext(), selected, Toast.LENGTH_SHORT);
+                toast.show();
+                EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(getContext());
+                EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                String descriptionEp = ((TextView) view.findViewById(R.id.episode_description)).getText().toString();
+                description.saveSession(descriptionEp);
+                episode.saveSession(selected);
+                showLoading();
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
+                int index = 0;
+                final int[] countDownloadedUris = {0};
+                ArrayList<Episode> episodes = getPodcast().getEpisodes();
+                ArrayList<Uri> uris = new ArrayList<>();
+                for (final int[] i = {0}; i[0] < episodes.size(); i[0]++) {
+                    Log.d(TAG, "Inside for: " + i[0]);
+                    if (episode.getSession().equals(episodes.get(i[0]).get_name())) {
+                        index = i[0];
+                        Log.d(TAG, "Found episode selected index: " + i[0]);
+                    }
+
+                    StorageReference episodesRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcast.getSession() + "/episodes/" + episodes.get(i[0]).get_name() + "/" + episodes.get(i[0]).get_name() + ".mp3");
+                    int finalIndex = index;
+                    episodesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            uris.add(uri);
+                            Log.d(TAG, "Adding uri in position: " + finalIndex);
+                            if (countDownloadedUris[0] == episodes.size() - 1) {
+                                dismissLoading();
+                                loadFragment(new MyMediaPlayerFragment(user, podcastImage, uris, finalIndex));
+                            }
+                            countDownloadedUris[0]++;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                            Log.d(TAG, "Failure in index: " + finalIndex);
+                        }
+                    });
+                }
+
             }
         });
 
         return view;
+    }
+
+    private Podcast getPodcast() {
+        PodcastNameSharedPreference podcastSession = new PodcastNameSharedPreference(getContext());
+        String podcastName = podcastSession.getSession();
+        ArrayList<Podcast> podcasts = user.getPodcasts();
+        Podcast podcast = null;
+        for (Podcast pod : podcasts) {
+            if (pod.getName().equals(podcastName)) {
+                podcast = pod;
+            }
+        }
+        return podcast;
     }
 
     private void createChannel() {
@@ -251,19 +345,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             }
         }).start();
     }
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            int currentPosition = msg.what;
-            seekBar.setProgress(currentPosition);
-
-            String elapsedTimeLabel = createTimeLabel(currentPosition);
-            elapsedTime.setText(elapsedTimeLabel);
-            String remainingTimeLabel = createTimeLabel(mediaPlayer.getDuration() - currentPosition);
-            remainingTime.setText("- " + remainingTimeLabel);
-        }
-    };
 
     public String createTimeLabel(int time) {
         String timeLabel = "";
@@ -309,31 +390,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);
     }
 
-
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getExtras().getString("action_name");
-
-            switch (action) {
-                case MyNotification.ACTION_PREVIOUS:
-                    onEpisodePrevious();
-                    break;
-                case MyNotification.ACTION_PLAY:
-                    if (mediaPlayer.isPlaying()) {
-                        onEpisodePause();
-                    } else {
-                        onEpisodePlay();
-                    }
-                    break;
-                case MyNotification.ACTION_NEXT:
-                    onEpisodeNext();
-                    break;
-            }
-        }
-    };
-
-
     @Override
     public void onEpisodePrevious() {
         position--;
@@ -364,5 +420,21 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    private void showLoading() {
+        if (progressDialog == null)
+            progressDialog = new ProgressDialog(getContext());
+
+        progressDialog.setMessage(getString(R.string.fetching_episodes));
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
+    }
+
+    private void dismissLoading() {
+        if (progressDialog != null)
+            progressDialog.dismiss();
+    }
+
 
 }

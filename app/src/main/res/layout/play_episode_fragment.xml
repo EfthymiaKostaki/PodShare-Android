@@ -238,7 +238,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacingTiny"
-        android:text="@string/episode_name_default"
+        android:text="@string/podcast_name_default"
         android:textColor="@color/white"
         android:textSize="@dimen/textExtra" />
 

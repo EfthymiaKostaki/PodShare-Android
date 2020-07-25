@@ -244,7 +244,7 @@ public class UploadEpisodeNewPodcastActivity extends AppCompatActivity {
                     //FINE
                     img_extension = file_extn;
                     image = BitmapFactory.decodeFile(filePath);
-                    ImageView imageView = (ImageView) findViewById(R.id.imgView);
+                    ImageView imageView = findViewById(R.id.imgView);
                     imageView.setImageBitmap(image);
                 }  //NOT IN REQUIRED FORMAT
 

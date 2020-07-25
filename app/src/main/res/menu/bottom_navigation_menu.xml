@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nb_home"
-        android:title="@string/nb_home"
-        android:icon="@drawable/navhome" />
-    <item android:id="@+id/nb_search"
-        android:title="@string/nb_search"
-        android:icon="@drawable/navsearch" />
-    <item android:id="@+id/nb_upload"
-        android:title="@string/nb_upload"
-        android:icon="@drawable/navadd" />
-    <item android:id="@+id/nb_favourites"
-        android:title="@string/nb_favourites"
-        android:icon="@drawable/navheart" />
-    <item android:id="@+id/nb_profile"
-        android:title="@string/nb_profile"
-        android:icon="@drawable/navprofile" />
+    <item
+        android:id="@+id/nb_home"
+        android:icon="@drawable/navhome"
+        android:title="@string/nb_home" />
+    <item
+        android:id="@+id/nb_search"
+        android:icon="@drawable/navsearch"
+        android:title="@string/nb_search" />
+    <item
+        android:id="@+id/nb_upload"
+        android:icon="@drawable/navadd"
+        android:title="@string/nb_upload" />
+    <item
+        android:id="@+id/nb_favourites"
+        android:icon="@drawable/navheart"
+        android:title="@string/nb_favourites" />
+    <item
+        android:id="@+id/nb_profile"
+        android:icon="@drawable/navprofile"
+        android:title="@string/nb_profile" />
 </menu>

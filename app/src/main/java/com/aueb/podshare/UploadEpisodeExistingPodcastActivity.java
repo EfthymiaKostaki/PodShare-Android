@@ -79,7 +79,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                 RadioGroup radioGroup = findViewById(R.id.podcast_choice);
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
-                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                RadioButton radioButton = findViewById(selectedId);
                 podcast_name_chosen = radioButton.getText().toString();
                 Log.d("BUTTON_TEXT", podcast_name_chosen);
                 Log.v("On clicked working", "clicado");
