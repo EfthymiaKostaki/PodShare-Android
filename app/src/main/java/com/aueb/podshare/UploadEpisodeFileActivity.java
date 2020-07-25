@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.aueb.podshare.Sessions.AudioSharedPreference;
-import com.aueb.podshare.Sessions.DurationSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
@@ -344,7 +341,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
 
 
     private void alertEmptyFields() {
-        new AlertDialog.Builder(UploadEpisodeFileActivity.this)
+        new AlertDialog.Builder(UploadEpisodeFileActivity.this, R.style.AlertDialog)
                 .setTitle("Empty fields")
                 .setMessage("Please add values to all the fields")
                 .setNegativeButton(android.R.string.yes, null)
@@ -377,7 +374,7 @@ public class UploadEpisodeFileActivity<StorageReference> extends AppCompatActivi
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeFileActivity.this);
         final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeFileActivity.this);
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeFileActivity.this);
-        new AlertDialog.Builder(UploadEpisodeFileActivity.this)
+        new AlertDialog.Builder(UploadEpisodeFileActivity.this, R.style.AlertDialog)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?" + episodeNameSharedPreference.getSession())
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

@@ -84,7 +84,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/podcast_name"
         android:layout_width="276dp"
-        android:layout_height="68dp"
+        android:layout_height="@dimen/text_input"
         android:layout_gravity="start"
         android:layout_marginStart="@dimen/spacingHuge"
         android:layout_marginLeft="@dimen/spacingHuge"
@@ -106,7 +106,7 @@
     <com.aueb.podshare.view.InputLayoutWithEditTextView
         android:id="@+id/podcast_description"
         android:layout_width="276dp"
-        android:layout_height="68dp"
+        android:layout_height="@dimen/text_input"
         android:layout_gravity="start"
         android:layout_marginStart="@dimen/spacingHuge"
         android:layout_marginLeft="@dimen/spacingHuge"

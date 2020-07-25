@@ -2,18 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
     <item
         android:id="@+id/side_menu"
         android:icon="@drawable/side_menu"
         android:title=""
         app:showAsAction="always">
-        <menu
-            android:panelFullBackground="@color/colorPrimaryDark" >
+        <menu android:panelFullBackground="@color/colorPrimaryDark">
             <item
                 android:id="@+id/sm_following"
-                android:title="@string/sm_following"
-                android:icon="@drawable/menufollowing" />
+                android:icon="@drawable/menufollowing"
+                android:title="@string/sm_following" />
             <item
                 android:id="@+id/sm_subscribed"
                 android:icon="@drawable/menusubscribed"

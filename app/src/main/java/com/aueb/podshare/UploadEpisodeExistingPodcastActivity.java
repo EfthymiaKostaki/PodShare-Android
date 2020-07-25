@@ -79,7 +79,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
                 RadioGroup radioGroup = findViewById(R.id.podcast_choice);
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
-                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                RadioButton radioButton = findViewById(selectedId);
                 podcast_name_chosen = radioButton.getText().toString();
                 Log.d("BUTTON_TEXT", podcast_name_chosen);
                 Log.v("On clicked working", "clicado");
@@ -126,7 +126,7 @@ public class UploadEpisodeExistingPodcastActivity extends AppCompatActivity {
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         final AudioSharedPreference audioSharedPreference = new AudioSharedPreference(UploadEpisodeExistingPodcastActivity.this);
         final PrivacySharedPreference privacySharedPreference = new PrivacySharedPreference(UploadEpisodeExistingPodcastActivity.this);
-        new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this)
+        new AlertDialog.Builder(UploadEpisodeExistingPodcastActivity.this, R.style.AlertDialog)
                 .setTitle("Disregard additions")
                 .setMessage("Are you sure you want to disregard your additions?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

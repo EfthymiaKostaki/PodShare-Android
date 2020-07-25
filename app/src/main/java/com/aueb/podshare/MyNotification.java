@@ -1,7 +1,6 @@
 package com.aueb.podshare;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.aueb.podshare.Services.NotificationActionService;
-import com.aueb.podshare.classes.Episode;
 
 public class MyNotification {
 
@@ -29,7 +27,7 @@ public class MyNotification {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-            MediaSessionCompat mediaSessionCompat = new MediaSessionCompat( context, "tag");
+            MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(context, "tag");
 
             Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.play);
 
@@ -75,12 +73,12 @@ public class MyNotification {
                     .addAction(play_button, "play", pendingIntentPlay)
                     .addAction(drw_next, "next", pendingIntentNext)
                     .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
-                        .setShowActionsInCompactView(0, 1, 2)
-                        .setMediaSession(mediaSessionCompat.getSessionToken()))
+                            .setShowActionsInCompactView(0, 1, 2)
+                            .setMediaSession(mediaSessionCompat.getSessionToken()))
                     .setPriority(NotificationCompat.PRIORITY_LOW)
                     .build();
 
-            notificationManagerCompat.notify(1,notification);
+            notificationManagerCompat.notify(1, notification);
         }
     }
 }

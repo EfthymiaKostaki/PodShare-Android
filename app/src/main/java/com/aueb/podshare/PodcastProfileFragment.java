@@ -94,7 +94,7 @@ public class PodcastProfileFragment extends Fragment {
                             // Got the download URL for 'users/me/profile.png'
                             uris.add(uri);
                             Log.d(TAG, "Adding uri in position: " + finalIndex);
-                            if (countDownloadedUris[0] == episodes.size() -1){
+                            if (countDownloadedUris[0] == episodes.size() - 1) {
                                 dismissLoading();
                                 loadFragment(new MyMediaPlayerFragment(user, podcastImage, uris, finalIndex));
                             }
@@ -114,7 +114,7 @@ public class PodcastProfileFragment extends Fragment {
         return view;
     }
 
-    private Podcast  getPodcast() {
+    private Podcast getPodcast() {
         PodcastNameSharedPreference podcastSession = new PodcastNameSharedPreference(getContext());
         String podcastName = podcastSession.getSession();
         ArrayList<Podcast> podcasts = user.getPodcasts();
@@ -181,7 +181,7 @@ public class PodcastProfileFragment extends Fragment {
         if (progressDialog == null)
             progressDialog = new ProgressDialog(getContext());
 
-        progressDialog.setMessage(getString(R.string.fetching_podcats));
+        progressDialog.setMessage(getString(R.string.fetching_episodes));
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
