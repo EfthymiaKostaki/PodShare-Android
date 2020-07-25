@@ -25,7 +25,7 @@ public class MyNotification {
 
     public static Notification notification;
 
-    public static void createNotification(Context context, Episode episode, int play_button, int pos, int size) {
+    public static void createNotification(Context context, String episode, int play_button, int pos, int size) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
@@ -66,7 +66,7 @@ public class MyNotification {
 
             notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.pause)
-                    .setContentTitle(episode.get_name())
+                    .setContentTitle(episode)
                     .setContentText("publisher")
                     .setLargeIcon(icon)
                     .setOnlyAlertOnce(true)

@@ -40,4 +40,6 @@
     <dimen name="info">200dp</dimen>
     <dimen name="podsharer_card">60dp</dimen>
     <dimen name="text_input">80dp</dimen>
+    <dimen name="media_player_podsharer">25dp</dimen>
+    <dimen name="replay_size">30dp</dimen>
 </resources>

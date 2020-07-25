@@ -31,6 +31,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
 import com.aueb.podshare.Sessions.ImageSharedPreference;
@@ -56,7 +57,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public class MyMediaPlayerFragment extends Fragment {
+public class MyMediaPlayerFragment extends Fragment implements Playable{
 
     List<Episode> episodes;
     int position = 0;
@@ -107,7 +108,7 @@ public class MyMediaPlayerFragment extends Fragment {
                 seekBar.setMax(mediaPlayer.getDuration());
                 playCycle();
                 mediaPlayer.start();
-                //MyNotification.createNotification(MyMediaPlayerFragment.this, );
+                MyNotification.createNotification(getActivity(), "koko", R.drawable.pause, position, 0);
             }
         });
 
@@ -280,10 +281,10 @@ public class MyMediaPlayerFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.cancelAll();
         }
-        /*unregisterReceiver(broadcastReceiver);*/
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);
     }
 
-    /*
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -305,13 +306,13 @@ public class MyMediaPlayerFragment extends Fragment {
                     break;
             }
         }
-    };*/
+    };
 
-/*
+
     @Override
     public void onEpisodePrevious() {
         position--;
-        MyNotification.createNotification(getActivity(), episodes.get(position), R.drawable.pause, position, episodes.size() - 1);
+        MyNotification.createNotification(getActivity(), "Nico", R.drawable.pause, position, episodes.size() - 1);
     }
 
     @Override
@@ -327,8 +328,8 @@ public class MyMediaPlayerFragment extends Fragment {
     @Override
     public void onEpisodeNext() {
         position++;
-        MyNotification.createNotification(getActivity(), episodes.get(position), R.drawable.play, position, episodes.size() - 1);
-    }*/
+        MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, episodes.size() - 1);
+    }
 
 
     private void showLoading() {
