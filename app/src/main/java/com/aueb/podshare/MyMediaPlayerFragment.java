@@ -74,7 +74,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
 
     public MyMediaPlayerFragment(User user, Uri uri, byte[] podcastImage) {
-        // Required empty public constructor
         this.user = user;
         this.uri = uri;
         this.podcastImage = podcastImage;
@@ -108,7 +107,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         remainingTime = (TextView) view.findViewById(R.id.remainingTime);
         mediaPlayer = MediaPlayer.create(getActivity().getApplicationContext(), uri);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
+        TextView durationView = (TextView) view.findViewById(R.id.duration_play_episode);
+        durationView.setText(createTimeLabel(mediaPlayer.getDuration()));
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
