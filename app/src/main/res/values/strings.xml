@@ -105,5 +105,6 @@
     <string name="fetching_podcats">Fetching podcasts now. Please wait…</string>
     <string name="fetching_episodes">Fetching podcast\'s episodes now. Please wait…</string>
     <string name="preparing_results">Preparing search function. Please wait…</string>
+    <string name="other_episodes">"Other episodes in: "</string>
 
 </resources>

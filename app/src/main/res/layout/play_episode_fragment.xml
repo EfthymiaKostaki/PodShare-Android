@@ -233,7 +233,25 @@
         android:text="Cooking sessions with Sally. In today’s episode we will be making Spagetti Bolognese using a true italian  recipe."
         android:textColor="@color/description"
         android:textSize="@dimen/textSubtitle" />
-
+    <LinearLayout
+        android:id="@+id/other_eps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/spacingTiny"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/spacingSmall">
+        <TextView
+            android:id="@+id/other_eps_in_podcast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingTiny"
+            android:text="@string/other_episodes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textExtra" />
     <TextView
         android:id="@+id/podcast_name_play"
         android:layout_width="wrap_content"
@@ -242,7 +260,7 @@
         android:text="@string/podcast_name_default"
         android:textColor="@color/white"
         android:textSize="@dimen/textExtra" />
-
+    </LinearLayout>
     <ListView
         android:id="@+id/other_episodes_list"
         android:layout_width="match_parent"
