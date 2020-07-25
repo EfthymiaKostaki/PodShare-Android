@@ -156,6 +156,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             @Override
             public void onClick(View v) {
                 playAudio(v);
+                MyNotification.createNotification(getActivity(), "loko", R.drawable.pause, position, 1);
             }
         });
 
@@ -268,7 +269,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                     onEpisodePrevious();
                     break;
                 case MyNotification.ACTION_PLAY:
-                    if (isPlaying) {
+                    if (mediaPlayer.isPlaying()) {
                         onEpisodePause();
                     } else {
                         onEpisodePlay();
@@ -301,7 +302,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     @Override
     public void onEpisodeNext() {
         position++;
-        MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, episodes.size() - 1);
+        MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);
+        playButton.setBackgroundResource(R.drawable.replay);
     }
 
     private void loadFragment(Fragment fragment) {
