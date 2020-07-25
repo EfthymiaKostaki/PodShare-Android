@@ -243,6 +243,7 @@
         android:textSize="@dimen/textExtra" />
 
     <ListView
+        android:id="@+id/other_episodes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

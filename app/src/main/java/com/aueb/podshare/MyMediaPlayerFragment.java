@@ -23,8 +23,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,11 +40,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
 import com.aueb.podshare.Sessions.ImageSharedPreference;
+import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
+import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -68,7 +72,9 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
     TextView elapsedTime;
     TextView remainingTime;
     private Button playButton;
-    private Button backButton;
+    private ListView episodesList;
+    private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
+    private ArrayList<String> episodeTitles = new ArrayList<>();
     SeekBar seekBar;
     Runnable runnable;
     MediaPlayer mediaPlayer;
@@ -90,6 +96,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
         View view = inflater.inflate(R.layout.play_episode_fragment, container, false);
 
         final PodsharerNameSharedPreference podsharer = new PodsharerNameSharedPreference(getActivity());
+        final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getActivity());
         final EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(getActivity());
         final EpisodeDescriptionSharedPreference episodeDescription = new EpisodeDescriptionSharedPreference(getActivity());
 
@@ -174,6 +181,32 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
                 } else {
                     return false;
                 }
+            }
+        });
+
+        String podcastName = podcast.getSession();
+        ArrayList<Podcast> podcasts = user.getPodcasts();
+        Podcast myPodcast = null;
+        for (Podcast pod : podcasts) {
+            if (pod.getName().equals(podcastName)) {
+                myPodcast = pod;
+            }
+        }
+
+        podcastEpisodes = myPodcast.getEpisodes();
+
+        for (int i = 0; i < podcastEpisodes.size(); i++) {
+            episodeTitles.add(podcastEpisodes.get(i).get_name());
+        }
+
+        EpisodeAdapter episodeAdapter = new EpisodeAdapter(episodeTitles, podcastEpisodes, getActivity());
+
+        episodesList = view.findViewById(R.id.other_episodes_list);
+        episodesList.setAdapter(episodeAdapter);
+
+        episodesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // The selected episode will start playing
             }
         });
 
