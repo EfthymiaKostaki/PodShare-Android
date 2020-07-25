@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -42,6 +43,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
+import com.aueb.podshare.Services.OnClearFromRecentService;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
@@ -163,6 +165,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
+            getActivity().registerReceiver(broadcastReceiver, new IntentFilter("EPISODES_EPISODES"));
+            getActivity().startService(new Intent(getActivity().getBaseContext(), OnClearFromRecentService.class));
         }
 
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -338,12 +342,12 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
     @Override
     public void onEpisodePlay() {
-
+        onResume();
     }
 
     @Override
     public void onEpisodePause() {
-
+        onPause();
     }
 
     @Override
