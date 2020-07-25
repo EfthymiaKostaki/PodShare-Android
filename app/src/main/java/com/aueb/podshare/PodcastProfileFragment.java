@@ -93,12 +93,12 @@ public class PodcastProfileFragment extends Fragment {
                         public void onSuccess(Uri uri) {
                             // Got the download URL for 'users/me/profile.png'
                             uris.add(uri);
-                            countDownloadedUris[0]++;
                             Log.d(TAG, "Adding uri in position: " + finalIndex);
                             if (countDownloadedUris[0] == episodes.size() -1){
                                 dismissLoading();
                                 loadFragment(new MyMediaPlayerFragment(user, podcastImage, uris, finalIndex));
                             }
+                            countDownloadedUris[0]++;
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
