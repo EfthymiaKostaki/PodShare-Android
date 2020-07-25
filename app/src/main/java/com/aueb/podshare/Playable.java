@@ -1,11 +1,11 @@
 package com.aueb.podshare;
 
 public interface Playable {
-    void onEpisodePrevious();
+    void onEpisodePrevious(int i);
 
     void onEpisodePlay();
 
     void onEpisodePause();
 
-    void onEpisodeNext();
+    void onEpisodeNext(int i);
 }

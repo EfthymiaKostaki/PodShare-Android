@@ -83,7 +83,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
             switch (action) {
                 case MyNotification.ACTION_PREVIOUS:
-                    onEpisodePrevious();
+                    onEpisodePrevious(indexCurrentAudioPlaying - 1);
                     break;
                 case MyNotification.ACTION_PLAY:
                     if (mediaPlayer.isPlaying()) {
@@ -93,7 +93,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                     }
                     break;
                 case MyNotification.ACTION_NEXT:
-                    onEpisodeNext();
+                    onEpisodeNext(indexCurrentAudioPlaying + 1);
                     break;
             }
         }
@@ -213,14 +213,9 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             @Override
             public void onClick(View v) {
                 if (indexCurrentAudioPlaying == 0) {
-                    new AlertDialog.Builder(getActivity(), R.style.AlertDialog)
-                            .setTitle("First episode")
-                            .setMessage("You are listening to the first episode of the podcast!")
-                            .setNegativeButton(android.R.string.ok, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    onEpisodeNext(podcastEpisodes.size() - 1);
                 } else {
-                    onEpisodePrevious();
+                    onEpisodePrevious(indexCurrentAudioPlaying - 1);
                 }
             }
         });
@@ -236,14 +231,9 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             @Override
             public void onClick(View v) {
                 if (indexCurrentAudioPlaying == podcastEpisodes.size() - 1) {
-                    new AlertDialog.Builder(getActivity(), R.style.AlertDialog)
-                            .setTitle("Last episode")
-                            .setMessage("You are listening to the last episode of the podcast!")
-                            .setNegativeButton(android.R.string.ok, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                    onEpisodeNext(0);
                 } else {
-                    onEpisodeNext();
+                    onEpisodeNext(indexCurrentAudioPlaying + 1);
                 }
             }
         });
@@ -403,10 +393,10 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     }
 
     @Override
-    public void onEpisodePrevious() {
+    public void onEpisodePrevious(int i) {
         position--;
         MyNotification.createNotification(getActivity(), "Nico", R.drawable.pause, position, episodes.size() - 1);
-        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, indexCurrentAudioPlaying - 1));
+        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, i));
     }
 
     @Override
@@ -420,10 +410,10 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     }
 
     @Override
-    public void onEpisodeNext() {
+    public void onEpisodeNext(int i) {
         position++;
         MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);
-        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, indexCurrentAudioPlaying + 1));
+        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, i));
     }
 
     private void loadFragment(Fragment fragment) {
