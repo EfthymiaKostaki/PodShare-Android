@@ -432,7 +432,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     public void onEpisodePrevious() {
         position--;
         MyNotification.createNotification(getActivity(), "Nico", R.drawable.pause, position, episodes.size() - 1);
-        MyMediaPlayerFragment();
+        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, indexCurrentAudioPlaying - 1));
     }
 
     @Override
@@ -449,7 +449,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     public void onEpisodeNext() {
         position++;
         MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);
-        playButton.setBackgroundResource(R.drawable.replay);
+        loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, indexCurrentAudioPlaying + 1));
     }
 
     private void loadFragment(Fragment fragment) {
