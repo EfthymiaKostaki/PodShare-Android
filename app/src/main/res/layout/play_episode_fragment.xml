@@ -239,16 +239,15 @@
             android:textSize="@dimen/textSubtitle" />
 
         <Button
-            android:id="@+id/main_button"
+            android:id="@+id/back_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
             android:padding="@dimen/spacingSmall"
-            android:text="Go to main"
+            android:text="@string/back_to_profile"
             android:textAlignment="center"
             android:textColor="@color/podshare_purple" />
     </LinearLayout>

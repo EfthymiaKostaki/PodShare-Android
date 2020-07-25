@@ -31,6 +31,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
@@ -64,7 +65,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
     boolean isPlaying = false;
     TextView elapsedTime;
     TextView remainingTime;
-    Button playButton;
+    private Button playButton;
+    private Button backButton;
     SeekBar seekBar;
     Runnable runnable;
     MediaPlayer mediaPlayer;
@@ -74,6 +76,11 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
     private byte[] userImage;
     public static String TAG = "MEDIA PLAYER";
     /*private ArrayList<Bitmap> episodes1;*/
+
+    public MyMediaPlayerFragment(User user) {
+        // Required empty public constructor
+        this.user = user;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,6 +102,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
         descriptionEpisode.setText(episodeDescription.getSession());
         showLoading();
         getAudio();
+
+        backButton = (Button) view.findViewById(R.id.back_button);
         seekBar = (SeekBar) view.findViewById(R.id.progressBar);
         playButton = (Button) view.findViewById(R.id.playButton);
         elapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
@@ -149,6 +158,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
             @Override
             public void onClick(View v) {
                 playAudio(v);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new PodcastProfileFragment(user));
             }
         });
 
@@ -345,6 +361,14 @@ public class MyMediaPlayerFragment extends Fragment implements Playable{
     private void dismissLoading() {
         if (progressDialog != null)
             progressDialog.dismiss();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

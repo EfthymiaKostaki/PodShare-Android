@@ -69,7 +69,7 @@ public class PodcastProfileFragment extends Fragment {
                 String descriptionEp  =  ((TextView) view.findViewById(R.id.episode_description)).getText().toString();
                 description.saveSession(descriptionEp);
                 episode.saveSession(selected);
-                loadFragment(new MyMediaPlayerFragment());
+                loadFragment(new MyMediaPlayerFragment(user));
             }
         });
         return view;
