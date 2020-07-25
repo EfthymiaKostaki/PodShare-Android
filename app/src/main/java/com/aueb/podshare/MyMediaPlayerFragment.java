@@ -100,12 +100,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
         final ImageSharedPreference image = new ImageSharedPreference(getContext());
         View view = inflater.inflate(R.layout.play_episode_fragment, container, false);
-
-        final PodsharerNameSharedPreference podsharer = new PodsharerNameSharedPreference(getActivity());
-        final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getActivity());
-        final EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(getActivity());
-        final EpisodeDescriptionSharedPreference episodeDescription = new EpisodeDescriptionSharedPreference(getActivity());
-
+        
         ImageView podsharerPlay = view.findViewById(R.id.podsharer_play);
         podsharerPlay.setImageBitmap(BitmapUtil.decodeBase64(image.getSession()));
         TextView episodeText = view.findViewById(R.id.episode_name_play);
