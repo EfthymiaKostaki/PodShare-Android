@@ -73,10 +73,10 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     SeekBar seekBar;
     Runnable runnable;
     MediaPlayer mediaPlayer;
-    NotificationManager notificationManager;
+    //NotificationManager notificationManager;
     private Button playButton;
 
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+   /*BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getExtras().getString("action_name");
@@ -98,6 +98,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             }
         }
     };
+    */
 
     private ListView episodesList;
     private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
@@ -204,12 +205,12 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
             }
         });
-
+        /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
             getActivity().registerReceiver(broadcastReceiver, new IntentFilter("EPISODES_EPISODES"));
             getActivity().startService(new Intent(getActivity().getBaseContext(), OnClearFromRecentService.class));
-        }
+        }*/
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -335,7 +336,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         }
         return podcast;
     }
-
+/*
     private void createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(MyNotification.CHANNEL_ID,
@@ -347,6 +348,8 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             }
         }
     }
+
+ */
 
     public void playCycle() {
         seekBar.setProgress(mediaPlayer.getCurrentPosition());
@@ -402,13 +405,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.cancelAll();
         }
-        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);
-        super.onDestroy();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);*/
     }
 
     @Override
