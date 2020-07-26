@@ -1,14 +1,5 @@
 package com.aueb.podshare;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.app.ProgressDialog;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -33,30 +24,19 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.aueb.podshare.Services.OnClearFromRecentService;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
-import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
-import com.aueb.podshare.adapter.EpisodeAdapter;
-import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.aueb.podshare.utils.BitmapUtil;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +48,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     int position = 0;
     boolean isPlaying = false;
     TextView elapsedTime;
-    private ProgressDialog progressDialog;
     TextView remainingTime;
     SeekBar seekBar;
     Runnable runnable;
@@ -435,7 +414,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     @Override
     public void onEpisodeNext(int i) {
         position++;
-        MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);
+        /*MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);*/
         loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, i));
     }
 
