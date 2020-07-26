@@ -396,7 +396,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     @Override
     public void onEpisodePrevious(int i) {
         position--;
-        MyNotification.createNotification(getActivity(), "Nico", R.drawable.pause, position, episodes.size() - 1);
+        /*MyNotification.createNotification(getActivity(), "Nico", R.drawable.pause, position, episodes.size() - 1);*/
         loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, i));
     }
 
