@@ -27,13 +27,13 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
-import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
-import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
-import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.adapter.EpisodeAdapter;
 import com.aueb.podshare.classes.Episode;
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
+import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
+import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.aueb.podshare.utils.BitmapUtil;
@@ -386,6 +386,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     public void onDestroy() {
         super.onDestroy();
         mediaPlayer.release();
+        mediaPlayer = null;
         handler.removeCallbacks(runnable);
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.cancelAll();
@@ -413,7 +414,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     @Override
     public void onEpisodeNext(int i) {
         position++;
-        MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);
+        /*MyNotification.createNotification(getActivity(), "Rico", R.drawable.play, position, 2);*/
         loadFragment(new MyMediaPlayerFragment(user, podcastImage, episodesAudioUri, i));
     }
 
