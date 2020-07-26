@@ -222,7 +222,7 @@
         android:id="@+id/description_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="start"
         android:layout_marginStart="@dimen/spacingMedium"
         android:layout_marginLeft="@dimen/spacingMedium"
         android:layout_marginEnd="@dimen/spacingMedium"
@@ -256,7 +256,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingTiny"
-            android:text="@string/podcast_name_default"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/textLarge" />
     </LinearLayout>

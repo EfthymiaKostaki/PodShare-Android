@@ -380,13 +380,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     @Override
     public void onResume() {
         super.onResume();
-        playAudio();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mediaPlayer.pause();
+        playButton.setBackgroundResource(R.drawable.play);
     }
 
     @Override
