@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.aueb.podshare.Sessions.ImageSharedPreference;
@@ -48,9 +50,27 @@ public class PodsharerProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.podsharer_profile_fragment, container, false);
+
         showLoading();
         getUserDetails();
-        return inflater.inflate(R.layout.podsharer_profile_fragment, container, false);
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(getTag(), "keyCode: " + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    loadFragment(new SearchFragment());
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        return view;
     }
 
     private void getUserDetails() {
@@ -145,7 +165,7 @@ public class PodsharerProfileFragment extends Fragment {
     }
 
     private void setUpPodsharerInfoImage() {
-        ImageView podsharerimage = (ImageView) getView().findViewById(R.id.podsharer_image);
+        ImageView podsharerimage = getView().findViewById(R.id.podsharer_image);
         Bitmap bitmap = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
         podsharerimage.setImageBitmap(bitmap);
         final ImageSharedPreference imageSharedPreference = new ImageSharedPreference(getContext());
@@ -153,23 +173,23 @@ public class PodsharerProfileFragment extends Fragment {
     }
 
     private void setUpPodsharerInfoUser() {
-        TextView podsharerName = (TextView) getView().findViewById(R.id.podsharer_name);
+        TextView podsharerName = getView().findViewById(R.id.podsharer_name);
         podsharerName.setText(user.getUsername());
-        TextView podsharerDescription = (TextView) getView().findViewById(R.id.podsharer_description);
+        TextView podsharerDescription = getView().findViewById(R.id.podsharer_description);
         podsharerDescription.setText(user.getDescription());
 
     }
 
     private void setUpPodsharerInfoPodcasts() {
-        TextView numberOfPodcasts = (TextView) getView().findViewById(R.id.number_of_podcasts);
+        TextView numberOfPodcasts = getView().findViewById(R.id.number_of_podcasts);
         if (!user.getPodcasts().isEmpty()) {
             numberOfPodcasts.setText(String.valueOf(user.getPodcasts().size()));
         }
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) getView().findViewById(R.id.viewPagerPodsharer);
+        ViewPager viewPager = getView().findViewById(R.id.viewPagerPodsharer);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) getView().findViewById(R.id.tabLayout);
+        TabLayout tabs = getView().findViewById(R.id.tabLayout);
         tabs.setupWithViewPager(viewPager);
     }
 
@@ -183,6 +203,14 @@ public class PodsharerProfileFragment extends Fragment {
         }
         adapter.addFragment(new RecentsFragment(), "Recents");
         viewPager.setAdapter(adapter);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void showLoading() {

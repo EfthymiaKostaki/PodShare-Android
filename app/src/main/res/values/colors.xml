@@ -20,6 +20,7 @@
     <color name="pink">#fb4c69</color>
     <color name="yellow">#f4e139</color>
     <color name="purple">#6942FD</color>
+    <color name="podshare_purple">#6942FD</color>
     <color name="galleryBg">#212121</color>
 
     <!-- NAVIGATION BAR -->
@@ -42,6 +43,14 @@
     <color name="step_color">#C220D0</color>
     <color name="add_color">#DADADA</color>
 
+
+    <!-- Media Player -->
+    <color name="background">#09121C</color>
+    <color name="podsharer_media_player">#898F97</color>
+    <color name="like">#3369FF</color>
+    <color name="description">#DADADA</color>
+
     <!-- Background-->
     <color name="background_card">#260033</color>
+
 </resources>

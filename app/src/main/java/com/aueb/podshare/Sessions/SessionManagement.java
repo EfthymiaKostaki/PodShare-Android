@@ -3,12 +3,10 @@ package com.aueb.podshare.Sessions;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.aueb.podshare.classes.User;
-
 public class SessionManagement {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String SHARED_PREF_NAME= "session";
+    String SHARED_PREF_NAME = "session";
     String SESSION_KEY = "session_user";
 
     public SessionManagement(Context context) {

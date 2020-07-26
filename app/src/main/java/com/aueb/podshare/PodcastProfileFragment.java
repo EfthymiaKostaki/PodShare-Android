@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
@@ -39,7 +43,7 @@ public class PodcastProfileFragment extends Fragment {
     private ProgressDialog progressDialog;
     private User user;
     private View view;
-    private byte[] userImage;
+    private byte[] podcastImage;
     private ListView episodesList;
     private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
     private ArrayList<String> episodeTitles = new ArrayList<>();
@@ -63,13 +67,54 @@ public class PodcastProfileFragment extends Fragment {
                 Toast toast = Toast.makeText(getContext(), selected, Toast.LENGTH_SHORT);
                 toast.show();
                 EpisodeNameSharedPreference episode = new EpisodeNameSharedPreference(getContext());
+                EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                String descriptionEp = ((TextView) view.findViewById(R.id.episode_description)).getText().toString();
+                description.saveSession(descriptionEp);
                 episode.saveSession(selected);
+                showLoading();
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                final PodcastNameSharedPreference podcast = new PodcastNameSharedPreference(getContext());
+                int index = 0;
+                final int[] countDownloadedUris = {0};
+                ArrayList<Episode> episodes = getPodcast().getEpisodes();
+                ArrayList<Uri> uris = new ArrayList<>();
+                for (final int[] i = {0}; i[0] < episodes.size(); i[0]++) {
+                    Log.d(TAG, "Inside for: " + i[0]);
+                    if (episode.getSession().equals(episodes.get(i[0]).get_name())) {
+                        index = i[0];
+                        Log.d(TAG, "Found episode selected index: " + i[0]);
+                    }
+
+                    StorageReference episodesRef = storageRef.child("users/" + user.getUid() + "/podcasts/" + podcast.getSession() + "/episodes/" + episodes.get(i[0]).get_name() + "/" + episodes.get(i[0]).get_name() + ".mp3");
+                    int finalIndex = index;
+                    episodesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            uris.add(uri);
+                            Log.d(TAG, "Adding uri in position: " + finalIndex);
+                            if (countDownloadedUris[0] == episodes.size() - 1) {
+                                dismissLoading();
+                                loadFragment(new MyMediaPlayerFragment(user, podcastImage, uris, finalIndex));
+                            }
+                            countDownloadedUris[0]++;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                            Log.d(TAG, "Failure in index: " + finalIndex);
+                        }
+                    });
+                }
+
             }
         });
         return view;
     }
 
-    private void getPodcastDetails() {
+    private Podcast getPodcast() {
         PodcastNameSharedPreference podcastSession = new PodcastNameSharedPreference(getContext());
         String podcastName = podcastSession.getSession();
         ArrayList<Podcast> podcasts = user.getPodcasts();
@@ -79,6 +124,13 @@ public class PodcastProfileFragment extends Fragment {
                 podcast = pod;
             }
         }
+        return podcast;
+    }
+
+    private void getPodcastDetails() {
+        PodcastNameSharedPreference podcastSession = new PodcastNameSharedPreference(getContext());
+        String podcastName = podcastSession.getSession();
+        Podcast podcast = getPodcast();
         final RelativeLayout relativeImage = view.findViewById(R.id.relative_image);
         TextView podcastNameText = view.findViewById(R.id.podcast_name);
         podcastNameText.setText(podcastName);
@@ -97,8 +149,8 @@ public class PodcastProfileFragment extends Fragment {
         userImageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
-                userImage = bytes;
-                Bitmap bitmapPodcast = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
+                podcastImage = bytes;
+                Bitmap bitmapPodcast = BitmapFactory.decodeByteArray(podcastImage, 0, podcastImage.length);
                 BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmapPodcast);
                 relativeImage.setBackground(bitmapDrawable);
                 dismissLoading();
@@ -129,7 +181,7 @@ public class PodcastProfileFragment extends Fragment {
         if (progressDialog == null)
             progressDialog = new ProgressDialog(getContext());
 
-        progressDialog.setMessage(getString(R.string.fetching_podcats));
+        progressDialog.setMessage(getString(R.string.fetching_episodes));
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -145,6 +197,14 @@ public class PodcastProfileFragment extends Fragment {
         super.onResume();
         podcastEpisodes = new ArrayList<>();
         episodeTitles = new ArrayList<>();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

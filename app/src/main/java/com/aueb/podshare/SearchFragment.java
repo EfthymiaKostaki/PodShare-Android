@@ -25,10 +25,10 @@ public class SearchFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.searchviewPager);
+        ViewPager viewPager = view.findViewById(R.id.searchviewPager);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
-        tabs = (TabLayout) view.findViewById(R.id.searchtabLayout);
+        tabs = view.findViewById(R.id.searchtabLayout);
         tabs.setupWithViewPager(viewPager);
         setupTabIcons();
 

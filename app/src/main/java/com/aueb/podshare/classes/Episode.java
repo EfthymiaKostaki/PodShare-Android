@@ -1,6 +1,5 @@
 package com.aueb.podshare.classes;
 
-import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,7 +14,7 @@ public class Episode {
     private int likes;
     private int views;
     private Date pub_date;
-    private Duration duration;
+    private String duration;
 
     public Episode(String name, String description) {
         if (name.trim().equals("")) {
@@ -98,8 +97,12 @@ public class Episode {
         return pub_date;
     }
 
-    public Duration get_duration() {
+    public String get_duration() {
         return duration;
+    }
+
+    public void set_duration(String dur) {
+        duration = dur;
     }
 
     public void setEpisodeLink(String link) {

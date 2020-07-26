@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class PodcastDescriptionSharedPreference {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String SHARED_PREF_NAME= "podcast_description";
+    String SHARED_PREF_NAME = "podcast_description";
     String SESSION_KEY = "podcast_description";
 
     public PodcastDescriptionSharedPreference(Context context) {

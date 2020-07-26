@@ -8,7 +8,7 @@ public class AudioSharedPreference {
     SharedPreferences.Editor editor1;
     SharedPreferences sharedPreferences2;
     SharedPreferences.Editor editor2;
-    String SHARED_PREF_NAME= "audio";
+    String SHARED_PREF_NAME = "audio";
     String SESSION_KEY = "audio";
     String SHARED_PREF_AUD = "audio_extension";
     String AUDIO_KEY = "audio_extension";
@@ -29,7 +29,9 @@ public class AudioSharedPreference {
         return sharedPreferences1.getString(SESSION_KEY, null);
     }
 
-    public String getAudioExtension(){ return sharedPreferences2.getString(AUDIO_KEY, null); }
+    public String getAudioExtension() {
+        return sharedPreferences2.getString(AUDIO_KEY, null);
+    }
 
     public void terminateSession() {
         editor1.putString(SESSION_KEY, null).commit();

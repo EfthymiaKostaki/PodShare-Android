@@ -3,8 +3,6 @@ package com.aueb.podshare.Sessions;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.aueb.podshare.classes.User;
-
 public class EpisodeNameSharedPreference {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;

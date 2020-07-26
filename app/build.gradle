@@ -11,6 +11,10 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -23,6 +27,7 @@ android {
             java {
                 srcDir 'src'
                 exclude '**/com/aueb/podshare/SubmitUpload.java'
+                exclude '**/com/aueb/podshare/PlayEpisode.java'
             }
         }
     }
@@ -46,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'androidx.media:media:1.1.0'
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'

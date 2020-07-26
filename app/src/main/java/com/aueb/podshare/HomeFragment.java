@@ -1,6 +1,7 @@
 package com.aueb.podshare;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +15,23 @@ import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {
 
+    Activity context;
+
     public HomeFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        context = getActivity();
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+        ViewPager viewPager = view.findViewById(R.id.viewPager);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) view.findViewById(R.id.tabLayout);
+        TabLayout tabs = view.findViewById(R.id.tabLayout);
         tabs.setupWithViewPager(viewPager);
-
 
         return view;
     }
