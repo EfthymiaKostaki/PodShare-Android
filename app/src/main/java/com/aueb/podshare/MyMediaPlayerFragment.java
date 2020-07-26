@@ -216,7 +216,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playAudio(v);
+                playAudio();
                 //MyNotification.createNotification(getActivity(), "loko", R.drawable.pause, position, 1);
             }
         });
@@ -367,7 +367,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         return timeLabel;
     }
 
-    public void playAudio(View view) {
+    public void playAudio() {
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
             playButton.setBackgroundResource(R.drawable.play_button);
@@ -380,13 +380,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     @Override
     public void onResume() {
         super.onResume();
-        mediaPlayer.start();
+        playAudio();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mediaPlayer.stop();
+        mediaPlayer.pause();
     }
 
     @Override
