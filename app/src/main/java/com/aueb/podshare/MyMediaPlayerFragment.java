@@ -214,8 +214,12 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             @Override
             public void onClick(View v) {
                 if (indexCurrentAudioPlaying == 0) {
+                    EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
+                    name.saveSession(episodeTitles.get(episodeTitles.size() - 1));
                     onEpisodePrevious(podcastEpisodes.size() - 1);
                 } else {
+                    EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
+                    name.saveSession(episodeTitles.get(indexCurrentAudioPlaying - 1));
                     onEpisodePrevious(indexCurrentAudioPlaying - 1);
                 }
             }
@@ -232,8 +236,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             @Override
             public void onClick(View v) {
                 if (indexCurrentAudioPlaying == podcastEpisodes.size() - 1) {
+                    EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
+                    name.saveSession(episodeTitles.get(0));
+                    EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
                     onEpisodeNext(0);
                 } else {
+                    EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
+                    name.saveSession(episodeTitles.get(indexCurrentAudioPlaying));
                     onEpisodeNext(indexCurrentAudioPlaying + 1);
                 }
             }
