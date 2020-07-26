@@ -402,13 +402,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mediaPlayer.release();
         handler.removeCallbacks(runnable);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.cancelAll();
         }
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
     }
 
     @Override
