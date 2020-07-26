@@ -102,6 +102,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     private ListView episodesList;
     private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
     private ArrayList<String> episodeTitles = new ArrayList<>();
+    private ArrayList<String> episodeDescriptions = new ArrayList<>();
     private User user;
     private byte[] podcastImage;
     private ArrayList<Uri> episodesAudioUri;
@@ -216,10 +217,14 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                 if (indexCurrentAudioPlaying == 0) {
                     EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
                     name.saveSession(episodeTitles.get(episodeTitles.size() - 1));
+                    EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                    description.saveSession(episodeDescriptions.get(episodeDescriptions.size() - 1));
                     onEpisodePrevious(podcastEpisodes.size() - 1);
                 } else {
                     EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
                     name.saveSession(episodeTitles.get(indexCurrentAudioPlaying - 1));
+                    EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                    description.saveSession(episodeDescriptions.get(indexCurrentAudioPlaying - 1));
                     onEpisodePrevious(indexCurrentAudioPlaying - 1);
                 }
             }
@@ -239,10 +244,13 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
                     EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
                     name.saveSession(episodeTitles.get(0));
                     EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                    description.saveSession(episodeDescriptions.get(0));
                     onEpisodeNext(0);
                 } else {
                     EpisodeNameSharedPreference name = new EpisodeNameSharedPreference(getContext());
                     name.saveSession(episodeTitles.get(indexCurrentAudioPlaying));
+                    EpisodeDescriptionSharedPreference description = new EpisodeDescriptionSharedPreference(getContext());
+                    description.saveSession(episodeDescriptions.get(indexCurrentAudioPlaying));
                     onEpisodeNext(indexCurrentAudioPlaying + 1);
                 }
             }
@@ -276,6 +284,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         for (int i = 0; i < podcastEpisodes.size(); i++) {
             if (! podcastEpisodes.get(i).get_name().equals(episode.getSession())) {
                 episodeTitles.add(podcastEpisodes.get(i).get_name());
+                episodeDescriptions.add(podcastEpisodes.get(i).get_description());
             }
         }
 
