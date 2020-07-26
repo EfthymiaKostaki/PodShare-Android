@@ -1,6 +1,5 @@
 package com.aueb.podshare.classes;
 
-import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -58,11 +57,6 @@ public class Episode {
         return privacy;
     }
 
-
-    public void set_duration(String dur) {
-        duration = dur;
-    }
-
     public void set_privacy(boolean privacy) {
         this.privacy = privacy;
     }
@@ -105,6 +99,10 @@ public class Episode {
 
     public String get_duration() {
         return duration;
+    }
+
+    public void set_duration(String dur) {
+        duration = dur;
     }
 
     public void setEpisodeLink(String link) {

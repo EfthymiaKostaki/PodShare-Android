@@ -1,21 +1,12 @@
 package com.aueb.podshare;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.app.ProgressDialog;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,16 +24,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.aueb.podshare.Services.OnClearFromRecentService;
-import com.aueb.podshare.Sessions.ImageSharedPreference;
-import com.aueb.podshare.adapter.EpisodeAdapter;
-import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
 import com.aueb.podshare.Sessions.ImageSharedPreference;
@@ -53,10 +37,6 @@ import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.aueb.podshare.utils.BitmapUtil;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,13 +48,12 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     int position = 0;
     boolean isPlaying = false;
     TextView elapsedTime;
-    private ProgressDialog progressDialog;
     TextView remainingTime;
     SeekBar seekBar;
     Runnable runnable;
     MediaPlayer mediaPlayer;
-    //NotificationManager notificationManager;
-    private Button playButton;
+    Button next;
+    Button previous;
 
    /*BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -99,7 +78,9 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         }
     };
     */
-
+    private ProgressDialog progressDialog;
+    //NotificationManager notificationManager;
+    private Button playButton;
     private ListView episodesList;
     private ArrayList<Episode> podcastEpisodes = new ArrayList<>();
     private ArrayList<String> episodeTitles = new ArrayList<>();
@@ -109,8 +90,6 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     private ArrayList<Uri> episodesAudioUri;
     private Bitmap audioPlay;
     private int indexCurrentAudioPlaying;
-    Button next;
-    Button previous;
     private String episode_title;
 
     private Handler handler = new Handler() {
@@ -283,7 +262,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
         podcastEpisodes = myPodcast.getEpisodes();
 
         for (int i = 0; i < podcastEpisodes.size(); i++) {
-            if (! podcastEpisodes.get(i).get_name().equals(episode.getSession())) {
+            if (!podcastEpisodes.get(i).get_name().equals(episode.getSession())) {
                 episodeTitles.add(podcastEpisodes.get(i).get_name());
                 episodeDescriptions.add(podcastEpisodes.get(i).get_description());
             }

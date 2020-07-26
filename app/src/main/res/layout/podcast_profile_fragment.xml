@@ -8,8 +8,7 @@
     <RelativeLayout
         android:id="@+id/relative_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/podcast_background">
+        android:layout_height="250dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
                 android:id="@+id/podcast_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Music Therapy"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textExtraHuge" />
 
@@ -36,14 +34,12 @@
                     android:id="@+id/podcast_creator_picture"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:contentDescription="@string/podsharers"
-                    android:src="@drawable/podsharer_example_image" />
+                    android:contentDescription="@string/podsharers" />
 
                 <TextView
                     android:id="@+id/podcast_creator_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="John Holmes"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -109,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/layout_padding"
-            android:text="8.2k subscribers"
+            android:text="@string/no_of_subscribers"
             android:textColor="@color/white"
             android:textSize="@dimen/textSmall" />
     </LinearLayout>

@@ -8,6 +8,6 @@ public class NotificationActionService extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         context.sendBroadcast(new Intent("EPISODES_EPISODES")
-        .putExtra("action_name", intent.getAction()));
+                .putExtra("action_name", intent.getAction()));
     }
 }

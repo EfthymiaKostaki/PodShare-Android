@@ -88,6 +88,8 @@
     <string name="episode_name_default">Episode Name</string>
     <string name="podsharer_name_default">PodSharer</string>
     <string name="podcast_name_default">Podcast Name</string>
+    <string name="no_of_likes">37 501</string>
+    <string name="no_of_favorites">200K Views</string>
 
     <!-- PODSHARER AND PODCAST PROFILE-->
     <string name="podcasts_text">Podcasts:</string>
@@ -99,6 +101,10 @@
     <string name="podsharers">Podsharers:</string>
     <string name="no_podcasts">This PodSharer hasn\'t created any podcasts yet!</string>
     <string name="back_to_profile">Go back to Podcast Page</string>
+    <string name="no_of_episodes">1</string>
+    <string name="no_of_podcasts">1</string>
+    <string name="no_of_subscribers">8.2k subscribers</string>
+    <string name="no_of_followers">511 followers</string>
 
     <!-- PROGRESS DIALOGES-->
     <string name="please_wait">Please wait…</string>

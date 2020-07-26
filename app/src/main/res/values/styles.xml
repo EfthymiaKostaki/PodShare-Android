@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here. -->
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/gray_dark</item>
         <item name="colorAccent">@color/popupmenu</item>
@@ -59,10 +59,10 @@
     <!-- styles.xml -->
     <style name="next">
         <item name="android:textSize">
-                16sp
-            </item>
-            <item name="android:textColor">
-               #FFFFFF
+            16sp
+        </item>
+        <item name="android:textColor">
+            #FFFFFF
         </item>
     </style>
 

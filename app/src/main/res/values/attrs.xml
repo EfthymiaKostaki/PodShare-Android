@@ -4,7 +4,7 @@
         <attr name="itemInputLayout" format="string" />
         <attr name="itemEditTextValue" format="string" />
         <attr name="itemEditTextHint" format="string" />
-        <attr name="android:inputType"/>
-        <attr name="android:imeOptions"/>
+        <attr name="android:inputType" />
+        <attr name="android:imeOptions" />
     </declare-styleable>
 </resources>

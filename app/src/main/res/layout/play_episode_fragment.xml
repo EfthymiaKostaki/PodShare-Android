@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/spacingTiny"
-        android:text="@string/episode_name_default"
         android:textColor="@color/white"
         android:textSize="@dimen/textExtra" />
 
@@ -42,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/spacingTiny"
-            android:text="@string/podsharer_name_default"
             android:textColor="@color/podsharer_media_player"
             android:textSize="@dimen/textSubtitle" />
     </LinearLayout>
@@ -63,7 +61,6 @@
             android:id="@+id/play_inside"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/play_image"
             android:baselineAligned="false"
             android:gravity="center"
             android:orientation="vertical"
@@ -167,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="@dimen/spacingSmall"
-                android:text="37 501"
+                android:text="@string/no_of_likes"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSubtitle" />
 
@@ -183,7 +180,6 @@
             android:layout_marginEnd="@dimen/spacingHuge"
             android:layout_marginRight="@dimen/spacingHuge"
             android:padding="@dimen/spacingTiny"
-            android:text="4:17"
             android:textColor="@color/white"
             android:textSize="@dimen/textSubtitle" />
 
@@ -211,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="@dimen/spacingTiny"
-                android:text="200K Views"
+                android:text="@string/no_of_favorites"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSubtitle" />
         </LinearLayout>
@@ -231,9 +227,9 @@
         android:layout_marginLeft="@dimen/spacingMedium"
         android:layout_marginEnd="@dimen/spacingMedium"
         android:padding="@dimen/spacingTiny"
-        android:text="Cooking sessions with Sally. In today’s episode we will be making Spagetti Bolognese using a true italian  recipe."
         android:textColor="@color/description"
         android:textSize="@dimen/textSubtitle" />
+
     <LinearLayout
         android:id="@+id/other_eps"
         android:layout_width="wrap_content"
@@ -245,6 +241,7 @@
         android:paddingTop="@dimen/spacingTiny"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/spacingSmall">
+
         <TextView
             android:id="@+id/other_eps_in_podcast"
             android:layout_width="wrap_content"
@@ -253,19 +250,20 @@
             android:text="@string/other_episodes"
             android:textColor="@color/white"
             android:textSize="@dimen/textExtra" />
-    <TextView
-        android:id="@+id/podcast_name_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/spacingTiny"
-        android:text="@string/podcast_name_default"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textExtra" />
+
+        <TextView
+            android:id="@+id/podcast_name_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingTiny"
+            android:text="@string/podcast_name_default"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textLarge" />
     </LinearLayout>
+
     <ListView
         android:id="@+id/other_episodes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 
 </LinearLayout>

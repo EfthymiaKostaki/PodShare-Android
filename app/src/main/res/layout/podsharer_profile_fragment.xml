@@ -14,9 +14,7 @@
         <ImageView
             android:id="@+id/podsharer_image"
             android:layout_width="181dp"
-            android:layout_height="match_parent"
-            android:contentDescription="podsharer"
-            android:src="@drawable/podsharer_example_image" />
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +30,6 @@
                 android:layout_marginLeft="@dimen/spacingSmall"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:padding="@dimen/layout_padding"
-                android:text="After writing his first book his life completely changed. In every book he writes, he dives into a new adventure where societal status ... Read More"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textHint" />
 
@@ -44,7 +41,6 @@
                 android:layout_marginLeft="@dimen/spacingSmall"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:padding="@dimen/layout_padding"
-                android:text="Robert Duoni"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textTitle" />
         </LinearLayout>
@@ -81,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="20"
+            android:text="@string/no_of_podcasts"
             android:textColor="@color/white"
             android:textSize="@dimen/textSubtitle" />
     </LinearLayout>
@@ -110,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/layout_padding"
-            android:text="511 followers"
+            android:text="@string/no_of_followers"
             android:textColor="@color/white"
             android:textSize="@dimen/textSmall" />
     </LinearLayout>
