@@ -109,6 +109,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     private int indexCurrentAudioPlaying;
     Button next;
     Button previous;
+    private String episode_title;
 
     private Handler handler = new Handler() {
         @Override
@@ -213,7 +214,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
             @Override
             public void onClick(View v) {
                 if (indexCurrentAudioPlaying == 0) {
-                    onEpisodeNext(podcastEpisodes.size() - 1);
+                    onEpisodePrevious(podcastEpisodes.size() - 1);
                 } else {
                     onEpisodePrevious(indexCurrentAudioPlaying - 1);
                 }
