@@ -27,13 +27,13 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.aueb.podshare.Sessions.ImageSharedPreference;
-import com.aueb.podshare.adapter.EpisodeAdapter;
-import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.Sessions.EpisodeDescriptionSharedPreference;
 import com.aueb.podshare.Sessions.EpisodeNameSharedPreference;
+import com.aueb.podshare.Sessions.ImageSharedPreference;
 import com.aueb.podshare.Sessions.PodcastNameSharedPreference;
 import com.aueb.podshare.Sessions.PodsharerNameSharedPreference;
+import com.aueb.podshare.adapter.EpisodeAdapter;
+import com.aueb.podshare.classes.Episode;
 import com.aueb.podshare.classes.Podcast;
 import com.aueb.podshare.classes.User;
 import com.aueb.podshare.utils.BitmapUtil;
@@ -55,29 +55,29 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     Button next;
     Button previous;
 
-   /*BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getExtras().getString("action_name");
+    /*BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+         @Override
+         public void onReceive(Context context, Intent intent) {
+             String action = intent.getExtras().getString("action_name");
 
-            switch (action) {
-                case MyNotification.ACTION_PREVIOUS:
-                    onEpisodePrevious(indexCurrentAudioPlaying - 1);
-                    break;
-                case MyNotification.ACTION_PLAY:
-                    if (mediaPlayer.isPlaying()) {
-                        onEpisodePause();
-                    } else {
-                        onEpisodePlay();
-                    }
-                    break;
-                case MyNotification.ACTION_NEXT:
-                    onEpisodeNext(indexCurrentAudioPlaying + 1);
-                    break;
-            }
-        }
-    };
-    */
+             switch (action) {
+                 case MyNotification.ACTION_PREVIOUS:
+                     onEpisodePrevious(indexCurrentAudioPlaying - 1);
+                     break;
+                 case MyNotification.ACTION_PLAY:
+                     if (mediaPlayer.isPlaying()) {
+                         onEpisodePause();
+                     } else {
+                         onEpisodePlay();
+                     }
+                     break;
+                 case MyNotification.ACTION_NEXT:
+                     onEpisodeNext(indexCurrentAudioPlaying + 1);
+                     break;
+             }
+         }
+     };
+     */
     private ProgressDialog progressDialog;
     //NotificationManager notificationManager;
     private Button playButton;

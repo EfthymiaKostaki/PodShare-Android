@@ -102,7 +102,7 @@
     <string name="no_podcasts">This PodSharer hasn\'t created any podcasts yet!</string>
     <string name="back_to_profile">Go back to Podcast Page</string>
     <string name="no_of_episodes">1</string>
-    <string name="no_of_podcasts">1</string>
+    <string name="no_of_podcasts">0</string>
     <string name="no_of_subscribers">8.2k subscribers</string>
     <string name="no_of_followers">511 followers</string>
 
