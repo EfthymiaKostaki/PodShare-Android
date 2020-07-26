@@ -407,6 +407,7 @@ public class MyMediaPlayerFragment extends Fragment implements Playable {
     public void onDestroy() {
         super.onDestroy();
         mediaPlayer.release();
+        mediaPlayer = null;
         handler.removeCallbacks(runnable);
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.cancelAll();
